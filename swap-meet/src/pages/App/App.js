@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import HomePage from '../HomePage/HomePage';
 import InventoryPage from'../InventoryPage/InventoryPage';
 import ConnectionsPage from'../ConnectionsPage/ConnectionsPage';
+import Login from '../Login/Login';
+import Signup from '../Signup/Signup';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 
 
 class App extends Component {
   render(){
     return(
-      <div className="App">
-        <header className="App-header">
-          <h1>SwapMeet</h1>
-          <navbar>Navbar</navbar>
-        </header>
+      <div className="App-outer-container">
+        <Navbar />
+        <div className="App-inner-container">
         <Switch>
           <Route exact path='/' render={() =>
             <HomePage />
@@ -24,9 +26,15 @@ class App extends Component {
           <Route exact path='/connections' render={() =>
             <ConnectionsPage />
           }/>
-
+          <Route exact path="/login" render={props =>
+            <Login />
+          }/>
+          <Route exact path="/signup" render={props =>
+            <Signup />
+          }/>
         </Switch>
-        <footer className="">Footer</footer>
+        </div>
+        <Footer />  
       </div>
     );
   }

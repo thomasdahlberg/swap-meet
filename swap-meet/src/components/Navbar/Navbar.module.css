@@ -1,0 +1,28 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    background-color: #81C14B;
+    justify-content: space-around;
+    color: #ffffff;
+    box-shadow: 2px 2px 7px 2px lightgrey;
+  }
+  .navbar ul {
+    display: flex;
+    list-style: none;
+  }
+  .navbar ul li {
+    font-weight: 500;
+    margin: 1rem;
+  }
+  .navbarul li:hover {
+    border-bottom: 2px solid gray;
+  }
+
+  .navbar h1 {
+    font-family: 'Lacquer', sans-serif;
+  }
+  .navbar a {
+    text-decoration: none;
+    color: #ffffff;
+  }
