@@ -12,6 +12,7 @@
     list-style: none;
   }
   .navbar ul li {
+    font-family: 'Open Sans', serif;
     font-weight: 500;
     margin: 1rem;
   }
@@ -20,8 +21,9 @@
   }
 
   .navbar h1 {
-    font-family: 'Lacquer', sans-serif;
+    font-family: 'Permanent Marker', sans-serif;
   }
+
   .navbar a {
     text-decoration: none;
     color: #ffffff;

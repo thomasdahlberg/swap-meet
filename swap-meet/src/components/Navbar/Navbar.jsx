@@ -7,7 +7,7 @@ const Navbar = (props) => {
     return (
         <nav className={styles.navbar}>
             <Link to="/">
-                <h1>SwapMeet</h1>
+                <h1>SWAP-MEET</h1>
             </Link>
             <ul>
                 <li>
