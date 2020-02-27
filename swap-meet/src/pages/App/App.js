@@ -8,9 +8,16 @@ import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
-
+import userService from '../../utils/userService';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: userService.getUser()
+    }
+  }
+  
   render(){
     return(
       <div className="App-outer-container">
