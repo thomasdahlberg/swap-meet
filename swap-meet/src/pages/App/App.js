@@ -14,7 +14,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: userService.getUser()
+      user: userService.getUser(),
+      items: ['ipod', 'baseball', 'dancebelt']
     }
   }
 
@@ -37,7 +38,7 @@ class App extends Component {
             <HomePage />
           }/>
           <Route exact path='/inventory' render={() =>
-            <InventoryPage />
+            <InventoryPage {...this.state}/>
           }/>
           <Route exact path='/connections' render={() =>
             <ConnectionsPage />
