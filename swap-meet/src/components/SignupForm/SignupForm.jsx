@@ -36,12 +36,12 @@ class SignupForm extends Component {
         try {
             const { name, email, password } = this.state;
             await userService.signup({ name, email, password });
-            this.setState(this.getInitialState(), () => {alert('handleSubmit')}); 
+            this.props.handleSignupOrLogin();
+            this.setState(this.getInitialState());
+            this.props.history.push('/'); 
         } catch (error) {
-            
+            alert(error);
         }
-
-
     }
 
     render() {

@@ -1,27 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import styles from './Navbar.module.css';
+import { Fragment } from 'react';
 
 const Navbar = (props) => {
+    let nav = props.user ?
+    <Fragment>
+        <li>
+            <Link to="/inventory">Your Items</Link>
+        </li>
+        <li>
+            <Link to="/connections">Your Connections</Link>
+        </li>
+        <li>
+            <Link to="" onClick={props.handleLogout}>Log Out</Link>
+        </li>
+    </Fragment>
+    :
+    <Fragment>
+        <li>
+            <Link to="/login">Log In</Link>
+        </li>
+        <li>
+            <Link to="/signup">Sign Up</Link>
+        </li>
+    </Fragment>;
+
     return (
         <nav className={styles.navbar}>
             <Link to="/">
                 <h1>SWAP-MEET</h1>
             </Link>
             <ul>
-                <li>
-                    <Link to="/inventory">Your Items</Link>
-                </li>
-                <li>
-                    <Link to="/connections">Your Connections</Link>
-                </li>
-                <li>
-                  <Link to="/login">Log In</Link>
-                </li>
-                <li>
-                  <Link to="/signup">Sign Up</Link>
-                </li>
+                {nav}
             </ul>
             
         </nav>

@@ -17,11 +17,20 @@ class App extends Component {
       user: userService.getUser()
     }
   }
-  
+
+  handleSignupOrLogin = () => {
+    this.setState({user: userService.getUser()});
+  }
+
+  handleLogout = () => {
+    userService.logout();
+    this.setState({ user: null });
+  }
+
   render(){
     return(
       <div className="App-outer-container">
-        <Navbar />
+        <Navbar user={this.state.user} handleLogout={this.handleLogout}/>
         <div className="App-inner-container">
         <Switch>
           <Route exact path='/' render={() =>
@@ -33,11 +42,11 @@ class App extends Component {
           <Route exact path='/connections' render={() =>
             <ConnectionsPage />
           }/>
-          <Route exact path="/login" render={props =>
-            <Login />
+          <Route exact path="/login" render={({ history }) =>
+            <Login handleSignupOrLogin={this.handleSignupOrLogin} history={history}/>
           }/>
-          <Route exact path="/signup" render={props =>
-            <Signup />
+          <Route exact path="/signup" render={({ history }) =>
+            <Signup handleSignupOrLogin={this.handleSignupOrLogin} history={history}/>
           }/>
         </Switch>
         </div>

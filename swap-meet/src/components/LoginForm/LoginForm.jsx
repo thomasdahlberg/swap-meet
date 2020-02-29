@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styles from './LoginForm.module.css';
+import userService from '../../utils/userService';
 
 class LoginForm extends Component {
     
@@ -12,17 +13,33 @@ class LoginForm extends Component {
         };
     }
 
+    isFormValid = () => {
+        return (
+            this.state.email && 
+            this.state.password 
+        );
+    }
+
+
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
-    handleSubmit = e => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-
-
-        this.getInitialState();
+        alert('handleSubmit');
+        if(!this.isFormValid()) return;
+        try {
+            const { email, password } = this.state;
+            await userService.login({ email, password });
+            this.props.handleSignupOrLogin();
+            this.setState(this.getInitialState());
+            this.props.history.push('/'); 
+        } catch (error) {
+            alert('Invalid Credentials');
+        }
     }
 
 
@@ -49,7 +66,7 @@ class LoginForm extends Component {
                         onChange={this.handleChange}
                     />
 
-                    <button onSubmit={this.handleSubmit} type="submit">Log In</button>
+                    <button onClick={this.handleSubmit} disabled={!this.isFormValid()} type="submit">Log In</button>
                 </fieldset>
             </form>
         );
