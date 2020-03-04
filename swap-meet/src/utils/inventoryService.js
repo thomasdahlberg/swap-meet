@@ -21,7 +21,7 @@ function addItem(item) {
 
 
 function index(items) {
-    return fetch(BASE_URL + 'new', {
+    return fetch(BASE_URL, {
         method: 'GET',
         headers: new Headers({
             'Content-type': 'Application/json',

@@ -7,10 +7,10 @@ const Navbar = (props) => {
     let nav = props.user ?
     <Fragment>
         <li>
-            <Link to="/inventory">Your Items</Link>
+            <Link to="/inventory">My Items</Link>
         </li>
         <li>
-            <Link to="/connections">Your Connections</Link>
+            <Link to="/connections">My Connections</Link>
         </li>
         <li>
             <Link to="" onClick={props.handleLogout}>Log Out</Link>

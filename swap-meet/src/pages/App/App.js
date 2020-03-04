@@ -9,6 +9,7 @@ import Signup from '../Signup/Signup';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import userService from '../../utils/userService';
+import inventoryService from '../../utils/inventoryService';
 import NewInventoryItem from '../../pages/NewInventoryItem/NewInventoryItem';
 
 class App extends Component {
@@ -16,7 +17,14 @@ class App extends Component {
     super();
     this.state = {
       user: userService.getUser(),
-      items: ['ipod', 'baseball', 'dancebelt']
+      items: []
+    }
+  }
+
+  async componentDidMount() {
+    if(userService.getUser()) {
+      const { items } = await inventoryService.index();
+      this.setState({ items: items })
     }
   }
 
@@ -40,15 +48,11 @@ class App extends Component {
           }/>
           <Route exact path='/inventory' render={() =>
             userService.getUser() ?
-            <InventoryPage {...this.state}/>
+            <InventoryPage 
+            items={this.state.items}
+            />
               :
             <Redirect to='/login' />
-          }/>
-          <Route exact path='/inventory/new' render={() =>
-            userService.getUser() ?
-            <NewInventoryItem/>
-              :
-            <Redirect to='/login' />           
           }/>
           <Route exact path='/connections' render={() =>
             userService.getUser() ?
