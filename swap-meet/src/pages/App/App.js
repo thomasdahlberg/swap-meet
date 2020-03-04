@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import HomePage from '../HomePage/HomePage';
 import InventoryPage from'../InventoryPage/InventoryPage';
 import ConnectionsPage from'../ConnectionsPage/ConnectionsPage';
@@ -39,13 +39,22 @@ class App extends Component {
             <HomePage />
           }/>
           <Route exact path='/inventory' render={() =>
+            userService.getUser() ?
             <InventoryPage {...this.state}/>
+              :
+            <Redirect to='/login' />
           }/>
           <Route exact path='/inventory/new' render={() =>
+            userService.getUser() ?
             <NewInventoryItem/>
+              :
+            <Redirect to='/login' />           
           }/>
           <Route exact path='/connections' render={() =>
+            userService.getUser() ?
             <ConnectionsPage />
+              :
+            <Redirect to='/login' />    
           }/>
           <Route exact path="/login" render={({ history }) =>
             <Login handleSignupOrLogin={this.handleSignupOrLogin} history={history}/>

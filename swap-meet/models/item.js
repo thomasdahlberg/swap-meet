@@ -11,7 +11,7 @@ const itemSchema = new Schema({
     active: Boolean,
     location: Object,
     swapped: Boolean,
-    currentOwner: this.ownerHistory[0],
+    currentOwner: {type: Schema.Types.ObjectId, ref: 'User'},
     ownerHistory:[{type: Schema.Types.ObjectId, ref: 'User'}]
 },{
     timestamps: true

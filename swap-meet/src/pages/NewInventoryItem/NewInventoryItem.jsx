@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import inventoryService from '../../utils/inventoryService';
+import userService from '../../utils/userService';
 import styles from './NewInventoryItem.module.css';
 
 class NewInventoryItem extends Component {
@@ -7,6 +8,7 @@ class NewInventoryItem extends Component {
 
     getInitialState() {
         return {
+            user: userService.getUser(),
             image: null,
             name: '',
             description: '',
