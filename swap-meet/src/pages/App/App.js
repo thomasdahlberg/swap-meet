@@ -9,6 +9,7 @@ import Signup from '../Signup/Signup';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import userService from '../../utils/userService';
+import NewInventoryItem from '../../pages/NewInventoryItem/NewInventoryItem';
 
 class App extends Component {
   constructor() {
@@ -39,6 +40,9 @@ class App extends Component {
           }/>
           <Route exact path='/inventory' render={() =>
             <InventoryPage {...this.state}/>
+          }/>
+          <Route exact path='/inventory/new' render={() =>
+            <NewInventoryItem/>
           }/>
           <Route exact path='/connections' render={() =>
             <ConnectionsPage />
