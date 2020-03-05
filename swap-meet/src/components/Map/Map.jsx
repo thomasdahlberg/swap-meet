@@ -1,46 +1,43 @@
-import { Map, GoogleApiWrapper } from 'google-maps-react';
-import React, {Component} from 'react';
-import styles from './Map.module.css';
+import React from 'react';
+import mapStyle from './map-style';
 
+class Map extends React.Component {
+  mapDiv = React.createRef();
+  
+  setMap() {
+    if (this.props.lat && this.props.lng) {
+      const location = {lat: this.props.lat, lng: this.props.lng};
+      const map = new window.google.maps.Map(
+        this.mapDiv.current, {
+          zoom: this.props.zoom || 12,
+          center: location,
+          disableDefaultUI: true,
+          styles: mapStyle
+        }
+      );
+      new window.google.maps.Marker({position: location, map: map});
+    }
+  }
 
+  // Called after the first render
+  componentDidMount() {
+    this.setMap();
+  }
 
-class SwapMap extends Component {
-    constructor() {
-        super();
-        this.state = {
-        };
-      } 
+  // Called when props or state change
+  componentDidUpdate() {
+    this.setMap();
+  }
+
+  render() {
+    const baseStyle = {
+        width: 500,
+        height: 500,
+      };
     
-    componentWillMount() {
-        this.getUserLocation();
-    }
-
-    getUserLocation = () => {
-        navigator.geolocation.getCurrentPosition(this.showPosition)
-    }
-
-    showPosition = position => {
-        this.setState({
-            lat: position.coords.latitude,
-            long: position.coords.longitude,
-        })
-    }
-
-
-    render() {
-        return(
-            <div onLoad={this.getUserLocation}>
-                <Map
-                    google={this.props.google}
-                    zoom={15}
-                    initialCenter={{ lat: this.state.lat, lng: this.state.long }}
-                    centerAroundCurrentLocation={true}
-                />
-            </div>
-        )
-    }
+    return (
+      <div ref={this.mapDiv} style={baseStyle}></div>
+    );
+  }
 }
-
-export default GoogleApiWrapper({
-    apiKey: 'AIzaSyDBDG1GXL5fTNxIMCSbjQnfsDDDTwTpiIU'
-  })(SwapMap);
+export default Map;

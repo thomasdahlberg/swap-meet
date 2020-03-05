@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import HomePage from '../HomePage/HomePage';
 import InventoryPage from'../InventoryPage/InventoryPage';
 import SwapmeetsPage from'../SwapmeetsPage/SwapmeetsPage';
 import SwapsitesPage from'../SwapsitesPage/SwapsitesPage';
+import AddSwapsitesPage from'../AddSwapsitesPage/AddSwapsitesPage';
+import Map from'../../components/Map/Map';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import userService from '../../utils/userService';
 import inventoryService from '../../utils/inventoryService';
+import { getCurrentLatLng } from '../../utils/geolocationService';
+import swapSiteService from '../../utils/swapSiteService';
+
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       user: userService.getUser(),
-      items: []
+      items: [],
+      sites: [],
+      lat: null,
+      lng: null,
     }
   }
 
@@ -28,8 +35,23 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
+  handleGetSites = async () => {
+    if(userService.getUser()) {
+      const { sites } = await swapSiteService.index();
+      this.setState({ sites: sites })
+    }
+  }
+
+
+  async componentDidMount() {
     this.handleGetItems();
+    this.handleGetSites();
+    const {lat, lng} = await getCurrentLatLng();
+    this.setState({
+      lat,
+      lng
+    })
+    console.log(lat, lng);
   }
 
   handleSignupOrLogin = () => {
@@ -46,9 +68,10 @@ class App extends Component {
       <div className="App-outer-container">
         <Navbar user={this.state.user} handleLogout={this.handleLogout}/>
         <div className="App-inner-container">
+        {/* <Map lat={this.state.lat} lng={this.state.lng} /> */}
         <Switch>
           <Route exact path='/' render={() =>
-            <HomePage />
+          <div>Welcome!</div>
           }/>
           <Route exact path='/inventory' render={() =>
             userService.getUser() ?
@@ -67,10 +90,15 @@ class App extends Component {
           }/>
           <Route exact path='/swapsites' render={() =>
             userService.getUser() ?
-            <SwapsitesPage />
+            <SwapsitesPage items={this.state.sites} handleGetSites={this.handleGetSites} />
               :
             <Redirect to='/login' />    
           }/>
+          {/* <Route exact path='/swapsites/new' render={() =>
+            userService.getUser() ?
+              :
+            <Redirect to='/login' />     */}
+          {/* }/> */}
 
           <Route exact path="/login" render={({ history }) =>
             <Login handleSignupOrLogin={this.handleSignupOrLogin} history={history}/>

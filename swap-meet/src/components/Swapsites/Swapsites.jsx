@@ -3,16 +3,14 @@ import React , {Component} from 'react';
 const Swapsites = (props) => {
     return (
         <main>
-            {
-                props.swapSites.map(({name, _id, description, image, itemType, swapPref}) => (
+            {props.sites?
+                props.sites.map(({ siteName, _id}) => (
                 <section key={_id}>
-                    <h1>{name}</h1>
-                    <img/>
-                    <h3>{itemType}</h3>
-                    <p>{description}</p>
-                    <h3>Looking for: {swapPref}</h3>
+                    <h1>{siteName}</h1>
                 </section>
                 ))
+                :
+                <div>no sites</div>
                 }
         </main>
     )

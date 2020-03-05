@@ -3,7 +3,7 @@ const swapMeetCtrl = require('../../controllers/swapMeets');
 
 router.use(require('../../config/auth'));
 router.get('/', checkAuth, swapMeetCtrl.index);
-router.post('/new', checkAuth, swapMeetCtrl.createMeet);
+// router.post('/new', checkAuth, swapMeetCtrl.createMeet);
 
 
 function checkAuth(req, res, next) {

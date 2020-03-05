@@ -7,21 +7,16 @@ module.exports = {
 
 
 async function addSite(req, res) {
-    // console.log(req.user);
+    console.log(req.body);
     const site = new SwapSite({
-    //     name: req.body.name,
-    //     description: req.body.description,
-    //     image: req.body.image,
-    //     itemType: req.body.itemType,
-    //     swapPref: req.body.swapPref,
-    //     active: true,
-    //     location: null,
-    //     swapped: false,
-    //     currentOwner: req.user,
-    //     ownerHistory: [req.user]
+        siteName: req.body.siteName,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
+        active: true,
+        items: []
     });
     try {
-        await SwapSite.save();
+        await site.save();
         res.json({ site });
     } catch (error) {
         res.status(400).json(error);
