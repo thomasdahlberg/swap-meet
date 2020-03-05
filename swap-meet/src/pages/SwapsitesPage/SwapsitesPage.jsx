@@ -1,7 +1,6 @@
 import React from 'react';
 import Swapsites from '../../components/Swapsites/Swapsites';
-import AddSwapsitesPage from '../AddSwapsitesPage/AddSwapsitesPage';
-import { Link } from 'react-router-dom';
+import AddSwapsitesForm from '../../components/AddSwapsitesForm/AddSwapsitesForm';
 
 
 
@@ -11,7 +10,7 @@ const SwapsitesPage = (props) => {
         <div>
             <h1>My SwapSites</h1>
             <Swapsites sites={props.sites} />
-            <AddSwapsitesPage handleGetSites={props.handleGetSites} />
+            <AddSwapsitesForm handleGetSites={props.handleGetSites} />
         </div>
     )
 }

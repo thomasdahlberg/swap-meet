@@ -1,4 +1,4 @@
-import React , {Component} from 'react';
+import React from 'react';
 
 const Swapmeets = (props) => {
     return (
@@ -7,7 +7,6 @@ const Swapmeets = (props) => {
                 props.swapMeets.map(({name, _id, description, image, itemType, swapPref}) => (
                 <section key={_id}>
                     <h1>{name}</h1>
-                    <img/>
                     <h3>{itemType}</h3>
                     <p>{description}</p>
                     <h3>Looking for: {swapPref}</h3>

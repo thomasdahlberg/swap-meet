@@ -1,4 +1,4 @@
-import React , {Component} from 'react';
+import React from 'react';
 
 const Inventory = (props) => {
     return (
@@ -7,7 +7,7 @@ const Inventory = (props) => {
                 props.items.map(({name, _id, description, image, itemType, swapPref}) => (
                 <section key={_id}>
                     <h1>{name}</h1>
-                    <img/>
+                    <img alt="alt text"/>
                     <h3>{itemType}</h3>
                     <p>{description}</p>
                     <h3>Looking for: {swapPref}</h3>

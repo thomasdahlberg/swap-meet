@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
+
+// Pages and Components
 import InventoryPage from'../InventoryPage/InventoryPage';
 import SwapmeetsPage from'../SwapmeetsPage/SwapmeetsPage';
 import SwapsitesPage from'../SwapsitesPage/SwapsitesPage';
-import AddSwapsitesPage from'../AddSwapsitesPage/AddSwapsitesPage';
 import Map from'../../components/Map/Map';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+
+// Services
 import userService from '../../utils/userService';
 import inventoryService from '../../utils/inventoryService';
 import { getCurrentLatLng } from '../../utils/geolocationService';
 import swapSiteService from '../../utils/swapSiteService';
+
 
 
 class App extends Component {
@@ -68,7 +72,7 @@ class App extends Component {
       <div className="App-outer-container">
         <Navbar user={this.state.user} handleLogout={this.handleLogout}/>
         <div className="App-inner-container">
-        {/* <Map lat={this.state.lat} lng={this.state.lng} /> */}
+        <Map lat={this.state.lat} lng={this.state.lng} />
         <Switch>
           <Route exact path='/' render={() =>
           <div>Welcome!</div>
@@ -90,16 +94,10 @@ class App extends Component {
           }/>
           <Route exact path='/swapsites' render={() =>
             userService.getUser() ?
-            <SwapsitesPage items={this.state.sites} handleGetSites={this.handleGetSites} />
+            <SwapsitesPage sites={this.state.sites} handleGetSites={this.handleGetSites} />
               :
             <Redirect to='/login' />    
           }/>
-          {/* <Route exact path='/swapsites/new' render={() =>
-            userService.getUser() ?
-              :
-            <Redirect to='/login' />     */}
-          {/* }/> */}
-
           <Route exact path="/login" render={({ history }) =>
             <Login handleSignupOrLogin={this.handleSignupOrLogin} history={history}/>
           }/>
