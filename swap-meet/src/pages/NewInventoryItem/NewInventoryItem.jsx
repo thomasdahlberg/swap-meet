@@ -38,7 +38,8 @@ class NewInventoryItem extends Component {
         try {
             const { image, name, description, itemType, swapPref } = this.state;
             await inventoryService.addItem({ image, name, description, itemType, swapPref });
-            this.setState(this.getInitialState()); 
+            this.props.handleGetItems();
+            this.props.history.push('/inventory');
         } catch (error) {
             console.log(error);
         }

@@ -10,7 +10,10 @@ const Navbar = (props) => {
             <Link to="/inventory">My Items</Link>
         </li>
         <li>
-            <Link to="/connections">My Connections</Link>
+            <Link to="/swapmeets">My SwapMeets</Link>
+        </li>
+        <li>
+            <Link to="/swapsites">My SwapSites</Link>
         </li>
         <li>
             <Link to="" onClick={props.handleLogout}>Log Out</Link>

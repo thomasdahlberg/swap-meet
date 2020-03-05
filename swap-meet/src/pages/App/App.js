@@ -3,14 +3,14 @@ import './App.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import HomePage from '../HomePage/HomePage';
 import InventoryPage from'../InventoryPage/InventoryPage';
-import ConnectionsPage from'../ConnectionsPage/ConnectionsPage';
+import SwapmeetsPage from'../SwapmeetsPage/SwapmeetsPage';
+import SwapsitesPage from'../SwapsitesPage/SwapsitesPage';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import userService from '../../utils/userService';
 import inventoryService from '../../utils/inventoryService';
-import NewInventoryItem from '../../pages/NewInventoryItem/NewInventoryItem';
 
 class App extends Component {
   constructor() {
@@ -21,11 +21,15 @@ class App extends Component {
     }
   }
 
-  async componentDidMount() {
+  handleGetItems = async () => {
     if(userService.getUser()) {
       const { items } = await inventoryService.index();
       this.setState({ items: items })
     }
+  }
+
+  componentDidMount() {
+    this.handleGetItems();
   }
 
   handleSignupOrLogin = () => {
@@ -48,18 +52,26 @@ class App extends Component {
           }/>
           <Route exact path='/inventory' render={() =>
             userService.getUser() ?
-            <InventoryPage 
+            <InventoryPage
+            handleGetItems={this.handleGetItems} 
             items={this.state.items}
             />
               :
             <Redirect to='/login' />
           }/>
-          <Route exact path='/connections' render={() =>
+          <Route exact path='/swapmeets' render={() =>
             userService.getUser() ?
-            <ConnectionsPage />
+            <SwapmeetsPage />
               :
             <Redirect to='/login' />    
           }/>
+          <Route exact path='/swapsites' render={() =>
+            userService.getUser() ?
+            <SwapsitesPage />
+              :
+            <Redirect to='/login' />    
+          }/>
+
           <Route exact path="/login" render={({ history }) =>
             <Login handleSignupOrLogin={this.handleSignupOrLogin} history={history}/>
           }/>

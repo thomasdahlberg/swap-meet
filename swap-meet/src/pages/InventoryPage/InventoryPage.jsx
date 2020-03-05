@@ -8,7 +8,7 @@ const InventoryPage = (props) => {
         <div>
             <h1>Inventory</h1>
             <Inventory items={props.items} />
-            <NewInventoryItem/>
+            <NewInventoryItem handleGetItems={props.handleGetItems}/>
         </div>
     )
 }
