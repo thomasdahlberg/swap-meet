@@ -1,6 +1,25 @@
 import tokenService from './tokenService';
 const BASE_URL = '/api/swapsites/';
 
+function linkItem(site) {
+    return fetch(BASE_URL + `${site.site}`, {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        },
+        body: JSON.stringify(site)
+    })
+    .then(response => {
+        if(response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Invalid Site, Try Again');
+        }
+    })
+}
+
+
 function addSite(site) {
     return fetch(BASE_URL + 'new', {
         method: 'POST',
@@ -39,6 +58,7 @@ function index(sites) {
 }
 
 export default {
+    linkItem,
     addSite,
     index
 }

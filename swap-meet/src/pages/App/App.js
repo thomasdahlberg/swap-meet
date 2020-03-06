@@ -94,7 +94,11 @@ class App extends Component {
           }/>
           <Route exact path='/swapsites' render={() =>
             userService.getUser() ?
-            <SwapsitesPage sites={this.state.sites} handleGetSites={this.handleGetSites} />
+            <SwapsitesPage 
+              sites={this.state.sites} 
+              handleGetSites={this.handleGetSites} 
+              items={this.state.items}
+            />
               :
             <Redirect to='/login' />    
           }/>

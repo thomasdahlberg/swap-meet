@@ -5,7 +5,7 @@ import swapSiteService from '../../utils/swapSiteService';
 
 const API_KEY = 'AIzaSyDBDG1GXL5fTNxIMCSbjQnfsDDDTwTpiIU';
 
-class AddSwapsitesPage extends Component {
+class AddSwapsitesForm extends Component {
     constructor(props) {
       super(props)
       this.state = {
@@ -49,4 +49,4 @@ class AddSwapsitesPage extends Component {
     } 
   }
 
-  export default AddSwapsitesPage;
+  export default AddSwapsitesForm;
