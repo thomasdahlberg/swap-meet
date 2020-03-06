@@ -21,16 +21,17 @@ import swapSiteService from '../../utils/swapSiteService';
 
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      user: userService.getUser(),
-      items: [],
-      sites: [],
-      lat: null,
-      lng: null,
-    }
-  }
+  state = this.getInitialState();
+      
+  getInitialState() {
+    return {
+        user: userService.getUser(),
+        items: [],
+        sites: [],
+        lat: null,
+        lng: null,
+    };
+}
 
   handleGetItems = async () => {
     if(userService.getUser()) {

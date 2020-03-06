@@ -30,7 +30,7 @@ async function addItem(req, res) {
 
 async function index(req, res) {
     try {
-        await Item.find({currentOwner: req.user}, function(err, items){
+        await Item.find({}, function(err, items){
             res.status(200).json({ items });
         });
     } catch (error) {

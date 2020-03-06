@@ -38,7 +38,26 @@ function index(items) {
     })
 }
 
+function myItems(items) {
+    return fetch(BASE_URL, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        }),
+        body: JSON.stringify(items)
+    })
+    .then(response => {
+        if(response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Invalid Request, Try Again');
+        }
+    })
+}
+
 export default {
+    myItems,
     addItem,
     index
 }

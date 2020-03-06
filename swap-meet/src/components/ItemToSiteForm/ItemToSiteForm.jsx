@@ -51,24 +51,24 @@ class NewInventoryItem extends Component {
     render() {
         return(
             <form onSubmit={this.handleSubmit}>
-            <fieldset>
-                <label htmlFor="itemType">Select Item</label>
-                <select 
-                    id="item" 
-                    name="item"  
-                    value=""
-                    onChange={this.handleChange}
-                >
-                {this.state.items ?
-                    this.state.items.map(({ name, _id}) => (
-                    <option key={_id}name="item" value={_id}>{name}</option>
-                    )) : 
-                    <option>no items</option>
-                }
-                </select>
-                <button type="submit">Submit</button>
-            </fieldset>
-        </form>
+                <fieldset>
+                    <label htmlFor="itemType">Select Item</label>
+                    <select 
+                        id="item" 
+                        name="item"  
+                        value=""
+                        onChange={this.handleChange}
+                    >
+                    {this.state.items ?
+                        this.state.items.map(({ name, _id}) => (
+                        <option key={_id} name="item" value={_id}>{name}</option>
+                        )) : 
+                        <option>no items</option>
+                    }
+                    </select>
+                    <button type="submit">Submit</button>
+                </fieldset>
+            </form>
         );
     }
 }
