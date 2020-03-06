@@ -22,7 +22,7 @@ class AddSwapsitesForm extends Component {
             const { siteName, latitude, longitude } = this.state;
             await swapSiteService.addSite({ siteName, latitude, longitude });
             this.props.handleGetSites();
-            this.props.history.push('/swapsites');
+            // this.props.history.push('/swapsites');
         } catch (error) {
             console.log(error);
         }

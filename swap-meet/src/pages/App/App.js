@@ -22,17 +22,32 @@ import swapSiteService from '../../utils/swapSiteService';
 
 class App extends Component {
   state = this.getInitialState();
-      
-  getInitialState() {
+  
+  getInitialState () {
     return {
-        user: userService.getUser(),
-        myItems: [],
-        items: [],
-        sites: [],
-        lat: null,
-        lng: null,
+      user: userService.getUser(),
+      myItems: [],
+      items: [],
+      sites: [],
+      lat: null,
+      lng: null,
     };
-}
+  }
+  
+  handleGetItems = async () => {
+    if(userService.getUser()) {
+      const { items } = await inventoryService.index();
+      this.setState({ items: items })
+      this.handleGetMyItems();
+    }
+  }
+  
+  handleGetSites = async () => {
+    if(userService.getUser()) {
+      const { sites } = await swapSiteService.index();
+      this.setState({ sites: sites })
+    }
+  }
 
   handleGetMyItems = () => {
     let myItems = [];
@@ -45,20 +60,6 @@ class App extends Component {
     this.setState({ myItems: myItems});
   }
 
-  handleGetItems = async () => {
-    if(userService.getUser()) {
-      const { items } = await inventoryService.index();
-      this.setState({ items: items })
-      this.handleGetMyItems();
-    }
-  }
-
-  handleGetSites = async () => {
-    if(userService.getUser()) {
-      const { sites } = await swapSiteService.index();
-      this.setState({ sites: sites })
-    }
-  }
 
 
   async componentDidMount() {
@@ -77,7 +78,10 @@ class App extends Component {
 
   handleLogout = () => {
     userService.logout();
-    this.setState({ user: null });
+    this.setState({ 
+      user: null,
+      myItems: [],
+    });
   }
 
   render(){

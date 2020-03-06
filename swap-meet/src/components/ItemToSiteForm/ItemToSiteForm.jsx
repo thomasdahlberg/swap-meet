@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import swapSiteService from '../../utils/swapSiteService';
 import userService from '../../utils/userService';
 
-class NewInventoryItem extends Component {
+class ItemToSiteForm extends Component {
     constructor(props) {
         super(props)
+
    
     
     this.state = this.getInitialState();
@@ -40,7 +41,8 @@ class NewInventoryItem extends Component {
             const { user, item, site } = this.state;
             await swapSiteService.linkItem({ user, item, site });
             this.props.handleGetSites();
-            this.props.history.push('/swapsites');
+            console.log('sites gotten');
+            // this.props.history.push('/swapsites');
         } catch (error) {
             console.log(error);
         }
@@ -56,7 +58,6 @@ class NewInventoryItem extends Component {
                     <select 
                         id="item" 
                         name="item"  
-                        value=""
                         onChange={this.handleChange}
                     >
                     {this.state.items ?
@@ -73,4 +74,4 @@ class NewInventoryItem extends Component {
     }
 }
 
-export default NewInventoryItem
+export default ItemToSiteForm;
