@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-// Pages and Components
-import InventoryPage from'../InventoryPage/InventoryPage';
-import SwapmeetsPage from'../SwapmeetsPage/SwapmeetsPage';
-import SwapsitesPage from'../SwapsitesPage/SwapsitesPage';
-import Map from'../../components/Map/Map';
+// Pages
+import InventoryPage from '../InventoryPage/InventoryPage';
+import SwapmeetsPage from '../SwapmeetsPage/SwapmeetsPage';
+import SwapsitesPage from '../SwapsitesPage/SwapsitesPage';
+import NewSwapmeetsPage from '../NewSwapmeetsPage/NewSwapmeetsPage';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
+
+// Components
+import Map from'../../components/Map/Map';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 
@@ -31,6 +34,7 @@ class App extends Component {
       sites: [],
       lat: null,
       lng: null,
+      wantItem: []
     };
   }
   
@@ -60,6 +64,10 @@ class App extends Component {
     this.setState({ myItems: myItems});
   }
 
+  handleGetMyWantItem = e => {
+    e.preventDefault();
+    console.log(e.target.id);
+  }
 
 
   async componentDidMount() {
@@ -89,7 +97,7 @@ class App extends Component {
       <div className="App-outer-container">
         <Navbar user={this.state.user} handleLogout={this.handleLogout}/>
         <div className="App-inner-container">
-        <Map lat={this.state.lat} lng={this.state.lng} />
+        {/* <Map lat={this.state.lat} lng={this.state.lng} /> */}
         <Switch>
           <Route exact path='/' render={() =>
           <div>Welcome!</div>
@@ -106,7 +114,13 @@ class App extends Component {
           }/>
           <Route exact path='/swapmeets' render={() =>
             userService.getUser() ?
-            <SwapmeetsPage />
+            <SwapmeetsPage items={this.state.items} myItems={this.state.myItems}/>
+              :
+            <Redirect to='/login' />    
+          }/>
+          <Route exact path='/swapmeets/new' render={() =>
+            userService.getUser() ?
+            <NewSwapmeetsPage items={this.state.items} myItems={this.state.myItems}/>
               :
             <Redirect to='/login' />    
           }/>
@@ -117,6 +131,7 @@ class App extends Component {
               sites={this.state.sites} 
               handleGetSites={this.handleGetSites} 
               items={this.state.items}
+              handleGetMyWantItem={this.handleGetMyWantItem}
             />
               :
             <Redirect to='/login' />    

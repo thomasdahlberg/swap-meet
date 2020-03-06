@@ -1,33 +1,33 @@
 import tokenService from './tokenService';
-const BASE_URL = '/api/inventory/';
+const BASE_URL = '/api/swapmeets/';
 
-function addItem(item) {
+function addOffer(swapMeet) {
     return fetch(BASE_URL + 'new', {
         method: 'POST',
         headers: {
             'Content-type': 'Application/json',
             'Authorization': 'Bearer ' + tokenService.getToken()
         },
-        body: JSON.stringify(item)
+        body: JSON.stringify(swapMeet)
     })
     .then(response => {
         if(response.ok) {
             return response.json();
         } else {
-            throw new Error('Invalid Item, Try Again');
+            throw new Error('Invalid Offer, Try Again');
         }
     })
 }
 
 
-function index(items) {
+function index(swapMeets) {
     return fetch(BASE_URL, {
         method: 'GET',
         headers: new Headers({
             'Content-type': 'Application/json',
             'Authorization': 'Bearer ' + tokenService.getToken()
         }),
-        body: JSON.stringify(items)
+        body: JSON.stringify(swapMeets)
     })
     .then(response => {
         if(response.ok) {
@@ -40,7 +40,6 @@ function index(items) {
 
 
 export default {
-    addItem,
+    addOffer,
     index
 }
-

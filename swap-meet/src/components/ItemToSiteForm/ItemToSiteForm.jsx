@@ -5,10 +5,7 @@ import userService from '../../utils/userService';
 class ItemToSiteForm extends Component {
     constructor(props) {
         super(props)
-
-   
-    
-    this.state = this.getInitialState();
+        this.state = this.getInitialState();
     }
     
     getInitialState() {

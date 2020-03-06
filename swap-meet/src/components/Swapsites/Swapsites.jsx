@@ -1,7 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import ItemToSiteForm from '../ItemToSiteForm/ItemToSiteForm';
 
-const Swapsites = (props) => {
+
+    
+const Swapsites = (props) => {   
     return (
         <main>
             {props.sites.map(({ siteName, _id, items}) => (
@@ -10,7 +14,7 @@ const Swapsites = (props) => {
                     <ul>
                         {props.items.map(({ _id, name}) => 
                             { for( let i = 1; i < items.length; i++) {
-                                if( items[i] === _id ) { return <li key={items[i]}>{name}</li> }
+                                if( items[i] === _id ) { return <li key={_id}><Link key={_id} id={_id} onClick={props.handleGetMyWantItem} to="/swapmeets/new">{name}</Link></li> }
                                 }
                             })
                         }
@@ -24,6 +28,7 @@ const Swapsites = (props) => {
         </main>
     )
 }
+
 
 
 export default Swapsites;

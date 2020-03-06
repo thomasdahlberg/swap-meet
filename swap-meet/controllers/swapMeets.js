@@ -1,23 +1,25 @@
 const SwapMeet = require('../models/swapMeet');
 
 module.exports = {
-    index
+    index,
+    addOffer
 };
 
 
-async function createMeet(req, res) {
-    // console.log(req.user);
+async function addOffer(req, res) {
+    console.log(req.user);
     const meet = new SwapMeet({
-    //     name: req.body.name,
-    //     description: req.body.description,
-    //     image: req.body.image,
-    //     itemType: req.body.itemType,
-    //     swapPref: req.body.swapPref,
-    //     active: true,
-    //     location: null,
-    //     swapped: false,
-    //     currentOwner: req.user,
-    //     ownerHistory: [req.user]
+        site: req.body.swapSiteId,
+        dateTime: req.body.dateTime,
+        transaction: {
+            offerUser: req.body.offerUser,
+            offerItem: req.body.offerItemId,
+            wantItemUser: req.body.wantItemUser,
+            wantItem: req.body.wantItemId
+        },
+        swapped: false,
+        meetAccepted: false,
+        active: true
     });
     try {
         await SwapMeet.save();

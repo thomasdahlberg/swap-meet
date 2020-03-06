@@ -9,8 +9,16 @@ const SwapsitesPage = (props) => {
     return(
         <div>
             <h1>My SwapSites</h1>
-            <Swapsites sites={props.sites} items={props.items} handleGetSites={props.handleGetSites} myItems={props.myItems}/>
-            <AddSwapsitesForm handleGetSites={props.handleGetSites} />
+            <Swapsites 
+                sites={props.sites}
+                items={props.items}     
+                handleGetSites={props.handleGetSites}
+                myItems={props.myItems}
+                handleGetMyWantItem={props.handleGetMyWantItem}
+            />
+            <AddSwapsitesForm 
+                handleGetSites={props.handleGetSites} 
+            />
         </div>
     )
 }

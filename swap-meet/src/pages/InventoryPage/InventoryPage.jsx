@@ -1,6 +1,6 @@
 import React from 'react';
 import Inventory from '../../components/Inventory/Inventory'
-import NewInventoryItem from '../NewInventoryItem/NewInventoryItem';
+import NewInventoryItem from '../../components/NewInventoryItem/NewInventoryItem';
 
 const InventoryPage = (props) => {
 
