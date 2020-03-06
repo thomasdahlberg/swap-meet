@@ -18,7 +18,7 @@ const Swapsites = (props) => {
                 
                     
                     </ul>
-                    <ItemToSiteForm items={props.items} siteId={_id} key={_id}/>
+                    <ItemToSiteForm items={props.myItems} siteId={_id} key={_id}/>
                 </section>
                 ))
             }

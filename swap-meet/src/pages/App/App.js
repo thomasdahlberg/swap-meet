@@ -26,6 +26,7 @@ class App extends Component {
   getInitialState() {
     return {
         user: userService.getUser(),
+        myItems: [],
         items: [],
         sites: [],
         lat: null,
@@ -33,10 +34,22 @@ class App extends Component {
     };
 }
 
+  handleGetMyItems = () => {
+    let myItems = [];
+    console.log('getmyitems')
+    for(let i = 1; i < this.state.items.length; i++){
+      if(this.state.items[i].currentOwner === this.state.user._id){
+        myItems.push(this.state.items[i]);
+      }
+    }
+    this.setState({ myItems: myItems});
+  }
+
   handleGetItems = async () => {
     if(userService.getUser()) {
       const { items } = await inventoryService.index();
       this.setState({ items: items })
+      this.handleGetMyItems();
     }
   }
 
@@ -56,7 +69,6 @@ class App extends Component {
       lat,
       lng
     })
-    console.log(lat, lng);
   }
 
   handleSignupOrLogin = () => {
@@ -81,6 +93,7 @@ class App extends Component {
           <Route exact path='/inventory' render={() =>
             userService.getUser() ?
             <InventoryPage
+            myItems={this.state.myItems}
             handleGetItems={this.handleGetItems} 
             items={this.state.items}
             />
@@ -96,6 +109,7 @@ class App extends Component {
           <Route exact path='/swapsites' render={() =>
             userService.getUser() ?
             <SwapsitesPage 
+              myItems={this.state.myItems}
               sites={this.state.sites} 
               handleGetSites={this.handleGetSites} 
               items={this.state.items}

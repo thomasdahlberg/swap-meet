@@ -4,7 +4,7 @@ const Inventory = (props) => {
     return (
         <main>
             {
-                props.items.map(({name, _id, description, image, itemType, swapPref}) => (
+                props.myItems.map(({name, _id, description, image, itemType, swapPref}) => (
                 <section key={_id}>
                     <h1>{name}</h1>
                     <img alt="alt text"/>
