@@ -2,6 +2,7 @@
 
 A MERN web application for local non-currency bartering.
 
+![Screenshot](public/screen1.png)
 
 
 ### Overview
@@ -15,6 +16,8 @@ Swap-Meet works with four different data objects on a MongoDB server - users, it
 ### Getting Started
 
 To get started navigate to the deployed app at the link below. From there create a user and you should be able to intuitively start adding inventory items for swapping and perusing existing swap sites where other users are willing to hock their respective inventory items.
+
+https://swap-meet-app.herokuapp.com/
 
 ### Unsolved Problems
 
