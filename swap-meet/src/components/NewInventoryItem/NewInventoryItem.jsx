@@ -50,7 +50,7 @@ class NewInventoryItem extends Component {
     render() {
         return(
             <form className={styles.form} onSubmit={this.handleSubmit}>
-            <fieldset>
+            <fieldset className={styles.container}>
                 <legend>Add A New Item</legend>
                 <label htmlFor="image">Select Item Image:</label>
                 <input 
@@ -71,7 +71,8 @@ class NewInventoryItem extends Component {
                 />
                 
                 <label htmlFor="description">Description</label>
-                <input 
+                <input
+                    className={styles.description} 
                     id="description" 
                     name="description" 
                     type="text" 

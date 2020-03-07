@@ -1,14 +1,15 @@
 import React from 'react';
+import styles from './Inventory.module.css';
+
 
 const Inventory = (props) => {
     return (
-        <main>
+        <main className={styles.container}>
             {
                 props.myItems.map(({name, _id, description, image, itemType, swapPref}) => (
-                <section key={_id}>
+                <section className={styles.section} key={_id}>
                     <h1>{name}</h1>
                     <img alt="alt text"/>
-                    <h3>{itemType}</h3>
                     <p>{description}</p>
                     <h3>Looking for: {swapPref}</h3>
                 </section>

@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.section {
+    background-color: cornsilk;
+    height: 200px;
+    width: 300px;
+    margin: 5px;
+    padding: 10px;
+    border: solid black;
+}
+
+.section h1 {
+    text-align: center;
+}

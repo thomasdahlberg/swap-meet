@@ -1,10 +1,11 @@
 import React from 'react';
 import NewSwapMeetOfferForm from '../../components/NewSwapMeetOfferForm/NewSwapMeetOfferForm';
+import styles from './NewSwapmeetsPage.module.css'
 
 const NewSwapmeetsPage = (props) => {
 
     return(
-        <div>
+        <div className={styles.container}>
             <h1>Swap Meet Offer</h1>
             <NewSwapMeetOfferForm 
                 handleGetItems={props.handleGetItems} 

@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.section {
+    background-color: cornsilk;
+    width: 80%;
+    margin: 5px;
+    padding: 10px;
+    border: solid black;
+}
+
+.section h1 {
+    text-align: center;
+}

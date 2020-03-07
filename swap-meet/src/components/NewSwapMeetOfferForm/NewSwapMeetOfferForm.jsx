@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import userService from '../../utils/userService';
 import swapmeetService from '../../utils/swapmeetService';
+import styles from './NewSwapMeetOfferForm.module.css';
 
 class NewSwapMeetOfferForm extends Component {
     constructor(props) {
@@ -64,7 +65,7 @@ class NewSwapMeetOfferForm extends Component {
 
     render() {
         return(
-            <form onSubmit={this.handleSubmit}>
+            <form className={styles.container} onSubmit={this.handleSubmit}>
                 <fieldset>
                     <label htmlFor="offerItemId">Select Item to Swap</label>
                     <select  

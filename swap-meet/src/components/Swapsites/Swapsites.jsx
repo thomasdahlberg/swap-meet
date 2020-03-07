@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import styles from './Swapsites.module.css';
 import ItemToSiteForm from '../ItemToSiteForm/ItemToSiteForm';
 
 
     
 const Swapsites = (props) => {   
     return (
-        <main>
+        <main className={styles.container}>
             {props.sites.map(({ siteName, _id, items}) => (
-                <section key={_id}>
+                <section className={styles.section} key={_id}>
                     <h1>{siteName}</h1>
                         <ul id={_id}>
                             {props.items.map(({ _id, name}) => 
