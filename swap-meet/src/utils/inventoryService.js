@@ -38,8 +38,28 @@ function index(items) {
     })
 }
 
+function showOne(item) {
+    return fetch(BASE_URL, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        }),
+        body: JSON.stringify(item)
+    })
+    .then(response => {
+        if(response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Invalid Request, Try Again');
+        }
+    })
+}
+
+
 
 export default {
+    showOne,
     addItem,
     index
 }

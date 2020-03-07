@@ -20,6 +20,7 @@ import userService from '../../utils/userService';
 import inventoryService from '../../utils/inventoryService';
 import { getCurrentLatLng } from '../../utils/geolocationService';
 import swapSiteService from '../../utils/swapSiteService';
+import swapmeetService from '../../utils/swapmeetService';
 
 
 
@@ -30,6 +31,9 @@ class App extends Component {
     return {
       user: userService.getUser(),
       myItems: [],
+      mySwapmeets:[],
+      myOffers: [],
+      swapmeets: [],
       items: [],
       sites: [],
       lat: null,
@@ -54,6 +58,14 @@ class App extends Component {
       this.setState({ sites: sites })
     }
   }
+
+  handleGetSwapmeets = async () => {
+    if(userService.getUser()) {
+      const { meets } = await swapmeetService.index();
+      this.setState({ swapmeets: meets })
+    }
+  }
+
 
   handleGetMyItems = () => {
     let myItems = [];
@@ -81,6 +93,7 @@ class App extends Component {
   async componentDidMount() {
     this.handleGetItems();
     this.handleGetSites();
+    this.handleGetSwapmeets();
     const {lat, lng} = await getCurrentLatLng();
     this.setState({
       lat,
@@ -122,9 +135,12 @@ class App extends Component {
           }/>
           <Route exact path='/swapmeets' render={() =>
             userService.getUser() ?
-            <SwapmeetsPage 
+            <SwapmeetsPage
+              sites={this.state.sites} 
+              swapmeets={this.state.swapmeets}
               items={this.state.items} 
               myItems={this.state.myItems}
+              mySwapmeets={this.state.mySwapmeets}
             />
               :
             <Redirect to='/login' />    

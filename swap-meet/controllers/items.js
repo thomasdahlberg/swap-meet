@@ -1,10 +1,20 @@
 const Item = require('../models/item');
 
 module.exports = {
+    showOne,
     addItem,
     index
 };
 
+async function showOne(req, res) {
+    try {
+        await Item.findByIdAndUpdate(req.body.itemId, function(err, item){
+            res.status(200).json({ item });
+        });
+    } catch (error) {
+       res.status(400).json(error); 
+    }
+}
 
 async function addItem(req, res) {
     // console.log(req.user);

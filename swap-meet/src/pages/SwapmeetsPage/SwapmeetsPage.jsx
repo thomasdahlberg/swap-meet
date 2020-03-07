@@ -7,7 +7,7 @@ const SwapmeetsPage = (props) => {
     return(
         <div>
             <h1>My SwapMeets</h1>
-            <Swapmeets swapMeets={props.swapMeets} items={props.items} myItems={props.myItems}/>
+            <Swapmeets sites={props.sites} swapmeets={props.swapmeets} items={props.items} myItems={props.myItems}/>
         </div>
     )
 }
