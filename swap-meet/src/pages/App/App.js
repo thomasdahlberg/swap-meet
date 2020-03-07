@@ -11,7 +11,7 @@ import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 
 // Components
-import Map from'../../components/Map/Map';
+// import Map from'../../components/Map/Map';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 
