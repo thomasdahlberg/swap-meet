@@ -10,13 +10,27 @@ class NewSwapMeetOfferForm extends Component {
     
     getInitialState() {
         return {
-            offerUser: userService.getUser(),
-            wantItemUser: null,
-            wantItemId: '',
-            offerItemId: '',
-            swapSiteId: '',
+            offerUser: userService.getUser()._id,
+            wantItemId: null,
+            offerItemId: null,
+            swapSiteId: null,
             dateTime: null,
+            items:[]
         };
+    }
+    
+       
+
+    getSwapItem() {
+        this.setState({
+            wantItemId: this.props.wantItem,
+            swapSiteId: this.props.wantItemPlace,
+            items: this.props.items
+        })
+    }
+    
+    async componentDidMount(){
+        await this.getSwapItem();
     }
 
     isFormValid = () => {
@@ -37,11 +51,10 @@ class NewSwapMeetOfferForm extends Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-        if(!this.isFormValid()) return;
         console.log('submitting swapmeet offer');
         try {
-            const { wantItemId, offerItemId, swapSiteId, dateTime, offerUser, wantItemUser } = this.state;
-            await swapmeetService.addOffer({ wantItemId, offerItemId, swapSiteId, dateTime, offerUser, wantItemUser });
+            const { wantItemId, offerItemId, swapSiteId, dateTime, offerUser } = this.state;
+            await swapmeetService.addOffer({ wantItemId, offerItemId, swapSiteId, dateTime, offerUser });
             // this.props.handleGetItems();
             // this.props.history.push('/inventory');
         } catch (error) {

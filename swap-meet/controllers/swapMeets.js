@@ -7,14 +7,14 @@ module.exports = {
 
 
 async function addOffer(req, res) {
-    console.log(req.user);
+    console.log(req);
     const meet = new SwapMeet({
         site: req.body.swapSiteId,
-        dateTime: req.body.dateTime,
+        dateTime: new Date(req.body.dateTime),
         transaction: {
             offerUser: req.body.offerUser,
             offerItem: req.body.offerItemId,
-            wantItemUser: req.body.wantItemUser,
+            wantItemUser: null,
             wantItem: req.body.wantItemId
         },
         swapped: false,
@@ -22,7 +22,7 @@ async function addOffer(req, res) {
         active: true
     });
     try {
-        await SwapMeet.save();
+        await meet.save();
         res.json({ meet });
     } catch (error) {
         res.status(400).json(error);

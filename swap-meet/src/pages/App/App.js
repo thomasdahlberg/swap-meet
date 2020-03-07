@@ -34,7 +34,9 @@ class App extends Component {
       sites: [],
       lat: null,
       lng: null,
-      wantItem: []
+      wantItem: null,
+      wantItemPlace: null,
+      wantItemUser: null,
     };
   }
   
@@ -64,9 +66,15 @@ class App extends Component {
     this.setState({ myItems: myItems});
   }
 
-  handleGetMyWantItem = e => {
-    e.preventDefault();
-    console.log(e.target.id);
+  
+  
+  handleGetMyWantItem = async (e) => {
+    const wantItemPlace = e.target.parentNode.parentNode.id;
+    const wantItem = e.target.id
+    await this.setState({ 
+      wantItem: wantItem,
+      wantItemPlace: wantItemPlace
+     })
   }
 
 
@@ -114,13 +122,23 @@ class App extends Component {
           }/>
           <Route exact path='/swapmeets' render={() =>
             userService.getUser() ?
-            <SwapmeetsPage items={this.state.items} myItems={this.state.myItems}/>
+            <SwapmeetsPage 
+              items={this.state.items} 
+              myItems={this.state.myItems}
+            />
               :
             <Redirect to='/login' />    
           }/>
           <Route exact path='/swapmeets/new' render={() =>
             userService.getUser() ?
-            <NewSwapmeetsPage items={this.state.items} myItems={this.state.myItems}/>
+            <NewSwapmeetsPage 
+              items={this.state.items} 
+              myItems={this.state.myItems}
+              wantItem={this.state.wantItem}
+              wantItemPlace={this.state.wantItemPlace}
+              wantItemUser={this.state.wantItemUser}
+              handleGetWantItemUser={this.handleGetWantItemUser}
+            />
               :
             <Redirect to='/login' />    
           }/>

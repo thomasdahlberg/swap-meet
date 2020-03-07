@@ -11,10 +11,10 @@ const Swapsites = (props) => {
             {props.sites.map(({ siteName, _id, items}) => (
                 <section key={_id}>
                     <h1>{siteName}</h1>
-                    <ul>
+                    <ul id={_id}>
                         {props.items.map(({ _id, name}) => 
                             { for( let i = 1; i < items.length; i++) {
-                                if( items[i] === _id ) { return <li key={_id}><Link key={_id} id={_id} onClick={props.handleGetMyWantItem} to="/swapmeets/new">{name}</Link></li> }
+                                if( items[i] === _id ) { return <Link key={_id} to="/swapmeets/new"><li onClick={props.handleGetMyWantItem} key={_id} id={_id}>{name}</li><input type="hidden" name="swapSite" value={_id}/></Link> }
                                 }
                             })
                         }
