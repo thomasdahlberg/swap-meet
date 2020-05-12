@@ -1,43 +1,43 @@
-import React from 'react';
-import mapStyle from './map-style';
+import React, { Component, createRef } from 'react'
 
-class Map extends React.Component {
-  mapDiv = React.createRef();
-  
-  setMap() {
-    if (this.props.lat && this.props.lng) {
-      const location = {lat: this.props.lat, lng: this.props.lng};
-      const map = new window.google.maps.Map(
-        this.mapDiv.current, {
-          zoom: this.props.zoom || 12,
-          center: location,
-          disableDefaultUI: true,
-          styles: mapStyle
-        }
-      );
-      new window.google.maps.Marker({position: location, map: map});
-    }
+const GOOGLE_MAP_API_KEY = process.env.API_KEY;
+
+class GoogleMap extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.googleMapRef = React.createRef()
   }
 
-  // Called after the first render
   componentDidMount() {
-    this.setMap();
+    const googleMapScript = document.createElement('script')
+    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA8JacrsSr71qIf9zHzR_6__AbObv3hci8&libraries=places`
+    window.document.body.appendChild(googleMapScript)
+    googleMapScript.addEventListener('load',() => {
+      this.googleMap = this.createGoogleMap()
+    })
   }
+  
 
-  // Called when props or state change
-  componentDidUpdate() {
-    this.setMap();
-  }
+  createGoogleMap = () => 
+    new window.google.maps.Map(this.googleMapRef.current, {
+      zoom: 16,
+      center: {
+        lat: 43.642567,
+        lng: -79.387054,
+      },
+      disableDefaultUI: true,
+    })  
 
   render() {
-    const baseStyle = {
-        width: 500,
-        height: 500,
-      };
-    
-    return (
-      <div ref={this.mapDiv} style={baseStyle}></div>
-    );
+    return(
+      <div
+        id="google-map"
+        ref={this.googleMapRef}
+        style={{ width: '400px', height: '300px' }}
+      />
+    )
   }
 }
-export default Map;
+
+export default GoogleMap

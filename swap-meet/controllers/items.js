@@ -47,3 +47,13 @@ async function index(req, res) {
        res.status(400).json(error); 
     }
 }
+
+async function getOne(req, res) {
+    try {
+        await Item.findById(req.body, function(err, item){
+            res.status(200).json({ item });
+        });
+    } catch (error) {
+       res.status(400).json(error); 
+    }
+}

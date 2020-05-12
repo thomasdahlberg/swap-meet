@@ -14,6 +14,7 @@ import Signup from '../Signup/Signup';
 // import Map from'../../components/Map/Map';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+import GoogleMap from '../../components/Map/Map';
 
 // Services
 import userService from '../../utils/userService';
@@ -41,6 +42,7 @@ class App extends Component {
       wantItem: null,
       wantItemPlace: null,
       wantItemUser: null,
+      wantItems: null,
     };
   }
   
@@ -63,6 +65,7 @@ class App extends Component {
     if(userService.getUser()) {
       const { meets } = await swapmeetService.index();
       this.setState({ swapmeets: meets })
+      this.handleGetWantItems();
     }
   }
 
@@ -76,6 +79,13 @@ class App extends Component {
       }
     }
     this.setState({ myItems: myItems});
+  }
+
+  handleGetWantItems = () => {
+    const myWantItems = [];
+    this.state.swapmeets.forEach((element) => {
+      console.log(inventoryService.showOne(element.wantItem));
+    })
   }
 
   
@@ -94,12 +104,14 @@ class App extends Component {
     this.handleGetItems();
     this.handleGetSites();
     this.handleGetSwapmeets();
+    this.handleGetWantItems();
     const {lat, lng} = await getCurrentLatLng();
     this.setState({
       lat,
       lng
     })
   }
+
 
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()});
@@ -121,7 +133,7 @@ class App extends Component {
         {/* <Map lat={this.state.lat} lng={this.state.lng} /> */}
         <Switch>
           <Route exact path='/' render={() =>
-          <div>Welcome!</div>
+          <GoogleMap />
           }/>
           <Route exact path='/inventory' render={() =>
             userService.getUser() ?
