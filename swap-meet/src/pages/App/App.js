@@ -133,7 +133,12 @@ class App extends Component {
         {/* <Map lat={this.state.lat} lng={this.state.lng} /> */}
         <Switch>
           <Route exact path='/' render={() =>
-          <GoogleMap />
+          <GoogleMap
+            items={this.state.items}
+            sites={this.state.sites}
+            lat={this.state.lat}
+            lng={this.state.lng}
+          />
           }/>
           <Route exact path='/inventory' render={() =>
             userService.getUser() ?
