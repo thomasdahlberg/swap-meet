@@ -9,11 +9,13 @@ class GoogleMap extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.sites[0]);
     const googleMapScript = document.createElement('script')
     googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA8JacrsSr71qIf9zHzR_6__AbObv3hci8&libraries=places`
     window.document.body.appendChild(googleMapScript)
     googleMapScript.addEventListener('load',() => {
       this.googleMap = this.createGoogleMap()
+      this.marker = this.createMarker()
     })
   }
   
@@ -27,6 +29,12 @@ class GoogleMap extends Component {
       },
       disableDefaultUI: true,
     })  
+
+    createMarker = () =>
+    new window.google.maps.Marker({
+      position: { lat: this.props.sites[0].latitude, lng: this.props.sites[0].longitude },
+      map: this.googleMap,
+    })
 
   render() {
     return(
