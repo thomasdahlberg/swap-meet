@@ -11,7 +11,7 @@ class GoogleMap extends Component {
 
   componentDidMount() {
     const googleMapScript = document.createElement('script')
-    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA8JacrsSr71qIf9zHzR_6__AbObv3hci8&libraries=places`
+    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`
     window.document.body.appendChild(googleMapScript)
     googleMapScript.addEventListener('load',() => {
       this.googleMap = this.createGoogleMap()
