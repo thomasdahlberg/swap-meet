@@ -27,21 +27,29 @@ class GoogleMap extends Component {
         lng: this.props.lng,
       },
     })
-    this.setMarkers(map, this.props.sites) 
+    this.setMarkers(map, this.props.sites, this.props.items)
   }
-  setMarkers = (map, lib) => {
+  setMarkers = (map, lib, lib2) => {
+    let itemNames = [];
     for (let i = 0; i < lib.length; i++) {
-        let place = lib[i];
-        let infoWind = new window.google.maps.InfoWindow({
-            content: ''
-        })
-        let marker = new window.google.maps.Marker({
-            position: {lat: place.latitude, lng: place.longitude},
-            map: map,
-            title: lib[i].siteName
-        })
-        let placeHTML = `<strong>${place.siteName}</strong><br><a class="btn btn-flat btn-small" href="/swapsites/${place.id}">View</a>`;
-        bindInfoWindow(marker, map, infoWind, placeHTML);
+      let place = lib[i];
+      let infoWind = new window.google.maps.InfoWindow({ content: '' });
+      let marker = new window.google.maps.Marker({
+        position: {lat: place.latitude, lng: place.longitude},
+        map: map,
+        title: lib[i].siteName
+      })
+      for (let l = 0; l < lib[i].items.length; l++) {
+        for (let m = 0; m < lib2.length; m++) {
+          if (lib2[m]._id === lib[i].items[l]) {
+            itemNames.push(`<li>${lib2[m].name}</li>`);
+          }
+        }
+      }
+      console.log(itemNames.join(''));
+      let placeHTML = `<strong>${place.siteName}</strong><br><ul>${itemNames.join('')}</ul><a class="btn btn-flat btn-small" href="/swapsites/${place.id}">View</a>`;
+      bindInfoWindow(marker, map, infoWind, placeHTML);
+      itemNames = [];
     }
     function bindInfoWindow(marker, map, infoWind, html) {
         new window.google.maps.event.addListener(marker, 'click', function() {
