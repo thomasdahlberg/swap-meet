@@ -8,12 +8,12 @@ const Swapmeets = (props) => {
     return (
         <main>
             {props.swapmeets? 
-                props.swapmeets.map(({_id, dateTime, transaction, }) => (
-                <section key={_id}>
-                    <h1>{_id}</h1>
-                    <h2>{dateTime}</h2>
-                    <p>{transaction.wantItem}</p>
-                    <p>{transaction.offerItem}</p>
+                props.swapmeets.map(({site, offerItem, wantItem, }) => (
+                <section>
+                    <h1>{site}</h1>
+                    <h2>date</h2>
+                    <p>{offerItem}</p>
+                    <p>{wantItem}</p>
                 </section>
                 ))
                 :

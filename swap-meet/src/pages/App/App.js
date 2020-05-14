@@ -179,7 +179,7 @@ class App extends Component {
             userService.getUser() ?
             <SwapmeetsPage
               sites={this.state.sites} 
-              swapmeets={this.state.swapmeets}
+              swapmeets={this.state.swapmeetsData}
               items={this.state.items} 
               myItems={this.state.myItems}
               mySwapmeets={this.state.mySwapmeets}
