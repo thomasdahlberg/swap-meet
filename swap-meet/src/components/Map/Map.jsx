@@ -9,7 +9,6 @@ class GoogleMap extends Component {
     this.googleMapRef = createRef()
   }
   componentDidMount() {
-    console.log(this.props.sites[0]);
     const googleMapScript = document.createElement('script')
     googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA8JacrsSr71qIf9zHzR_6__AbObv3hci8&libraries=places`
     window.document.body.appendChild(googleMapScript)
@@ -46,7 +45,6 @@ class GoogleMap extends Component {
           }
         }
       }
-      console.log(itemNames.join(''));
       let placeHTML = `<strong>${place.siteName}</strong><br><ul>${itemNames.join('')}</ul><a class="btn btn-flat btn-small" href="/swapsites/${place.id}">View</a>`;
       bindInfoWindow(marker, map, infoWind, placeHTML);
       itemNames = [];

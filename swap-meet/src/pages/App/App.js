@@ -35,6 +35,7 @@ class App extends Component {
       mySwapmeets:[],
       myOffers: [],
       swapmeets: [],
+      swapmeetsData: [],
       items: [],
       sites: [],
       lat: null,
@@ -66,6 +67,7 @@ class App extends Component {
       const { meets } = await swapmeetService.index();
       this.setState({ swapmeets: meets })
       this.handleGetWantItems();
+      this.handleGetSwapmeetsData();
     }
   }
 
@@ -99,6 +101,30 @@ class App extends Component {
      })
   }
 
+  handleGetSwapmeetsData = async (e) => {
+    let swapmeets = [];
+    this.state.swapmeets.forEach((element) => {
+      let sites = this.state.sites;
+      let items = this.state.items;
+      let swapmeet = {};
+      for(let i = 1; i < sites.length; i++) {
+        if(sites[i]._id === element.site) {
+          swapmeet.site = sites[i].siteName;
+        }
+      }
+      for(let i = 1; i < items.length; i++) {
+        if(items[i]._id === element.transaction.offerItem){
+          swapmeet.offerItem = items[i].name;
+        }
+        if(items[i]._id === element.transaction.wantItem){
+          swapmeet.wantItem = items[i].name;
+        }
+      }
+      if(swapmeet.site) swapmeets.push(swapmeet);
+    })
+    this.setState({ swapmeetsData: swapmeets });
+  }
+
 
   async componentDidMount() {
     this.handleGetItems();
@@ -130,7 +156,6 @@ class App extends Component {
       <div className="App-outer-container">
         <Navbar user={this.state.user} handleLogout={this.handleLogout}/>
         <div className="App-inner-container">
-        {/* <Map lat={this.state.lat} lng={this.state.lng} /> */}
         <Switch>
           <Route exact path='/' render={() =>
           <GoogleMap

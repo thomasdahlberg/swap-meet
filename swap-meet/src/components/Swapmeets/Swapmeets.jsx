@@ -5,13 +5,6 @@ import inventoryService from '../../utils/inventoryService';
 
 const Swapmeets = (props) => {
 
-
-// props.swapmeets.forEach((element) => {
-//     wantItems.push(inventoryService.showOne(element.wantItem));
-// })
-// console.log(wantItems);
-
-
     return (
         <main>
             {props.swapmeets? 
