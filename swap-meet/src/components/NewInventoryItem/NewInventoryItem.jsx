@@ -43,9 +43,15 @@ class NewInventoryItem extends Component {
         e.preventDefault();
         if(!this.isFormValid()) return;
         console.log('submitting new item');
+        const data = new FormData(); 
+        data.append('file', this.state.image);
+        data.append('name', this.state.name);
+        data.append('description', this.state.description);
+        data.append('itemType', this.state.itemType);
+        data.append('swapPref', this.state.swapPref);
         try {
-            const { image, name, description, itemType, swapPref } = this.state;
-            await inventoryService.addItem({ image, name, description, itemType, swapPref });
+            // const { image, name, description, itemType, swapPref } = this.state;
+            await inventoryService.addItem(data);
             this.props.handleGetItems();
             this.props.history.push('/inventory');
         } catch (error) {
@@ -53,15 +59,15 @@ class NewInventoryItem extends Component {
         }
     }
 
-    onClickHandler = () => {
-        const data = new FormData(); 
-        data.append('file', this.state.image);
-        axios.post('http://localhost:3001/api/inventory/new-photo', data, {
-        })
-        .then(res => {
-            console.log(res.statusText);
-        })
-    }
+    // onClickHandler = () => {
+    //     const data = new FormData(); 
+    //     data.append('file', this.state.image);
+    //     axios.post('http://localhost:3001/api/inventory/new-photo', data, {
+    //     })
+    //     .then(res => {
+    //         console.log(res.statusText);
+    //     })
+    // }
 
 
     render() {
@@ -71,13 +77,12 @@ class NewInventoryItem extends Component {
                 <legend>Add A New Item</legend>
                 <label htmlFor="image">Select Item Image:</label>
                 <input 
-                    id="image" 
-                    name="image" 
-                    type="file" 
-                    accept="image/*"
-                    onChange={this.handleImageChange}
-                />
-                
+                        id="image" 
+                        name="image" 
+                        type="file" 
+                        accept="image/*"
+                        onChange={this.handleImageChange}
+                    />
                 <label htmlFor="name">Item Name</label>
                 <input 
                     id="name" 
@@ -121,8 +126,7 @@ class NewInventoryItem extends Component {
                 <option name="swapPref" value="3">Three</option>
                 </select>
 
-                
-                <button disabled={!this.isFormValid()} type="submit" onClick={this.onClickHandler}>Submit</button>
+                <button disabled={!this.isFormValid()} type="submit">Add Item</button>
             </fieldset>
         </form>
         );

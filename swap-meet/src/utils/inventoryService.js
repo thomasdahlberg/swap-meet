@@ -7,10 +7,9 @@ function addItem(item) {
     return fetch(BASE_URL + 'new', {
         method: 'POST',
         headers: {
-            'Content-type': 'Application/json',
             'Authorization': 'Bearer ' + tokenService.getToken()
         },
-        body: JSON.stringify(item)
+        body: item
     })
     .then(response => {
         if(response.ok) {
