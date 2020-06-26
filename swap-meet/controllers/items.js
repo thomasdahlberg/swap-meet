@@ -1,13 +1,9 @@
 const Item = require('../models/item');
 const multer = require('multer');
-
-module.exports = {
-    showOne,
-    addItem,
-    addPhoto,
-    index
-};
-
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3({apiVersion: '2006-03-01'});
+const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 const S3_BASE_URL = 'https://s3-us-east-1.amazonaws.com/';
 const BUCKET = 'swap-meet';
 
@@ -22,15 +18,15 @@ let storage = multer.diskStorage({
 
 let upload = multer({ storage: storage }).single('file')
 
+module.exports = {
+    showOne,
+    addItem,
+    addPhoto,
+    index
+};
+
 async function addPhoto(req, res) {
-    const AWS = require('aws-sdk');
-    const s3 = new AWS.S3({apiVersion: '2006-03-01'});
-    const fs = require('fs');
-    const { v4: uuidv4 } = require('uuid');
-
     let uploadParams = {Bucket: BUCKET, Key: '', Body: ''};
-
-    // AWS.config.update({region: 'REGION'});
 
     upload(req, res, function(err) {
         if (err instanceof multer.MulterError) {
@@ -40,23 +36,24 @@ async function addPhoto(req, res) {
         }
         let file = req.file;
         let fileStream = fs.createReadStream(file.path);
+        
         fileStream.on('error', function(err){
             console.log('File Error', err);
         });
+
         uploadParams.Body = fileStream;
         const key = uuidv4() + file.filename;
-        console.log(key);
         uploadParams.Key = key;
         const url = `${S3_BASE_URL}${BUCKET}/${key}`;
-        console.log(url);
+
         s3.upload(uploadParams, function(err, data) {
             if(err){
                 console.log("Error", err);
             } if(data) {
                 console.log("Upload Success", data.Location);
+                fs.unlinkSync(file.path);
             }
         });
-        console.log(req.file);
         return res.status(200).send(req.file)
     })
     
