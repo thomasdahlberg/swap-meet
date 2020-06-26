@@ -10,31 +10,6 @@ module.exports = {
 
 const S3_BASE_URL = 'https://s3-us-east-1.amazonaws.com/';
 const BUCKET = 'swap-meet';
-// const multerConfig = {
-//     storage: multer.diskStorage({
-//       destination: function(req, file, next){
-//         next(null, '../public/photo-storage');
-//       },
-//       filename: function(req, file, next){
-//         console.log(file);
-//         const ext = file.mimetype.split('/')[1];
-//         next(null, file.filename + Date.now() + '.' + ext);
-//       }
-//     }),
-//     fileFilter: function(req, file, next){
-//       if(!file){
-//         next();
-//       }
-//       const image = file.mimetype.startsWith('image/');
-//       if(image){
-//         console.log('photo uploaded');
-//         next(null, true);
-//       } else {
-//         console.log('file not supported');
-//         return next();
-//       }
-//     }
-//   };
 
 let storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -48,14 +23,43 @@ let storage = multer.diskStorage({
 let upload = multer({ storage: storage }).single('file')
 
 async function addPhoto(req, res) {
+    const AWS = require('aws-sdk');
+    const s3 = new AWS.S3({apiVersion: '2006-03-01'});
+    const fs = require('fs');
+    const { v4: uuidv4 } = require('uuid');
+
+    let uploadParams = {Bucket: BUCKET, Key: '', Body: ''};
+
+    // AWS.config.update({region: 'REGION'});
+
     upload(req, res, function(err) {
         if (err instanceof multer.MulterError) {
             return res.status(500).json(err)
         } else if (err) {
             return res.status(500).json(err)
         }
+        let file = req.file;
+        let fileStream = fs.createReadStream(file.path);
+        fileStream.on('error', function(err){
+            console.log('File Error', err);
+        });
+        uploadParams.Body = fileStream;
+        const key = uuidv4() + file.filename;
+        console.log(key);
+        uploadParams.Key = key;
+        const url = `${S3_BASE_URL}${BUCKET}/${key}`;
+        console.log(url);
+        s3.upload(uploadParams, function(err, data) {
+            if(err){
+                console.log("Error", err);
+            } if(data) {
+                console.log("Upload Success", data.Location);
+            }
+        });
+        console.log(req.file);
         return res.status(200).send(req.file)
     })
+    
 }
 
 async function showOne(req, res) {
@@ -69,36 +73,7 @@ async function showOne(req, res) {
 }
 
 async function addItem(req, res) {
-    // console.log(req.body);
-    // multer(multerConfig).single('image');
-
-    // let AWS = require('aws-sdk');
-    // AWS.config.update({region: 'REGION'});
-
-    // let s3 = new AWS.S3({apiVersion: '2006-03-01'});
-
-    // let uploadParams = {Bucket: BUCKET, Key: '', Body: ''};
-    // let file = req.body.image;
-
-    // let fs = require('fs');
-    // let fileStream = fs.createReadStream(file);
-    // fileStream.on('error', function(err){
-    //     console.log('File Error', err);
-    // });
-    // const { v4: uuidv4 } = require('uuid');
-    // uploadParams.Body = fileStream;
-    // const key = uuidv4() + file.name;
-    // console.log(key);
-    // uploadParams.Key = key;
-    // const url = `${S3_BASE_URL}${BUCKET}/${key}`;
-
-    // s3.upload(uploadParams, function(err, data) {
-    //     if(err){
-    //         console.log("Error", err);
-    //     } if(data) {
-    //         console.log("Upload Success", data.Location);
-    //     }
-    // });
+    console.log(req.body);
     
     const item = new Item({
         name: req.body.name,
