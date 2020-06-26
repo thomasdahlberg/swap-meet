@@ -1,7 +1,9 @@
 import tokenService from './tokenService';
 const BASE_URL = '/api/inventory/';
 
+
 function addItem(item) {
+    
     return fetch(BASE_URL + 'new', {
         method: 'POST',
         headers: {

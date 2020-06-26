@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import inventoryService from '../../utils/inventoryService';
 import userService from '../../utils/userService';
 import styles from './NewInventoryItem.module.css';
+import axios from 'axios';
+
 
 class NewInventoryItem extends Component {
     state = this.getInitialState();
@@ -25,6 +27,12 @@ class NewInventoryItem extends Component {
         );
     }
 
+    handleImageChange = e => {
+        this.setState({
+            image: e.target.files[0],
+        })
+    }
+
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
@@ -45,11 +53,20 @@ class NewInventoryItem extends Component {
         }
     }
 
+    onClickHandler = () => {
+        const data = new FormData(); 
+        data.append('file', this.state.image);
+        axios.post('http://localhost:3001/api/inventory/new-photo', data, {
+        })
+        .then(res => {
+            console.log(res.statusText);
+        })
+    }
 
 
     render() {
         return(
-            <form className={styles.form} onSubmit={this.handleSubmit}>
+            <form className={styles.form} onSubmit={this.handleSubmit} encType="multipart/form-data">
             <fieldset className={styles.container}>
                 <legend>Add A New Item</legend>
                 <label htmlFor="image">Select Item Image:</label>
@@ -58,7 +75,7 @@ class NewInventoryItem extends Component {
                     name="image" 
                     type="file" 
                     accept="image/*"
-                    onChange={this.handleChange}
+                    onChange={this.handleImageChange}
                 />
                 
                 <label htmlFor="name">Item Name</label>
@@ -105,7 +122,7 @@ class NewInventoryItem extends Component {
                 </select>
 
                 
-                <button disabled={!this.isFormValid()} type="submit">Submit</button>
+                <button disabled={!this.isFormValid()} type="submit" onClick={this.onClickHandler}>Submit</button>
             </fieldset>
         </form>
         );
