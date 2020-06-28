@@ -2,29 +2,45 @@
     display: flex;
     align-items: center;
     height: 5rem;
-    background-color: #81C14B;
-    justify-content: space-around;
+    background-color: #93FF96;
+    justify-content: space-between;
     color: #ffffff;
     box-shadow: 2px 2px 7px 2px lightgrey;
   }
+
   .navbar ul {
     display: flex;
     list-style: none;
   }
+
+  li {
+    text-align: center;
+  }
+
   .navbar ul li {
     font-family: 'Open Sans', serif;
     font-weight: 500;
-    margin: 1rem;
+    padding: 2rem 1rem;
+    /* height: 5rem; */
   }
-  .navbarul li:hover {
-    border-bottom: 2px solid gray;
+
+  .navbar ul li:hover {
+    background-color: #D0FFB7;
+  }
+
+  .navbar__link--active {
+    background-color: #86E7B8;
+    font-weight: 900;
+    padding: 2rem 1rem;
   }
 
   .navbar h1 {
+    padding-left: 2rem;
     font-family: 'Permanent Marker', sans-serif;
+    font-size: 3rem;
   }
 
   .navbar a {
     text-decoration: none;
-    color: #ffffff;
+    color: black;
   }

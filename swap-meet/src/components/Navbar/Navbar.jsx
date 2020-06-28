@@ -1,39 +1,39 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from './Navbar.module.css';
+import { NavLink } from 'react-router-dom';
+import styles from './Navbar.css';
 import { Fragment } from 'react';
 
 const Navbar = (props) => {
     let nav = props.user ?
     <Fragment>
         <li>
-            <Link to="/inventory">My Items</Link>
+            <NavLink to="/inventory" className="navbar__link" activeClassName="navbar__link--active">My Swap-Items</NavLink>
         </li>
         <li>
-            <Link to="/swapmeets">My SwapMeets</Link>
+            <NavLink to="/swapmeets" className="navbar__link" activeClassName="navbar__link--active">My Swap-Meets</NavLink>
         </li>
         <li>
-            <Link to="/swapsites">My SwapSites</Link>
+            <NavLink to="/swapsites" className="navbar__link" activeClassName="navbar__link--active">My Swap-Sites</NavLink>
         </li>
         <li>
-            <Link to="" onClick={props.handleLogout}>Log Out</Link>
+            <NavLink to="" onClick={props.handleLogout} className="navbar__link">Log Out</NavLink>
         </li>
     </Fragment>
     :
     <Fragment>
         <li>
-            <Link to="/login">Log In</Link>
+            <NavLink to="/login" className="navbar__link" activeClassName="navbar__link--active">Log In</NavLink>
         </li>
         <li>
-            <Link to="/signup">Sign Up</Link>
+            <NavLink to="/signup" className="navbar__link" activeClassName="navbar__link--active">Sign Up</NavLink>
         </li>
     </Fragment>;
 
     return (
-        <nav className={styles.navbar}>
-            <Link to="/">
+        <nav className="navbar">
+            <NavLink exact to="/">
                 <h1>SWAP-MEET</h1>
-            </Link>
+            </NavLink>
             <ul>
                 {nav}
             </ul>

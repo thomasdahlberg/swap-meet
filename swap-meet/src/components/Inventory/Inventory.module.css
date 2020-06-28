@@ -3,17 +3,26 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
+    padding: 10px;
 }
 
 .section {
     background-color: cornsilk;
-    height: 200px;
-    width: 300px;
-    margin: 5px;
+    height: 300px;
+    width: 500px;
+    margin: 5px 5px 3px 3px;
     padding: 10px;
-    border: solid black;
+    border: 2px solid #ddd;
+    border-radius: 10px;
 }
 
 .section h1 {
-    text-align: center;
+    text-align: left;
 }
+
+.section img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+  }

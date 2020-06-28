@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import inventoryService from '../../utils/inventoryService';
 import userService from '../../utils/userService';
 import styles from './NewInventoryItem.module.css';
-import axios from 'axios';
 
 
 class NewInventoryItem extends Component {
@@ -52,23 +51,12 @@ class NewInventoryItem extends Component {
         try {
             // const { image, name, description, itemType, swapPref } = this.state;
             await inventoryService.addItem(data);
-            this.props.handleGetItems();
+            setTimeout(this.props.handleGetItems(), 1000);
             this.props.history.push('/inventory');
         } catch (error) {
             console.log(error);
         }
     }
-
-    // onClickHandler = () => {
-    //     const data = new FormData(); 
-    //     data.append('file', this.state.image);
-    //     axios.post('http://localhost:3001/api/inventory/new-photo', data, {
-    //     })
-    //     .then(res => {
-    //         console.log(res.statusText);
-    //     })
-    // }
-
 
     render() {
         return(
