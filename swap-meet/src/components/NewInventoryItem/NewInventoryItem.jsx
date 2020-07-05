@@ -7,6 +7,9 @@ import styles from './NewInventoryItem.module.css';
 class NewInventoryItem extends Component {
     state = this.getInitialState();
 
+    formRef = React.createRef();
+    buttonRef = React.createRef();
+
     itemTypes = [
         'Antiques',
         'Art',
@@ -84,7 +87,6 @@ class NewInventoryItem extends Component {
         data.append('itemType', this.state.itemType);
         data.append('swapPref', this.state.swapPref);
         try {
-            // const { image, name, description, itemType, swapPref } = this.state;
             await inventoryService.addItem(data);
             setTimeout(this.props.handleGetItems(), 1000);
             this.getInitialState();
@@ -94,64 +96,82 @@ class NewInventoryItem extends Component {
         }
     }
 
+    addItemFormToggle = async e => {
+        const formNode = this.formRef.current;
+        const buttonNode = this.buttonRef.current;
+
+        if(buttonNode.innerText === 'Cancel'){
+            formNode.style.opacity = 0;
+            formNode.style.height = '0px';
+            buttonNode.innerText = 'Add an Item';
+        } else {
+            formNode.style.opacity = 1;
+            formNode.style.height = '50rem';
+            buttonNode.innerText = 'Cancel';    
+        }
+    }
+
     render() {
         return(
-            <form className={styles.form} onSubmit={this.handleSubmit} encType="multipart/form-data">
-            <div className={styles.container}>
-                <h1>Add A New Item</h1>
-                <label htmlFor="image">Select Item Image:</label>
-                <input 
-                        id="image" 
-                        name="image" 
-                        type="file" 
-                        accept="image/*"
-                        onChange={this.handleImageChange}
-                    />
-                <label htmlFor="name">Item Name</label>
-                <input 
-                    id="name" 
-                    name="name" 
-                    type="name"
-                    value={this.state.name}
-                    onChange={this.handleChange}
-                />
-                
-                <label htmlFor="description">Description</label>
-                <textarea
-                    rows="4"
-                    cols="50"
-                    maxLength="200"
-                    className={styles.description} 
-                    id="description" 
-                    name="description" 
-                    value={this.state.description} 
-                    onChange={this.handleChange}
-                />
-                
-                <label htmlFor="itemType">Select an item type:</label>
-                <select 
-                    id="itemType" 
-                    name="itemType"  
-                    value={this.state.itemType}
-                    onChange={this.handleChange}
-                >
-                    <option name="itemType" value="" disabled>Choose a Category</option>
-                    {this.itemTypes.map((type) => <option name="itemType" value={type}>{type}</option>)}
-                </select>
+            <div className={styles.additem}>
+                <button ref={this.buttonRef} onClick={this.addItemFormToggle}>Add an Item</button>
+                <form ref={this.formRef} className={styles.form} onSubmit={this.handleSubmit} encType="multipart/form-data">
+                    <div className={styles.container}>
+                        <h1>Add A New Item</h1>
+                        <label htmlFor="image">Select Item Image:</label>
+                        <input 
+                                id="image" 
+                                name="image" 
+                                type="file" 
+                                accept="image/*"
+                                onChange={this.handleImageChange}
+                            />
+                        <label htmlFor="name">Item Name:</label>
+                        <input 
+                            id="name" 
+                            name="name" 
+                            type="name"
+                            value={this.state.name}
+                            onChange={this.handleChange}
+                        />
+                        
+                        <label htmlFor="description">Description:</label>
+                        <textarea
+                            rows="4"
+                            cols="50"
+                            maxLength="200"
+                            className={styles.description} 
+                            id="description" 
+                            name="description" 
+                            value={this.state.description} 
+                            onChange={this.handleChange}
+                        />
+                        
+                        <label htmlFor="itemType">Select an item type:</label>
+                        <select 
+                            id="itemType" 
+                            name="itemType"  
+                            value={this.state.itemType}
+                            onChange={this.handleChange}
+                        >
+                            <option name="itemType" value="" disabled>Choose a Category</option>
+                            {this.itemTypes.map((type) => <option name="itemType" value={type}>{type}</option>)}
+                        </select>
 
-                <label htmlFor="swapPref">What are you looking for?</label>
-                <select 
-                    id="swapPref" 
-                    name="swapPref"  
-                    value={this.state.swapPref}
-                    onChange={this.handleChange}
-                >
-                    <option name="swapPref" value="" disabled>Choose a Category</option>
-                    {this.itemTypes.map((type) => <option name="swapPref" value={type}>{type}</option>)}
-                </select>
-                <button disabled={!this.isFormValid()} type="submit">Add Item</button>
+                        <label htmlFor="swapPref">What are you looking for?</label>
+                        <select 
+                            id="swapPref" 
+                            name="swapPref"  
+                            value={this.state.swapPref}
+                            onChange={this.handleChange}
+                        >
+                            <option name="swapPref" value="" disabled>Choose a Category</option>
+                            {this.itemTypes.map((type) => <option name="swapPref" value={type}>{type}</option>)}
+                        </select>
+                        <button disabled={!this.isFormValid()} type="submit">Add Item</button>
+                    </div>
+                </form>
             </div>
-        </form>
         );
     }
 }
