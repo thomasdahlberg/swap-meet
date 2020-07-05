@@ -2,8 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
-    height: 10rem;
-    background-color: #81C14B;
+    color: black;
+    height: 7rem;
+    background-color: #B2FFA8;
     font-family: 'Open Sans', serif;
+    box-shadow: 2px 2px 5px 2px gray;
 }

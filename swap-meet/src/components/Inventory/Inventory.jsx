@@ -10,7 +10,7 @@ const Inventory = (props) => {
                 <section className={styles.section} key={_id}>
                     <div className={styles.container}>
                         <img src={image} alt={name}/>                    
-                        <div>
+                        <div className={styles.info}>
                             <h1>{name}</h1>
                             <p>{description}</p>
                             <h3>Looking for: {swapPref}</h3>

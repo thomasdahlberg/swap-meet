@@ -7,6 +7,41 @@ import styles from './NewInventoryItem.module.css';
 class NewInventoryItem extends Component {
     state = this.getInitialState();
 
+    itemTypes = [
+        'Antiques',
+        'Art',
+        'Art & Craft Supplies',
+        'Baby Essentials',
+        'Books',
+        'Business & Industrial',
+        'Cameras & Photo',
+        'Cell Phones, Smart Watches & Accessories',
+        'Clothing, Shoes & Accessories',
+        'Coins & Paper Money',
+        'Computers, Tablets & Network Hardware',
+        'Consumer Electronics',
+        'Dolls & Teddy Bears',
+        'DVDs & Movies',
+        'Entertainment Memorabilia',
+        'Gift Cards & Coupons',
+        'Health & Beauty',
+        'Home & Garden',
+        'Jewelry & Watches',
+        'Music',
+        'Musical Instruments & Gear',
+        'Pet Supplies',
+        'Pottery & Glass',
+        'Real Estate',
+        'Specialty Services',
+        'Sporting Goods',
+        'Sports Memorabilia, Fan Shop & Sports Cards',
+        'Stamps',
+        'Tickets & Experiences',
+        'Toys & Hobbies',
+        'Travel',
+        'Video Games & Consoles',
+    ]
+
     getInitialState() {
         return {
             user: userService.getUser(),
@@ -52,6 +87,7 @@ class NewInventoryItem extends Component {
             // const { image, name, description, itemType, swapPref } = this.state;
             await inventoryService.addItem(data);
             setTimeout(this.props.handleGetItems(), 1000);
+            this.getInitialState();
             this.props.history.push('/inventory');
         } catch (error) {
             console.log(error);
@@ -75,43 +111,42 @@ class NewInventoryItem extends Component {
                 <input 
                     id="name" 
                     name="name" 
-                    type="name" 
+                    type="name"
                     value={this.state.name}
                     onChange={this.handleChange}
                 />
                 
                 <label htmlFor="description">Description</label>
-                <input
+                <textarea
+                    rows="4"
+                    cols="50"
                     className={styles.description} 
                     id="description" 
                     name="description" 
-                    type="text" 
                     value={this.state.description} 
                     onChange={this.handleChange}
                 />
                 
-                <label htmlFor="itemType">Select Item Type</label>
+                <label htmlFor="itemType">Select an item type:</label>
                 <select 
                     id="itemType" 
                     name="itemType"  
                     value={this.state.itemType}
                     onChange={this.handleChange}
                 >
-                <option name="itemType" value="1">One</option>
-                <option name="itemType" value="2">Two</option>
-                <option name="itemType" value="3">Three</option>
+                    <option name="itemType" value="" disabled>Choose a Category</option>
+                    {this.itemTypes.map((type) => <option name="itemType" value={type}>{type}</option>)}
                 </select>
 
-                <label htmlFor="swapPref">Select Item Type</label>
+                <label htmlFor="swapPref">What are you looking for?</label>
                 <select 
                     id="swapPref" 
                     name="swapPref"  
                     value={this.state.swapPref}
                     onChange={this.handleChange}
                 >
-                <option name="swapPref" value="1">One</option>
-                <option name="swapPref" value="2">Two</option>
-                <option name="swapPref" value="3">Three</option>
+                    <option name="swapPref" value="" disabled>Choose a Category</option>
+                    {this.itemTypes.map((type) => <option name="swapPref" value={type}>{type}</option>)}
                 </select>
 
                 <button disabled={!this.isFormValid()} type="submit">Add Item</button>
