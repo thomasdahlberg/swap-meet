@@ -1,11 +1,24 @@
 .form {
-    display: flex;
-    justify-content: center;
-    margin: 5px;
+    background-color: #93FF96;
+    max-height: 30rem;
+    max-width: 30rem;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 7px 2px gray;
+    font-family: 'Open Sans', serif;
+    font-weight: 500;
+    margin-bottom: 3rem;
 }
 
 .container {
-    display: flex;
     padding: 2em; 
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
+.container input, textarea, select {
+    margin-bottom: 1rem;
+}

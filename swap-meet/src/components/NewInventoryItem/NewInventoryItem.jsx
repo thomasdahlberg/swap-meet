@@ -97,8 +97,8 @@ class NewInventoryItem extends Component {
     render() {
         return(
             <form className={styles.form} onSubmit={this.handleSubmit} encType="multipart/form-data">
-            <fieldset className={styles.container}>
-                <legend>Add A New Item</legend>
+            <div className={styles.container}>
+                <h1>Add A New Item</h1>
                 <label htmlFor="image">Select Item Image:</label>
                 <input 
                         id="image" 
@@ -120,6 +120,7 @@ class NewInventoryItem extends Component {
                 <textarea
                     rows="4"
                     cols="50"
+                    maxLength="200"
                     className={styles.description} 
                     id="description" 
                     name="description" 
@@ -148,9 +149,8 @@ class NewInventoryItem extends Component {
                     <option name="swapPref" value="" disabled>Choose a Category</option>
                     {this.itemTypes.map((type) => <option name="swapPref" value={type}>{type}</option>)}
                 </select>
-
                 <button disabled={!this.isFormValid()} type="submit">Add Item</button>
-            </fieldset>
+            </div>
         </form>
         );
     }

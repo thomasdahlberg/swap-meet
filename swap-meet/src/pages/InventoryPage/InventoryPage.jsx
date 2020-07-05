@@ -4,12 +4,20 @@ import NewInventoryItem from '../../components/NewInventoryItem/NewInventoryItem
 
 const InventoryPage = (props) => {
     const h1Style = {
-        paddingLeft: '10rem',
         fontFamily: 'Permanent Marker',
         fontSize: '4rem'
     };
+
+    const containerStyle = {
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    };
+
     return(
-        <div>
+        <div style={containerStyle}>
             <h1 style={h1Style}>My Swap-Items</h1>
             <NewInventoryItem handleGetItems={props.handleGetItems}/>
             <Inventory items={props.items} myItems={props.myItems}/>

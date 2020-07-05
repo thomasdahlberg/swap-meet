@@ -1,3 +1,11 @@
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 10px;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -9,26 +17,39 @@
 
 .section {
     background-color: #D0FFB7;
-    height: 30rem;
-    width: 30rem;
+    max-height: 30rem;
+    max-width: 30rem;
     margin: 5px 5px 3px 3px;
-    padding: 10px;
+    padding: 1rem;
     border-radius: 10px;
     box-shadow: 2px 2px 7px 2px gray;
-}
-
-.section h1 {
-    text-align: left;
+    font-family: 'Open Sans', serif;
+    font-weight: 500;
 }
 
 .section img {
+    align-self: center;
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 5px;
-    width: 150px;
+    max-width: 25rem;
+    max-height: 10rem;
   }
+
 
 .item {
     background-color: white;
     border: black solid;
+}
+
+.info {
+    padding: 0 2rem;
+}
+
+.info p {
+    background-color: #F2F5DE;
+    padding: 1rem;
+    box-shadow: 1px 1px 7px 1px gray;
+    max-height: 10rem;
+    width: 23rem;
 }
