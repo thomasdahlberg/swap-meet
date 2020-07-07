@@ -36,3 +36,17 @@
 .additem button {
     margin-bottom: 2rem;
 }
+
+button {
+    background-color: #86e7b8;
+    font-weight: 900;
+    padding: 1rem;
+    box-shadow: 1px 1px 5px 1px gray;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Open Sans', serif;
+}
+
+button:disabled {
+    background-color: #ddd;
+}

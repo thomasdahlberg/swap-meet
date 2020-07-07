@@ -49,7 +49,19 @@ main {
 .info p {
     background-color: #F2F5DE;
     padding: 1rem;
-    box-shadow: 1px 1px 7px 1px gray;
+    /* box-shadow: 1px 1px 7px 1px gray; */
+    border-radius: 10px;
+    border: solid black 1px;
     max-height: 10rem;
     width: 23rem;
+}
+
+.info h1 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: black solid 1px;
+}
+
+.info h3 {
+    margin-top: .5rem;
 }

@@ -88,7 +88,8 @@ class NewInventoryItem extends Component {
         data.append('swapPref', this.state.swapPref);
         try {
             await inventoryService.addItem(data);
-            setTimeout(this.props.handleGetItems(), 1000);
+            setTimeout(this.props.handleGetItems(), 3000);
+            console.log('got the items?');
             this.getInitialState();
             this.props.history.push('/inventory');
         } catch (error) {
@@ -103,10 +104,12 @@ class NewInventoryItem extends Component {
         if(buttonNode.innerText === 'Cancel'){
             formNode.style.opacity = 0;
             formNode.style.height = '0px';
+            buttonNode.style.backgroundColor = '#86e7b8';
             buttonNode.innerText = 'Add an Item';
         } else {
             formNode.style.opacity = 1;
             formNode.style.height = '50rem';
+            buttonNode.style.backgroundColor = '#ff5a5f';
             buttonNode.innerText = 'Cancel';    
         }
     }
