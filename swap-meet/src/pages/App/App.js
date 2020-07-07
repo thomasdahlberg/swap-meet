@@ -86,7 +86,7 @@ class App extends Component {
   handleGetWantItems = () => {
     const myWantItems = [];
     this.state.swapmeets.forEach((element) => {
-      console.log(inventoryService.showOne(element.wantItem));
+      // console.log(inventoryService.showOne(element.wantItem));
     })
   }
 
@@ -142,6 +142,7 @@ class App extends Component {
     console.log(e.target.id);
     try {
         await inventoryService.deleteItem(e.target.id);
+        this.handleGetItems();
     } catch (error) {
         console.log(error);
     }

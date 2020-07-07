@@ -91,6 +91,7 @@ async function addItem(req, res) {
 async function index(req, res) {
     try {
         await Item.find({}, function(err, items){
+            console.log(items);
             res.status(200).json({ items });
         });
     } catch (error) {

@@ -19,11 +19,15 @@ class GoogleMap extends Component {
   
 
   initMap = () => {
+    let coords = {}
+    this.props.lat? coords.lat = this.props.lat : coords.lat = 51.5074;
+    this.props.lng? coords.lng = this.props.lng : coords.lng = 0.1278; 
+
     let map = new window.google.maps.Map(this.googleMapRef.current, {
       zoom: 12,
       center: {
-        lat: this.props.lat,
-        lng: this.props.lng,
+        lat: coords.lat,
+        lng: coords.lng,
       },
       styles: [
         {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
