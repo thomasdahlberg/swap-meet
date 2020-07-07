@@ -109,7 +109,7 @@ class NewInventoryItem extends Component {
         } else {
             formNode.style.opacity = 1;
             formNode.style.height = '50rem';
-            buttonNode.style.backgroundColor = '#ff5a5f';
+            buttonNode.style.backgroundColor = '#ff8589';
             buttonNode.innerText = 'Cancel';    
         }
     }

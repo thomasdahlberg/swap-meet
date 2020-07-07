@@ -17,7 +17,7 @@ main {
 
 .section {
     background-color: #D0FFB7;
-    max-height: 30rem;
+    max-height: 40rem;
     max-width: 30rem;
     margin: 5px 5px 3px 3px;
     padding: 1rem;
@@ -49,7 +49,6 @@ main {
 .info p {
     background-color: #F2F5DE;
     padding: 1rem;
-    /* box-shadow: 1px 1px 7px 1px gray; */
     border-radius: 10px;
     border: solid black 1px;
     max-height: 10rem;
@@ -64,4 +63,27 @@ main {
 
 .info h3 {
     margin-top: .5rem;
+}
+
+button {
+    background-color: #86e7b8;
+    font-weight: 900;
+    padding: 1rem;
+    margin-right: 1rem;
+    /* box-shadow: 1px 1px 5px 1px gray; */
+    border-radius: 50%;
+    border: none;
+    font-family: 'Open Sans', serif;
+}
+
+.delete {
+    background-color: #ff8589;
+}
+
+button:disabled {
+    background-color: #ddd;
+}
+
+button:hover {
+    cursor: pointer;
 }

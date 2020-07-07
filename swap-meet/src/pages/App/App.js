@@ -125,6 +125,27 @@ class App extends Component {
     this.setState({ swapmeetsData: swapmeets });
   }
 
+  handleItemEditView = async (e) => {
+    e.preventDefault();
+    console.log('Item Edit View');
+    console.log(e.target.id);
+    try {
+        await inventoryService.showOne(e.target.id);
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
+  handleItemDelete = async (e) => {
+    e.preventDefault();
+    console.log('Delete Item');
+    console.log(e.target.id);
+    try {
+        await inventoryService.deleteItem(e.target.id);
+    } catch (error) {
+        console.log(error);
+    }
+  }
 
   async componentDidMount() {
     this.handleGetItems();
@@ -138,6 +159,8 @@ class App extends Component {
     })
   }
 
+
+//Log In and Log Out Functions
 
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()});
@@ -171,6 +194,8 @@ class App extends Component {
             myItems={this.state.myItems}
             handleGetItems={this.handleGetItems} 
             items={this.state.items}
+            handleItemEditView={this.handleItemEditView}
+            handleItemDelete={this.handleItemDelete}
             />
               :
             <Redirect to='/login' />

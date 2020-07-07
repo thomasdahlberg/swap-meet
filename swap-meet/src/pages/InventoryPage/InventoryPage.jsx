@@ -20,7 +20,12 @@ const InventoryPage = (props) => {
         <div style={containerStyle}>
             <h1 style={h1Style}>My Swap-Items</h1>
             <NewInventoryItem handleGetItems={props.handleGetItems}/>
-            <Inventory items={props.items} myItems={props.myItems}/>
+            <Inventory 
+                items={props.items}
+                myItems={props.myItems}
+                handleItemEditView={props.handleItemEditView}
+                handleItemDelete={props.handleItemDelete}
+                />
         </div>
     )
 }

@@ -3,6 +3,8 @@ import styles from './Inventory.module.css';
 
 
 const Inventory = (props) => {
+
+
     return (
         <main className={styles.mainContainer}>
             {
@@ -14,6 +16,10 @@ const Inventory = (props) => {
                             <h1>{name}</h1>
                             <h3><em>{itemType}</em></h3>
                             <p>{description}</p>
+                            <div>
+                                <button id={_id} onClick={props.handleItemEditView}>Edit</button>
+                                <button id={_id} onClick={props.handleItemDelete} className={styles.delete}>Delete</button>
+                            </div>
                         </div>
                     </div>
                 </section>

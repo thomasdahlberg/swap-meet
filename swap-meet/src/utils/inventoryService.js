@@ -40,13 +40,29 @@ function index(items) {
 }
 
 function showOne(item) {
-    return fetch(BASE_URL, {
+    return fetch(BASE_URL + item, {
         method: 'GET',
         headers: new Headers({
             'Content-type': 'Application/json',
             'Authorization': 'Bearer ' + tokenService.getToken()
         }),
-        body: JSON.stringify(item)
+    })
+    .then(response => {
+        if(response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Invalid Request, Try Again');
+        }
+    })
+}
+
+function deleteItem(item) {
+    return fetch(BASE_URL + item, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        }),
     })
     .then(response => {
         if(response.ok) {
@@ -62,6 +78,7 @@ function showOne(item) {
 export default {
     showOne,
     addItem,
+    deleteItem,
     index
 }
 

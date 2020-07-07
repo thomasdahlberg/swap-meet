@@ -1,5 +1,5 @@
 .form {
-    background-color: #93FF96;
+    background-color: #D0FFB7;
     max-height: 30rem;
     max-width: 30rem;
     padding: 1rem;
@@ -24,6 +24,7 @@
 .form {
     height: 0px;
     opacity: 0;
+    padding-bottom: 2rem;
 }
 
 .additem {
@@ -49,4 +50,8 @@ button {
 
 button:disabled {
     background-color: #ddd;
+}
+
+button:hover {
+    cursor: pointer;
 }
