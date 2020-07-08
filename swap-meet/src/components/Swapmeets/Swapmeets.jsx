@@ -1,5 +1,5 @@
 import React from 'react';
-import inventoryService from '../../utils/inventoryService';
+// import inventoryService from '../../utils/inventoryService';
 
 
 

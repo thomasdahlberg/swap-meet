@@ -1,6 +1,8 @@
 import React, { Component, createRef } from 'react'
+import geolocationService from '../../utils/geolocationService';
 
-const GOOGLE_MAP_API_KEY = process.env.API_KEY;
+
+let GOOGLE_MAP_API_KEY;
 let prevInfoWindow = false;
 
 class GoogleMap extends Component {
@@ -9,14 +11,18 @@ class GoogleMap extends Component {
     this.googleMapRef = createRef()
   }
   componentDidMount() {
+    this.getAPI();
+  }
+  
+  getAPI = async () => {
+    GOOGLE_MAP_API_KEY = await geolocationService.getGoogleMapAPI();
     const googleMapScript = document.createElement('script')
-    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyA8JacrsSr71qIf9zHzR_6__AbObv3hci8&libraries=places`
-    window.document.body.appendChild(googleMapScript)
+    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`
+    window.document.body.appendChild(googleMapScript);
     googleMapScript.addEventListener('load',() => {
       this.googleMap = this.initMap()
     })
   }
-  
 
   initMap = () => {
     let coords = {}

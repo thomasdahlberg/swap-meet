@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './Navbar.css';
+import './Navbar.css';
 import { Fragment } from 'react';
 
 const Navbar = (props) => {

@@ -11,7 +11,6 @@ import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 
 // Components
-// import Map from'../../components/Map/Map';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import GoogleMap from '../../components/Map/Map';
@@ -19,7 +18,7 @@ import GoogleMap from '../../components/Map/Map';
 // Services
 import userService from '../../utils/userService';
 import inventoryService from '../../utils/inventoryService';
-import { getCurrentLatLng } from '../../utils/geolocationService';
+import geolocationService from '../../utils/geolocationService';
 import swapSiteService from '../../utils/swapSiteService';
 import swapmeetService from '../../utils/swapmeetService';
 
@@ -49,6 +48,7 @@ class App extends Component {
   
   handleGetItems = async () => {
     if(userService.getUser()) {
+      console.log('Get ITEMs!');
       const { items } = await inventoryService.index();
       this.setState({ items: items })
       this.handleGetMyItems();
@@ -84,7 +84,7 @@ class App extends Component {
   }
 
   handleGetWantItems = () => {
-    const myWantItems = [];
+    // const myWantItems = [];
     this.state.swapmeets.forEach((element) => {
       // console.log(inventoryService.showOne(element.wantItem));
     })
@@ -153,7 +153,7 @@ class App extends Component {
     this.handleGetSites();
     this.handleGetSwapmeets();
     this.handleGetWantItems();
-    const {lat, lng} = await getCurrentLatLng();
+    const {lat, lng} = await geolocationService.getCurrentLatLng();
     this.setState({
       lat,
       lng

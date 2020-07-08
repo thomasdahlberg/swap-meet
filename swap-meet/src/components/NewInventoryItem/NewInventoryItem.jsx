@@ -158,7 +158,7 @@ class NewInventoryItem extends Component {
                             onChange={this.handleChange}
                         >
                             <option name="itemType" value="" disabled>Choose a Category</option>
-                            {this.itemTypes.map((type) => <option name="itemType" value={type}>{type}</option>)}
+                            {this.itemTypes.map((type, idx) => <option name="itemType" value={type} key={idx}>{type}</option>)}
                         </select>
 
                         <label htmlFor="swapPref">What are you looking for?</label>
@@ -169,7 +169,7 @@ class NewInventoryItem extends Component {
                             onChange={this.handleChange}
                         >
                             <option name="swapPref" value="" disabled>Choose a Category</option>
-                            {this.itemTypes.map((type) => <option name="swapPref" value={type}>{type}</option>)}
+                            {this.itemTypes.map((type, idx) => <option name="swapPref" value={type} key={idx}>{type}</option>)}
                         </select>
                         <button disabled={!this.isFormValid()} type="submit">Add Item</button>
                     </div>

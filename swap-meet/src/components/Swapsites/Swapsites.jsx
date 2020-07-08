@@ -14,8 +14,12 @@ const Swapsites = (props) => {
                         <ul id={_id}>
                             {props.items.map(({ _id, name}) => 
                                 { for( let i = 1; i < items.length; i++) {
-                                    if( items[i] === _id ) { return <Link key={_id} to="/swapmeets/new"><li onClick={props.handleGetMyWantItem} key={_id} id={_id}>{name}</li><input type="hidden" name="swapSite" value={_id}/></Link> }
+                                    if( items[i] === _id ) { return <Link key={_id} to="/swapmeets/new"><li onClick={props.handleGetMyWantItem} key={_id} id={_id}>{name}</li><input type="hidden" name="swapSite" value={_id}/></Link>
+                                        } else {
+                                            return <div></div>;
+                                        }
                                     }
+                                    return null;
                                 })
                             }
                         </ul>

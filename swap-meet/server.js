@@ -26,9 +26,15 @@ app.use('/api/inventory', require('./routes/api/items'));
 app.use('/api/swapsites', require('./routes/api/swapSites'));
 app.use('/api/swapmeets', require('./routes/api/swapMeets'));
 
+app.get('/api/key/', function(req, res) {
+  res.json(process.env.API_KEY);
+  console.log(process.env.API_KEY);
+});
+
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });
+  
 
 const port = process.env.PORT || 3001;
     
