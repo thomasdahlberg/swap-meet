@@ -96,6 +96,7 @@ class NewInventoryItem extends Component {
                 itemType: '',
                 swapPref: ''
             });
+            this.addItemFormToggle();
         } catch (error) {
             console.log(error);
         }

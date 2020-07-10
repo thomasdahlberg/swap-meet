@@ -193,7 +193,7 @@ class App extends Component {
           <Route exact path='/inventory' render={() =>
             userService.getUser() ?
             <InventoryPage
-            myItems={this.state.myItems}
+            myItems={this.state.myItems.reverse()}
             handleGetItems={this.handleGetItems} 
             items={this.state.items}
             handleItemEditView={this.handleItemEditView}
