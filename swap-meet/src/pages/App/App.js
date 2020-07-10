@@ -141,7 +141,8 @@ class App extends Component {
     console.log('Delete Item');
     console.log(e.target.id);
     try {
-        await inventoryService.deleteItem(e.target.id);
+        inventoryService.deleteItem(e.target.id);
+        console.log('FIRE!');
         this.handleGetItems();
     } catch (error) {
         console.log(error);
@@ -149,10 +150,10 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    this.handleGetItems();
-    this.handleGetSites();
-    this.handleGetSwapmeets();
-    this.handleGetWantItems();
+    // this.handleGetItems();
+    // this.handleGetSites();
+    // this.handleGetSwapmeets();
+    // this.handleGetWantItems();
     const {lat, lng} = await geolocationService.getCurrentLatLng();
     this.setState({
       lat,
@@ -178,7 +179,7 @@ class App extends Component {
   render(){
     return(
       <div className="App-outer-container">
-        <Navbar user={this.state.user} handleLogout={this.handleLogout}/>
+        <Navbar user={this.state.user} handleLogout={this.handleLogout} handleGetItems={this.handleGetItems}/>
         <div className="App-inner-container">
         <Switch>
           <Route exact path='/' render={() =>

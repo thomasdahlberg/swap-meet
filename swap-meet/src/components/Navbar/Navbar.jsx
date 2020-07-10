@@ -7,7 +7,7 @@ const Navbar = (props) => {
     let nav = props.user ?
     <Fragment>
         <li>
-            <NavLink to="/inventory" className="navbar__link" activeClassName="navbar__link--active">My Swap-Items</NavLink>
+            <NavLink to="/inventory" className="navbar__link" activeClassName="navbar__link--active" onClick={props.handleGetItems}>My Swap-Items</NavLink>
         </li>
         <li>
             <NavLink to="/swapmeets" className="navbar__link" activeClassName="navbar__link--active">My Swap-Meets</NavLink>

@@ -66,6 +66,7 @@ function deleteItem(item) {
     })
     .then(response => {
         if(response.ok) {
+            
             return response.json();
         } else {
             throw new Error('Invalid Request, Try Again');

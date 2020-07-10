@@ -79,7 +79,6 @@ class NewInventoryItem extends Component {
     handleSubmit = async e => {
         e.preventDefault();
         if(!this.isFormValid()) return;
-        console.log('submitting new item');
         const data = new FormData(); 
         data.append('file', this.state.image);
         data.append('name', this.state.name);
@@ -87,11 +86,16 @@ class NewInventoryItem extends Component {
         data.append('itemType', this.state.itemType);
         data.append('swapPref', this.state.swapPref);
         try {
-            await inventoryService.addItem(data);
-            setTimeout(this.props.handleGetItems(), 3000);
+            inventoryService.addItem(data);
             console.log('got the items?');
-            this.getInitialState();
-            this.props.history.push('/inventory');
+            this.setState({
+                user: userService.getUser(),
+                image: null,
+                name: '',
+                description: '',
+                itemType: '',
+                swapPref: ''
+            });
         } catch (error) {
             console.log(error);
         }
@@ -112,6 +116,10 @@ class NewInventoryItem extends Component {
             buttonNode.style.backgroundColor = '#ff8589';
             buttonNode.innerText = 'Cancel';    
         }
+    }
+
+    delayedHandleGetItems = () => {
+        setTimeout(this.props.handleGetItems, 3000);
     }
 
     render() {
@@ -171,7 +179,7 @@ class NewInventoryItem extends Component {
                             <option name="swapPref" value="" disabled>Choose a Category</option>
                             {this.itemTypes.map((type, idx) => <option name="swapPref" value={type} key={idx}>{type}</option>)}
                         </select>
-                        <button disabled={!this.isFormValid()} type="submit">Add Item</button>
+                        <button disabled={!this.isFormValid()} type="submit" onClick={this.delayedHandleGetItems}>Add Item</button>
                     </div>
                 </form>
             </div>
