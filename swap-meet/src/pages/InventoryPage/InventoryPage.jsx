@@ -27,7 +27,7 @@ class InventoryPage extends Component {
     render(){
         return(
             <div style={this.containerStyle}>
-                <h1 style={this.h1Style}>My Swap-Items</h1>
+                {this.props.myItems.length === 0? <h1 style={this.h1Style}>No Swap-Items in Inventory</h1> : <h1 style={this.h1Style}>My Swap-Items</h1>}
                 <NewInventoryItem handleGetItems={this.props.handleGetItems}/>
                 <Inventory 
                     items={this.props.items}

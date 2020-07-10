@@ -120,6 +120,7 @@ class NewInventoryItem extends Component {
     }
 
     delayedHandleGetItems = () => {
+        // Make this better with a setInterval for larger files
         setTimeout(this.props.handleGetItems, 3000);
     }
 
