@@ -43,6 +43,7 @@ class App extends Component {
       wantItemPlace: null,
       wantItemUser: null,
       wantItems: null,
+      mapActive: false,
     };
   }
   
@@ -161,6 +162,14 @@ class App extends Component {
     })
   }
 
+  handleToggleMap = () => {
+    if(this.state.mapActive === false){
+      this.setState({mapActive: true});
+    } else {
+      this.setState({mapActive: false});
+    }
+  }
+
 
 //Log In and Log Out Functions
 
@@ -184,6 +193,10 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={() =>
           <GoogleMap
+            handleToggleMap={this.handleToggleMap}
+            handleGetItems={this.handleGetItems}
+            handleGetSites={this.handleGetSites}
+            mapActive={this.state.mapActive}
             items={this.state.items}
             sites={this.state.sites}
             lat={this.state.lat}

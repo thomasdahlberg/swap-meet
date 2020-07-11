@@ -12,8 +12,37 @@ class GoogleMap extends Component {
   }
   componentDidMount() {
     this.getAPI();
+    this.handleMapStyle();
+  }
+
+  buttonRef = React.createRef();
+  scrimRef = React.createRef();
+
+  handleShowMap = async () => {
+    await this.props.handleGetSites();
+    await this.props.handleGetItems();
+    await this.props.handleToggleMap();
+    this.handleMapStyle();
+    // this.getAPI();
   }
   
+  handleMapStyle = () => {
+    const buttonNode = this.buttonRef.current;
+    const scrimNode = this.scrimRef.current;
+    if(this.props.mapActive === false) {
+      buttonNode.style.opacity = 1;
+      scrimNode.style.opacity = 0.5;
+    } else {
+      buttonNode.style.opacity = 0;
+      scrimNode.style.opacity = 0;
+      scrimNode.style.height = 0;
+    }
+  }
+
+  isMapActive = () => {
+    return this.props.mapActive;
+  }
+
   getAPI = async () => {
     GOOGLE_MAP_API_KEY = await geolocationService.getGoogleMapAPI();
     const googleMapScript = document.createElement('script')
@@ -24,7 +53,9 @@ class GoogleMap extends Component {
     })
   }
 
-  initMap = () => {
+  initMap = async () => {
+    await this.props.handleGetItems();
+    await this.props.handleGetSites();
     let coords = {}
     this.props.lat? coords.lat = this.props.lat : coords.lat = 51.5074;
     this.props.lng? coords.lng = this.props.lng : coords.lng = 0.1278; 
@@ -153,14 +184,48 @@ class GoogleMap extends Component {
 
   render() {
     return(
-      <div
-        id="google-map"
-        ref={this.googleMapRef}
+      <div 
         style={{
-          width: '100vh',
-          height: '100vh',
-        }}
-      />
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }
+        }>
+        <button
+          disabled={this.isMapActive()}
+          ref={this.buttonRef} 
+          onClick={this.handleShowMap}
+          style={{
+            position: 'absolute',
+            zIndex: '10',
+            padding: '2rem',
+            fontFamily: 'Permanent Marker',
+            fontSize: '3rem',
+            borderRadius: '1rem',
+            boxShadow: '2px 2px 3px 2px black',
+            opacity: '0'
+          }}>Explore Swaps</button>
+          <div
+            id="scrim"
+            ref={this.scrimRef}
+            style={{
+              position: 'absolute',
+              zIndex: '9',
+              backgroundColor: '#B2FFA8',
+              width: '100vh',
+              height: '100vh',
+              opacity: '0'
+            }}
+          />
+        <div
+          id="google-map"
+          ref={this.googleMapRef}
+          style={{
+            width: '100vh',
+            height: '100vh',
+          }}
+        />
+      </div>
     )
   }
 }
