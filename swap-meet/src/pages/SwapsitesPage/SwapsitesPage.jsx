@@ -25,6 +25,7 @@ class SwapsitesPage extends Component {
 
     componentDidMount(){
         this.props.handleGetSites();
+        this.props.handleGetItems();
     }
     render(){
         return(

@@ -127,7 +127,7 @@ class NewInventoryItem extends Component {
     render() {
         return(
             <div className={styles.additem}>
-                <button ref={this.buttonRef} onClick={this.addItemFormToggle}>Add an Item</button>
+                <button className={styles.button} ref={this.buttonRef} onClick={this.addItemFormToggle}>Add an Item</button>
                 <form ref={this.formRef} className={styles.form} onSubmit={this.handleSubmit} encType="multipart/form-data">
                     <div className={styles.container}>
                         <h1>Add A New Item</h1>

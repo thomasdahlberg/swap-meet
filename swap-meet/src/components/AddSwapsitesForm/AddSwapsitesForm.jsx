@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { GoogleComponent } from 'react-google-location';
 import swapSiteService from '../../utils/swapSiteService';
+import styles from './AddSwapsitesForm.module.css';
 
 
 const API_KEY = 'AIzaSyDBDG1GXL5fTNxIMCSbjQnfsDDDTwTpiIU';
@@ -31,19 +32,23 @@ class AddSwapsitesForm extends Component {
 
     render() {
       return (
-        <form onSubmit={this.handleSubmit}>
-           <GoogleComponent
-           
-            apiKey={API_KEY}
-            language={'en'}
-            country={'country:us'}
-            coordinates={true}
-            placeholder={'Start typing location'}
-            locationBoxStyle={'custom-style'}
-            locationListStyle={'custom-style-list'}
-            onChange={(e) => { this.setState({ siteName: e.place, latitude: e.coordinates.lat, longitude: e.coordinates.lng }) }} />
-            <button type="submit">Add SwapSite</button>
-        </form>
+        <div className={styles.addsite}>
+          <button className={styles.button}>Create New Swap-Site</button>
+          <form className={styles.form} onSubmit={this.handleSubmit}>
+            <div className={styles.container}>
+              {/* <GoogleComponent
+                apiKey={API_KEY}
+                language={'en'}
+                country={'country:us'}
+                coordinates={true}
+                placeholder={'Start typing location'}
+                locationBoxStyle={'custom-style'}
+                locationListStyle={'custom-style-list'}
+                onChange={(e) => { this.setState({ siteName: e.place, latitude: e.coordinates.lat, longitude: e.coordinates.lng }) }} /> */}
+              <button type="submit">Add New Swap-Site</button>
+            </div>
+          </form>
+        </div>
   
       )
     } 

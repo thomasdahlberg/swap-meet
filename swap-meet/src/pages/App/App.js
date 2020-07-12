@@ -245,7 +245,8 @@ class App extends Component {
             <SwapsitesPage 
               myItems={this.state.myItems}
               sites={this.state.sites} 
-              handleGetSites={this.handleGetSites} 
+              handleGetSites={this.handleGetSites}
+              handleGetItems={this.handleGetItems} 
               items={this.state.items}
               handleGetMyWantItem={this.handleGetMyWantItem}
             />

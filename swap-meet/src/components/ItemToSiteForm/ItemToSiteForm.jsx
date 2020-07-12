@@ -8,6 +8,36 @@ class ItemToSiteForm extends Component {
         this.state = this.getInitialState();
     }
     
+    containerStyle = {
+        marginTop: '2rem',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: '#F2F5DE',
+        border: 'black solid 1px',
+        borderRadius: '10px',
+        padding: '1rem'
+    };
+    
+    buttonStyle = {
+        backgroundColor: '#86e7b8',
+        fontWeight: '900',
+        padding: '1rem',
+        boxShadow: '1px 1px 5px 1px gray',
+        borderRadius: '10px',
+        border: 'none',
+        fontSize: '1rem',
+        fontFamily: 'Open Sans , serif',
+        };
+
+    selectStyle ={
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'column',
+        justifyContent: 'center',
+    }
+
     getInitialState() {
         return {
             user: userService.getUser(),
@@ -49,23 +79,23 @@ class ItemToSiteForm extends Component {
 
     render() {
         return(
-            <form onSubmit={this.handleSubmit}>
-                <fieldset>
-                    <label htmlFor="itemType">Select Item</label>
-                    <select 
-                        id="item" 
-                        name="item"  
-                        onChange={this.handleChange}
-                    >
-                    {this.state.items ?
-                        this.state.items.map(({ name, _id}) => (
-                        <option key={_id} name="item" value={_id}>{name}</option>
-                        )) : 
-                        <option>no items</option>
-                    }
-                    </select>
-                    <button type="submit">Submit</button>
-                </fieldset>
+            <form style={this.containerStyle} onSubmit={this.handleSubmit}>
+                    <div style={this.selectStyle}>
+                        <label htmlFor="itemType">Select Item:</label>
+                        <select 
+                            id="item" 
+                            name="item"  
+                            onChange={this.handleChange}
+                        >
+                        {this.state.items ?
+                            this.state.items.map(({ name, _id}) => (
+                            <option key={_id} name="item" value={_id}>{name}</option>
+                            )) : 
+                            <option>no items</option>
+                        }
+                        </select>
+                    </div>
+                    <button style={this.buttonStyle} type="submit">List Your Item Here</button>
             </form>
         );
     }

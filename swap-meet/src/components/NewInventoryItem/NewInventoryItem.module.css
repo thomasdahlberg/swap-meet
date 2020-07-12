@@ -36,9 +36,13 @@
 
 .additem button {
     margin-bottom: 2rem;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 1px gray;
+    font-size: 1.5rem;
+    font-family: 'Open Sans', serif;
 }
 
-button {
+.button {
     background-color: #86e7b8;
     font-weight: 900;
     padding: 1rem;
@@ -51,6 +55,7 @@ button {
 
 button:disabled {
     background-color: #ddd;
+    border-radius: 10px;
 }
 
 button:hover {

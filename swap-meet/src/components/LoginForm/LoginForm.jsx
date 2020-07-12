@@ -29,7 +29,6 @@ class LoginForm extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        alert('handleSubmit');
         if(!this.isFormValid()) return;
         try {
             const { email, password } = this.state;
