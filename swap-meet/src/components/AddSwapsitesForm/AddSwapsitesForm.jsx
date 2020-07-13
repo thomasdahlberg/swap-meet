@@ -7,36 +7,67 @@ import styles from './AddSwapsitesForm.module.css';
 const API_KEY = 'AIzaSyDBDG1GXL5fTNxIMCSbjQnfsDDDTwTpiIU';
 
 class AddSwapsitesForm extends Component {
-    constructor(props) {
-      super(props)
-      this.state = {
-        siteName: null,
-        latitude: null,
-        longitude: null
-      };
-    }
+  constructor(props) {
+    super(props)
+    this.state = {
+      siteName: null,
+      latitude: null,
+      longitude: null,
+      address: null
+    };
+  }
 
-    handleSubmit = async e => {
-        e.preventDefault();
-        console.log('submitting swapsite');
-        try {
-            const { siteName, latitude, longitude } = this.state;
-            await swapSiteService.addSite({ siteName, latitude, longitude });
-            this.props.handleGetSites();
-            // this.props.history.push('/swapsites');
-        } catch (error) {
-            console.log(error);
-        }
+  formRef = React.createRef();
+  buttonRef = React.createRef();
+
+  handleSubmit = async e => {
+      e.preventDefault();
+      console.log('submitting swapsite');
+      try {
+          const { siteName, latitude, longitude } = this.state;
+          await swapSiteService.addSite({ siteName, latitude, longitude });
+          this.props.handleGetSites();
+          // this.props.history.push('/swapsites');
+      } catch (error) {
+          console.log(error);
+      }
+  }
+
+  handleChange = e => {
+    this.setState({
+        [e.target.name]: e.target.value
+    })
+  }
+
+  addSiteFormToggle = async e => {
+    const formNode = this.formRef.current;
+    const buttonNode = this.buttonRef.current;
+
+    if(buttonNode.innerText === 'Cancel'){
+        formNode.style.opacity = 0;
+        formNode.style.height = '0px';
+        buttonNode.style.backgroundColor = '#86e7b8';
+        buttonNode.innerText = 'Create New Swap-Site';
+    } else {
+        formNode.style.opacity = 1;
+        formNode.style.height = '50rem';
+        buttonNode.style.backgroundColor = '#ff8589';
+        buttonNode.innerText = 'Cancel';    
     }
+  }
+
+  delayedHandleGetSites = () => {
+    setTimeout(this.props.handleGetSites, 3000);
+  }
 
 
     render() {
       return (
         <div className={styles.addsite}>
-          <button className={styles.button}>Create New Swap-Site</button>
-          <form className={styles.form} onSubmit={this.handleSubmit}>
+          <button ref={this.buttonRef} className={styles.button} onClick={this.addSiteFormToggle}>Create New Swap-Site</button>
+          <form ref={this.formRef} className={styles.form} onSubmit={this.handleSubmit}>
             <div className={styles.container}>
-              {/* <GoogleComponent
+              <GoogleComponent
                 apiKey={API_KEY}
                 language={'en'}
                 country={'country:us'}
@@ -44,8 +75,18 @@ class AddSwapsitesForm extends Component {
                 placeholder={'Start typing location'}
                 locationBoxStyle={'custom-style'}
                 locationListStyle={'custom-style-list'}
-                onChange={(e) => { this.setState({ siteName: e.place, latitude: e.coordinates.lat, longitude: e.coordinates.lng }) }} /> */}
-              <button type="submit">Add New Swap-Site</button>
+                onChange={(e) => { this.setState({ siteName: e.place, latitude: e.coordinates.lat, longitude: e.coordinates.lng }) }} />
+              <form className={styles.container} action="">
+                <label htmlFor="siteName">Swap-Site Name:</label>
+                <input type="text" name="siteName"/>
+                <label htmlFor="address">Address:</label>
+                <textarea name="address" id="address" cols="40" rows="5"></textarea>
+                <label htmlFor="lat">Latitude:</label>
+                <input name="lat" disabled type="text"/>
+                <label htmlFor="lng">Longitude:</label>
+                <input name="lng" disabled type="text"/>
+                <button type="submit" onClick={this.delayedHandleGetSites}>Add New Swap-Site</button>
+              </form>
             </div>
           </form>
         </div>

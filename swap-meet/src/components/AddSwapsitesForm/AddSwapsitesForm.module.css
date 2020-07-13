@@ -35,6 +35,10 @@
     flex-direction: column;
 }
 
+.container input, textarea {
+    margin-bottom: 1rem;
+}
+
 .button {
     background-color: #86e7b8;
     font-weight: 900;
