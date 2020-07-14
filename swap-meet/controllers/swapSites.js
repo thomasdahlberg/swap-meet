@@ -26,6 +26,7 @@ async function addSite(req, res) {
         siteName: req.body.siteName,
         latitude: req.body.latitude,
         longitude: req.body.longitude,
+        address: req.body.address,
         active: true,
         items: []
     });
