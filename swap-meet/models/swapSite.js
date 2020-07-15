@@ -7,6 +7,8 @@ const swapSiteSchema = new Schema({
     latitude: Number,
     longitude: Number,
     address: String,
+    city: String,
+    usState: String,
     items: [{type: Schema.Types.ObjectId, ref: 'Item'}],
     active: Boolean,
 },{

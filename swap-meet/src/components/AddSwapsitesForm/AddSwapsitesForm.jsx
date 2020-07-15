@@ -18,6 +18,15 @@ class AddSwapsitesForm extends Component {
     };
   }
 
+  formRef = React.createRef();
+  buttonRef = React.createRef();
+  googleRef = React.createRef();
+  siteNameRef = React.createRef();
+  siteAddressRef = React.createRef();
+  siteCityRef = React.createRef();
+  siteStateRef = React.createRef();
+  siteLatRef = React.createRef();
+  siteLngRef= React.createRef();
 
   // componentDidMount(){
   //   this.getAPI();
@@ -28,15 +37,25 @@ class AddSwapsitesForm extends Component {
   //   return GOOGLE_MAP_API_KEY;
   // }
 
-  formRef = React.createRef();
-  buttonRef = React.createRef();
-  googleRef = React.createRef();
-
   handleSubmit = async e => {
-      e.preventDefault();
+    e.preventDefault();
+    const siteNameNode = this.siteNameRef.current;
+    const siteAddressNode = this.siteAddressRef.current;
+    const siteCityNode = this.siteCityRef.current;
+    const siteStateNode = this.siteStateRef.current;
+    const siteLatNode = this.siteLatRef.current;
+    const siteLngNode = this.siteLngRef.current;
       try {
-          const { siteName, latitude, longitude, address } = this.state;
-          await swapSiteService.addSite({ siteName, latitude, longitude, address });
+          await this.setState({
+            siteName: siteNameNode.value,
+            address: siteAddressNode.value,
+            city: siteCityNode.value,
+            usState: siteStateNode.value,
+            latitude: siteLatNode.value,
+            longitude: siteLngNode.value
+          });
+          const { siteName, latitude, longitude, address, city, usState } = this.state;
+          await swapSiteService.addSite({ siteName, latitude, longitude, address, city, usState });
       } catch (error) {
           console.log(error);
       }
@@ -48,6 +67,30 @@ class AddSwapsitesForm extends Component {
     })
   }
 
+  handlePlacesData = e => {
+    console.log(e);
+    const siteNameNode = this.siteNameRef.current;
+    const siteAddressNode = this.siteAddressRef.current;
+    const siteCityNode = this.siteCityRef.current;
+    const siteStateNode = this.siteStateRef.current;
+    const siteLatNode = this.siteLatRef.current;
+    const siteLngNode = this.siteLngRef.current;
+    let placeData = e.place;
+    let formData = [];
+    placeData = placeData.split(',');
+    placeData.forEach(elem => {
+      let mutatedElem = elem.trim();
+      formData.push(mutatedElem);
+    });
+    console.log(formData[0]);
+    siteNameNode.value = formData[0];
+    siteAddressNode.value = formData[1];
+    siteCityNode.value = formData[2];
+    siteStateNode.value = formData[3];
+    siteLatNode.value = e.coordinates.lat;
+    siteLngNode.value = e.coordinates.lng;
+  }
+  
   addSiteFormToggle = async e => {
     const formNode = this.formRef.current;
     const buttonNode = this.buttonRef.current;
@@ -89,33 +132,45 @@ class AddSwapsitesForm extends Component {
               placeholder={'Start typing location'}
               locationBoxStyle={'custom-style'}
               locationListStyle={'custom-style-list'}
-              onChange={(e) => {console.log(e)}} 
+              onChange={(e) => {this.handlePlacesData(e)}} 
             />
               <label htmlFor="siteName">Swap-Site Name:</label>
-              <input 
+              <input
+                ref={this.siteNameRef} 
                 type="text" 
                 name="siteName"
                 onChange={this.handleChange}
               />
               <label htmlFor="address">Address:</label>
-              <textarea
+              <input
+                ref={this.siteAddressRef}
                 name="address" 
                 id="address" 
-                cols="40"
-                rows="5"
                 onChange={this.handleChange}  
               />
-              <label htmlFor="latitude">Latitude:</label>
+              <label htmlFor="city">City:</label>
               <input
+                ref={this.siteCityRef}
+                name="city" 
+                id="city" 
+                onChange={this.handleChange}  
+              />
+              <label htmlFor="usState">State:</label>
+              <input
+                ref={this.siteStateRef}
+                name="usState" 
+                id="usState" 
+                onChange={this.handleChange}  
+              />
+              <input
+                ref={this.siteLatRef}
                 name="latitude"
-                disabled
                 type="text"
                 onChange={this.handleChange}
               />
-              <label htmlFor="longitude">Longitude:</label>
               <input 
+                ref={this.siteLngRef}
                 name="longitude"
-                disabled
                 type="text"
                 onChange={this.handleChange}  
               />
