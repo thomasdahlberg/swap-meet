@@ -21,7 +21,6 @@ async function linkItem(req, res) {
 }
 
 async function addSite(req, res) {
-    console.log(req.body);
     const site = new SwapSite({
         siteName: req.body.siteName,
         latitude: req.body.latitude,

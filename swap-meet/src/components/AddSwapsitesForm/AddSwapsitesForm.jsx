@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { GoogleComponent } from 'react-google-location';
 import swapSiteService from '../../utils/swapSiteService';
 import styles from './AddSwapsitesForm.module.css';
+import geolocationService from '../../utils/geolocationService';
 
+let GOOGLE_MAP_API_KEY;
 
-const API_KEY = 'AIzaSyDBDG1GXL5fTNxIMCSbjQnfsDDDTwTpiIU';
 
 class AddSwapsitesForm extends Component {
   constructor(props) {
@@ -17,17 +18,25 @@ class AddSwapsitesForm extends Component {
     };
   }
 
+
+  // componentDidMount(){
+  //   this.getAPI();
+  // }
+
+  // getAPI = async () => {
+  //   GOOGLE_MAP_API_KEY = await geolocationService.getGoogleMapAPI();
+  //   return GOOGLE_MAP_API_KEY;
+  // }
+
   formRef = React.createRef();
   buttonRef = React.createRef();
+  googleRef = React.createRef();
 
   handleSubmit = async e => {
       e.preventDefault();
-      console.log('submitting swapsite');
       try {
           const { siteName, latitude, longitude, address } = this.state;
           await swapSiteService.addSite({ siteName, latitude, longitude, address });
-          // this.props.handleGetSites();
-          // this.props.history.push('/swapsites');
       } catch (error) {
           console.log(error);
       }
@@ -65,56 +74,55 @@ class AddSwapsitesForm extends Component {
       return (
         <div className={styles.addsite}>
           <button ref={this.buttonRef} className={styles.button} onClick={this.addSiteFormToggle}>Create New Swap-Site</button>
+          <div className={styles.container}>
           <form
             ref={this.formRef}
             className={styles.form}
             onSubmit={this.handleSubmit}
           >
-            <div className={styles.container}>
-              <GoogleComponent
-                apiKey={API_KEY}
-                language={'en'}
-                country={'country:us'}
-                coordinates={true}
-                placeholder={'Start typing location'}
-                locationBoxStyle={'custom-style'}
-                locationListStyle={'custom-style-list'}
-                // onChange={(e) => { this.setState({ siteName: e.place, latitude: e.coordinates.lat, longitude: e.coordinates.lng }) }} 
+            <GoogleComponent
+              ref={this.googleRef}
+              apiKey={'AIzaSyAPjIdNMnpb3Mdon8K-tlPZq3-DmXBTHXk'}
+              language={'en'}
+              country={'country:us'}
+              coordinates={true}
+              placeholder={'Start typing location'}
+              locationBoxStyle={'custom-style'}
+              locationListStyle={'custom-style-list'}
+              onChange={(e) => {console.log(e)}} 
+            />
+              <label htmlFor="siteName">Swap-Site Name:</label>
+              <input 
+                type="text" 
+                name="siteName"
+                onChange={this.handleChange}
               />
-              <form className={styles.container} action="">
-                <label htmlFor="siteName">Swap-Site Name:</label>
-                <input 
-                  type="text" 
-                  name="siteName"
-                  onChange={this.handleChange}
-                />
-                <label htmlFor="address">Address:</label>
-                <textarea
-                  name="address" 
-                  id="address" 
-                  cols="40"
-                  rows="5"
-                  onChange={this.handleChange}  
-                />
-                <label htmlFor="latitude">Latitude:</label>
-                <input
-                  name="latitude"
-                  disabled
-                  type="text"
-                  onChange={this.handleChange}
-                />
-                <label htmlFor="longitude">Longitude:</label>
-                <input 
-                  name="longitude"
-                  disabled
-                  type="text"
-                  onChange={this.handleChange}  
-                />
-                <button type="submit" onClick={this.delayedHandleGetSites}>Add New Swap-Site</button>
-              </form>
-            </div>
+              <label htmlFor="address">Address:</label>
+              <textarea
+                name="address" 
+                id="address" 
+                cols="40"
+                rows="5"
+                onChange={this.handleChange}  
+              />
+              <label htmlFor="latitude">Latitude:</label>
+              <input
+                name="latitude"
+                disabled
+                type="text"
+                onChange={this.handleChange}
+              />
+              <label htmlFor="longitude">Longitude:</label>
+              <input 
+                name="longitude"
+                disabled
+                type="text"
+                onChange={this.handleChange}  
+              />
+              <button type="submit" onClick={this.delayedHandleGetSites}>Add New Swap-Site</button>
           </form>
         </div>
+      </div>
   
       )
     } 

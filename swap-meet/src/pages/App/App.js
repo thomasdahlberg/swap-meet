@@ -22,7 +22,7 @@ import geolocationService from '../../utils/geolocationService';
 import swapSiteService from '../../utils/swapSiteService';
 import swapmeetService from '../../utils/swapmeetService';
 
-
+let GOOGLE_MAP_API_KEY;
 
 class App extends Component {
   state = this.getInitialState();
@@ -91,7 +91,10 @@ class App extends Component {
     })
   }
 
-  
+  getAPI = async () => {
+    GOOGLE_MAP_API_KEY = await geolocationService.getGoogleMapAPI();
+    return GOOGLE_MAP_API_KEY;
+  }
   
   handleGetMyWantItem = async (e) => {
     const wantItemPlace = e.target.parentNode.parentNode.id;
@@ -242,7 +245,8 @@ class App extends Component {
           }/>
           <Route exact path='/swapsites' render={() =>
             userService.getUser() ?
-            <SwapsitesPage 
+            <SwapsitesPage
+              getAPI={this.getAPI} 
               myItems={this.state.myItems}
               sites={this.state.sites} 
               handleGetSites={this.handleGetSites}

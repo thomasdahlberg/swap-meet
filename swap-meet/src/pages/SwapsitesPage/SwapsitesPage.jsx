@@ -31,7 +31,8 @@ class SwapsitesPage extends Component {
         return(
             <div style={this.containerStyle}>
                 {this.props.sites.length === 0? <h1 style={this.h1Style}>No Swap-Sites Created</h1> : <h1 style={this.h1Style}>Swap-Sites</h1>}
-                <AddSwapsitesForm 
+                <AddSwapsitesForm
+                    getAPI={this.props.getAPI} 
                     handleGetSites={this.props.handleGetSites} 
                 className={styles.section}/>
                 <Swapsites 
