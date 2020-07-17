@@ -32,9 +32,9 @@ class SwapsitesPage extends Component {
             <div style={this.containerStyle}>
                 {this.props.sites.length === 0? <h1 style={this.h1Style}>No Swap-Sites Created</h1> : <h1 style={this.h1Style}>Swap-Sites</h1>}
                 <AddSwapsitesForm
-                    getAPI={this.props.getAPI} 
+                    mapKey={this.props.mapKey} 
                     handleGetSites={this.props.handleGetSites} 
-                className={styles.section}/>
+                    className={styles.section}/>
                 <Swapsites 
                     sites={this.props.sites}
                     items={this.props.items}     

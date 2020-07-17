@@ -22,12 +22,11 @@ import geolocationService from '../../utils/geolocationService';
 import swapSiteService from '../../utils/swapSiteService';
 import swapmeetService from '../../utils/swapmeetService';
 
-let GOOGLE_MAP_API_KEY;
 
 class App extends Component {
   state = this.getInitialState();
   
-  getInitialState () {
+  getInitialState(){
     return {
       user: userService.getUser(),
       myItems: [],
@@ -90,11 +89,6 @@ class App extends Component {
       // console.log(inventoryService.showOne(element.wantItem));
     })
   }
-
-  getAPI = async () => {
-    GOOGLE_MAP_API_KEY = await geolocationService.getGoogleMapAPI();
-    return GOOGLE_MAP_API_KEY;
-  }
   
   handleGetMyWantItem = async (e) => {
     const wantItemPlace = e.target.parentNode.parentNode.id;
@@ -154,10 +148,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    // this.handleGetItems();
-    // this.handleGetSites();
-    // this.handleGetSwapmeets();
-    // this.handleGetWantItems();
+    // this.getAPI_KEY();
     const {lat, lng} = await geolocationService.getCurrentLatLng();
     this.setState({
       lat,
@@ -199,6 +190,7 @@ class App extends Component {
             handleToggleMap={this.handleToggleMap}
             handleGetItems={this.handleGetItems}
             handleGetSites={this.handleGetSites}
+            mapKey={this.state.mapKey}
             mapActive={this.state.mapActive}
             items={this.state.items}
             sites={this.state.sites}
@@ -246,7 +238,7 @@ class App extends Component {
           <Route exact path='/swapsites' render={() =>
             userService.getUser() ?
             <SwapsitesPage
-              getAPI={this.getAPI} 
+              mapKey={this.state.mapKey} 
               myItems={this.state.myItems}
               sites={this.state.sites} 
               handleGetSites={this.handleGetSites}
@@ -265,7 +257,7 @@ class App extends Component {
           }/>
         </Switch>
         </div>
-        <Footer />  
+        <Footer />
       </div>
     );
   }

@@ -4,7 +4,6 @@ import swapSiteService from '../../utils/swapSiteService';
 import styles from './AddSwapsitesForm.module.css';
 import geolocationService from '../../utils/geolocationService';
 
-let GOOGLE_MAP_API_KEY;
 
 
 class AddSwapsitesForm extends Component {
@@ -14,7 +13,10 @@ class AddSwapsitesForm extends Component {
       siteName: null,
       latitude: null,
       longitude: null,
-      address: null
+      address: null,
+      city: null,
+      usState: null,
+      mapKey: null
     };
   }
 
@@ -28,14 +30,14 @@ class AddSwapsitesForm extends Component {
   siteLatRef = React.createRef();
   siteLngRef= React.createRef();
 
-  // componentDidMount(){
-  //   this.getAPI();
-  // }
+  componentDidMount(){
+    this.getAPI_KEY();
+  }
 
-  // getAPI = async () => {
-  //   GOOGLE_MAP_API_KEY = await geolocationService.getGoogleMapAPI();
-  //   return GOOGLE_MAP_API_KEY;
-  // }
+  getAPI_KEY = async () => {
+    const API_KEY = await geolocationService.getGoogleMapAPI();
+    this.setState({mapKey: API_KEY})
+  }
 
   handleSubmit = async e => {
     e.preventDefault();
@@ -56,9 +58,38 @@ class AddSwapsitesForm extends Component {
           });
           const { siteName, latitude, longitude, address, city, usState } = this.state;
           await swapSiteService.addSite({ siteName, latitude, longitude, address, city, usState });
+          this.resetAddSiteForm();
+          this.resetState();
       } catch (error) {
           console.log(error);
       }
+  }
+
+  resetAddSiteForm = () => {
+    const siteNameNode = this.siteNameRef.current;
+    const siteAddressNode = this.siteAddressRef.current;
+    const siteCityNode = this.siteCityRef.current;
+    const siteStateNode = this.siteStateRef.current;
+    const siteLatNode = this.siteLatRef.current;
+    const siteLngNode = this.siteLngRef.current;
+    siteNameNode.value = '';
+    siteAddressNode.value = '';
+    siteCityNode.value = '';
+    siteStateNode.value = '';
+    siteLatNode.value = '';
+    siteLngNode.value = '';
+    this.addSiteFormToggle();
+  }
+
+  resetState = () => {
+    this.setState({
+      siteName: null,
+      latitude: null,
+      longitude: null,
+      address: null,
+      city: null,
+      usState: null,
+    })
   }
 
   handleChange = e => {
@@ -125,7 +156,7 @@ class AddSwapsitesForm extends Component {
           >
             <GoogleComponent
               ref={this.googleRef}
-              apiKey={'AIzaSyAPjIdNMnpb3Mdon8K-tlPZq3-DmXBTHXk'}
+              apiKey={this.state.mapKey}
               language={'en'}
               country={'country:us'}
               coordinates={true}
