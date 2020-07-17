@@ -11,19 +11,26 @@ const Swapsites = (props) => {
             {props.sites.map(({ siteName, _id, items, address, city, state}) => (
                 <section className={styles.section} key={_id}>
                     <h1>{siteName}</h1>
-            <h3><em>{address}</em></h3>
-                    <ul id={_id}>
-                        {props.items.map(({ _id, name}) => 
-                            { for( let i = 0; i < items.length; i++) {
-                                if( items[i] === _id ) { return <Link key={_id} to="/swapmeets/new"><li onClick={props.handleGetMyWantItem} key={_id} id={_id}>{name}</li><input type="hidden" name="swapSite" value={_id}/></Link>
+                    <h3><em>{address}</em></h3>
+                    <div id={_id}>
+                    {items.map((siteItem) => {
+                        return (
+                            <ul>
+                                {props.items.map(({_id, name}) => {
+                                    if(siteItem === _id){
+                                        return (
+                                            <Link key={_id} to="/swapmeets/new"><li onClick={props.handleGetMyWantItem} key={_id} id={_id}>{name}</li><input type="hidden" name="swapSite" value={_id}/></Link>
+                                        )
                                     } else {
-                                        return <div key={_id}></div>;
+                                        return null;
                                     }
+                                })
                                 }
-                                return null;
-                            })
-                        }
-                    </ul>
+                            </ul>
+                        )
+                    })
+                    }
+                    </div>
                     <div>
                         <button id={_id}>Edit</button>
                         <button id={_id} className={styles.delete}>Delete</button>
