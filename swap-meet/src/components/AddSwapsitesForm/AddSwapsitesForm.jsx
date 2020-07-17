@@ -115,7 +115,7 @@ class AddSwapsitesForm extends Component {
     });
     console.log(formData[0]);
     siteNameNode.value = formData[0];
-    siteAddressNode.value = formData[1];
+    siteAddressNode.value = `${formData[1]}, ${formData[2]}, ${formData[3]}`;
     siteCityNode.value = formData[2];
     siteStateNode.value = formData[3];
     siteLatNode.value = e.coordinates.lat;

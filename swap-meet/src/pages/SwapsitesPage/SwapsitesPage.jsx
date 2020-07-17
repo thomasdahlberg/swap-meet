@@ -27,6 +27,12 @@ class SwapsitesPage extends Component {
         this.props.handleGetSites();
         this.props.handleGetItems();
     }
+
+    // componentDidUpdate(){
+    //     this.props.handleGetSites();
+    //     this.props.handleGetItems();
+    // }
+
     render(){
         return(
             <div style={this.containerStyle}>
@@ -35,7 +41,8 @@ class SwapsitesPage extends Component {
                     mapKey={this.props.mapKey} 
                     handleGetSites={this.props.handleGetSites} 
                     className={styles.section}/>
-                <Swapsites 
+                <Swapsites
+                    handleGetItems={this.props.handleGetItems} 
                     sites={this.props.sites}
                     items={this.props.items}     
                     handleGetSites={this.props.handleGetSites}

@@ -213,6 +213,8 @@ class App extends Component {
           <Route exact path='/swapmeets' render={() =>
             userService.getUser() ?
             <SwapmeetsPage
+              handleGetSites={this.handleGetSites}
+              handleGetItems={this.handleGetMyItems}
               sites={this.state.sites} 
               swapmeets={this.state.swapmeetsData}
               items={this.state.items} 

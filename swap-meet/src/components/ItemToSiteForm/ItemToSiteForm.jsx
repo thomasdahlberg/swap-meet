@@ -28,6 +28,7 @@ class ItemToSiteForm extends Component {
         borderRadius: '10px',
         border: 'none',
         fontSize: '1rem',
+        marginLeft: '2rem',
         fontFamily: 'Open Sans , serif',
         };
 
@@ -41,7 +42,6 @@ class ItemToSiteForm extends Component {
     getInitialState() {
         return {
             user: userService.getUser(),
-            items: this.props.items,
             item: null,
             site: this.props.siteId       
         };
@@ -56,6 +56,7 @@ class ItemToSiteForm extends Component {
     }
 
     handleChange = e => {
+        console.log(e.target);
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -68,6 +69,7 @@ class ItemToSiteForm extends Component {
             const { user, item, site } = this.state;
             await swapSiteService.linkItem({ user, item, site });
             this.props.handleGetSites();
+            this.props.handleGetItems();
             console.log('sites gotten');
             // this.props.history.push('/swapsites');
         } catch (error) {
@@ -75,6 +77,10 @@ class ItemToSiteForm extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.handleGetSites();
+        this.props.handleGetItems();
+    }
 
 
     render() {
@@ -86,13 +92,10 @@ class ItemToSiteForm extends Component {
                             id="item" 
                             name="item"  
                             onChange={this.handleChange}
+                            defaultValue={'DEFAULT'}
                         >
-                        {this.state.items ?
-                            this.state.items.map(({ name, _id}) => (
-                            <option key={_id} name="item" value={_id}>{name}</option>
-                            )) : 
-                            <option>no items</option>
-                        }
+                            <option disabled value="DEFAULT" name="item">Choose Item to List</option>
+                            {this.props.myItems.map(({ name, _id}) => <option key={_id} name="item" value={_id}>{name}</option>)}
                         </select>
                     </div>
                     <button style={this.buttonStyle} type="submit">List Your Item Here</button>
