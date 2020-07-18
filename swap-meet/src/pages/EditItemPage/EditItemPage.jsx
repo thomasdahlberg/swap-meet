@@ -70,6 +70,7 @@ class EditItemPage extends Component {
     }
 
     handleChange = e => {
+        e.preventDefault();
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -107,7 +108,7 @@ class EditItemPage extends Component {
 
     render() {
         return(
-            <div>
+            <div className={styles.edit}>
                 <img src={this.props.showItem.image} alt={this.props.showItem.name}/>                    
                 <h1>{this.props.showItem.name}</h1>
                 <h3><em>{this.props.showItem.itemType}</em></h3>
@@ -128,7 +129,7 @@ class EditItemPage extends Component {
                             id="name" 
                             name="name" 
                             type="name"
-                            value={this.props.showItem.name}
+                            defaultValue={this.props.showItem.name}
                             onChange={this.handleChange}
                         />
                         
@@ -140,7 +141,7 @@ class EditItemPage extends Component {
                             className={styles.description} 
                             id="description" 
                             name="description" 
-                            value={this.props.showItem.description} 
+                            defaultValue={this.props.showItem.description} 
                             onChange={this.handleChange}
                         />
                         
@@ -148,7 +149,7 @@ class EditItemPage extends Component {
                         <select 
                             id="itemType" 
                             name="itemType"  
-                            value={this.props.showItem.itemType}
+                            defaultValue={this.props.showItem.itemType}
                             onChange={this.handleChange}
                         >
                             <option name="itemType" value="" disabled>Choose a Category</option>
@@ -159,14 +160,14 @@ class EditItemPage extends Component {
                         <select 
                             id="swapPref" 
                             name="swapPref"  
-                            value={this.props.showItem.swapPref}
+                            defaultValue={this.props.showItem.swapPref}
                             onChange={this.handleChange}
                         >
                             <option name="swapPref" value="" disabled>Choose a Category</option>
                             {this.itemTypes.map((type, idx) => <option name="swapPref" value={type} key={idx}>{type}</option>)}
                         </select>
 
-                        <button disabled={!this.isFormValid()} type="submit" onClick={this.delayedHandleGetItems}>Add Item</button>
+                        <button disabled={!this.isFormValid()} type="submit" onClick={this.delayedHandleGetItems}>Update Item</button>
                     
                     </div>
                 </form>
