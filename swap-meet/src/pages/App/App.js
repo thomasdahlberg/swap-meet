@@ -6,6 +6,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import InventoryPage from '../InventoryPage/InventoryPage';
 import SwapmeetsPage from '../SwapmeetsPage/SwapmeetsPage';
 import SwapsitesPage from '../SwapsitesPage/SwapsitesPage';
+import EditItemPage from '../EditItemPage/EditItemPage';
 import NewSwapmeetsPage from '../NewSwapmeetsPage/NewSwapmeetsPage';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
@@ -198,6 +199,18 @@ class App extends Component {
           <Route exact path='/inventory' render={() =>
             userService.getUser() ?
             <InventoryPage
+            myItems={this.state.myItems.reverse()}
+            handleGetItems={this.handleGetItems} 
+            items={this.state.items}
+            handleItemEditView={this.handleItemEditView}
+            handleItemDelete={this.handleItemDelete}
+            />
+              :
+            <Redirect to='/login' />
+          }/>
+          <Route exact path='/inventory/edit' render={() =>
+            userService.getUser() ?
+            <EditItemPage
             myItems={this.state.myItems.reverse()}
             handleGetItems={this.handleGetItems} 
             items={this.state.items}
