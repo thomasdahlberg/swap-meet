@@ -13,9 +13,9 @@ const Swapsites = (props) => {
                     <h1>{siteName}</h1>
                     <h3><em>{address}</em></h3>
                     <div id={_id}>
-                    {items.map((siteItem) => {
+                    {items.map((siteItem, idx) => {
                         return (
-                            <ul>
+                            <ul key={idx}>
                                 {props.items.map(({_id, name}) => {
                                     if(siteItem === _id){
                                         return (
@@ -36,7 +36,7 @@ const Swapsites = (props) => {
                         <button id={_id} className={styles.delete}>Delete</button>
                     </div>
 
-                    <ItemToSiteForm {...props} handleGetItems={props.handleGetItems} handleGetSites={props.handleGetSites} myItems={props.myItems} siteId={_id} key={_id}/>
+                    <ItemToSiteForm handleGetItems={props.handleGetItems} handleGetSites={props.handleGetSites} myItems={props.myItems} siteId={_id} siteItems={items} listItems={props.myItems} key={_id}/>
                 </section>
                 ))
             }

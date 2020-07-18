@@ -47,19 +47,17 @@ class App extends Component {
   }
   
   handleGetItems = async () => {
+    console.log('Get ITEMs!');
+    const { items } = await inventoryService.index();
+    this.setState({ items: items })
     if(userService.getUser()) {
-      console.log('Get ITEMs!');
-      const { items } = await inventoryService.index();
-      this.setState({ items: items })
       this.handleGetMyItems();
     }
   }
   
   handleGetSites = async () => {
-    if(userService.getUser()) {
-      const { sites } = await swapSiteService.index();
-      this.setState({ sites: sites })
-    }
+    const { sites } = await swapSiteService.index();
+    this.setState({ sites: sites })
   }
 
   handleGetSwapmeets = async () => {
@@ -148,7 +146,6 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    // this.getAPI_KEY();
     const {lat, lng} = await geolocationService.getCurrentLatLng();
     this.setState({
       lat,

@@ -7,13 +7,26 @@ module.exports = {
 };
 
 async function linkItem(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     try {
         await SwapSite.findById(req.body.site, function(err, site){
-            site.items.push(req.body.item);
-            site.save(); 
-            console.log(site);
-            res.json({ site });
+            console.log(req.body.item);
+            let pushItem = true;
+            site.items.forEach(element => {
+                if(element === req.body.item){
+                    pushItem = false;
+                }
+            });
+            console.log(pushItem);
+            if(pushItem === true){
+                site.items.push(req.body.item);
+                site.save(); 
+                console.log(site);
+                res.json({ site });    
+            } else {
+                alert('Item already listed');
+                res.json({ site });
+            }
         });
     } catch (error) {
         res.status(400).json(error);

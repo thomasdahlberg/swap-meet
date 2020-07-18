@@ -2,7 +2,7 @@ const router = require('express').Router();
 const swapSitesCtrl = require('../../controllers/swapSites');
 
 router.use(require('../../config/auth'));
-router.get('/', checkAuth, swapSitesCtrl.index);
+router.get('/', swapSitesCtrl.index);
 router.post('/new', checkAuth, swapSitesCtrl.addSite);
 router.put('/:id', checkAuth, swapSitesCtrl.linkItem);
 

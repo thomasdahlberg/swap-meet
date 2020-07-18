@@ -44,7 +44,7 @@ function index(sites) {
         method: 'GET',
         headers: new Headers({
             'Content-type': 'Application/json',
-            'Authorization': 'Bearer ' + tokenService.getToken()
+            // 'Authorization': 'Bearer ' + tokenService.getToken()
         }),
         body: JSON.stringify(sites)
     })

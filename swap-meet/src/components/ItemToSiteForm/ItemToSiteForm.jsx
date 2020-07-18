@@ -5,7 +5,9 @@ import userService from '../../utils/userService';
 class ItemToSiteForm extends Component {
     constructor(props) {
         super(props)
+        console.log(props);
         this.state = this.getInitialState();
+        // this.getInitialState();
     }
     
     containerStyle = {
@@ -39,12 +41,30 @@ class ItemToSiteForm extends Component {
         justifyContent: 'center',
     }
 
-    getInitialState() {
-        return {
+    getInitialState = () => {
+        console.log('initializing state')
+        return({
             user: userService.getUser(),
             item: null,
-            site: this.props.siteId       
-        };
+            site: this.props.siteId,
+            myItems: this.props.myItems,
+            siteItems: this.props.siteItems,
+            listItems: this.props.listItems,
+        })
+    }
+
+    editListItems = () => {
+        console.log('editing list items');
+        let listItems = this.props.listItems;
+        console.log(listItems);
+        listItems.forEach(({_id}, idx) => {
+            this.props.siteItems.forEach(item => {
+                if(item === _id){
+                    listItems.splice(idx, 1);
+                }
+            })
+        })
+        this.setState({listItems: listItems});
     }
 
     isFormValid = () => {
@@ -68,8 +88,8 @@ class ItemToSiteForm extends Component {
         try {
             const { user, item, site } = this.state;
             await swapSiteService.linkItem({ user, item, site });
-            this.props.handleGetSites();
-            this.props.handleGetItems();
+            setTimeout(this.props.handleGetSites(),1000);
+            setTimeout(this.props.handleGetItems(), 1000);
             console.log('sites gotten');
             // this.props.history.push('/swapsites');
         } catch (error) {
@@ -80,6 +100,7 @@ class ItemToSiteForm extends Component {
     componentDidMount() {
         this.props.handleGetSites();
         this.props.handleGetItems();
+        this.editListItems();
     }
 
 
@@ -95,7 +116,7 @@ class ItemToSiteForm extends Component {
                             defaultValue={'DEFAULT'}
                         >
                             <option disabled value="DEFAULT" name="item">Choose Item to List</option>
-                            {this.props.myItems.map(({ name, _id}) => <option key={_id} name="item" value={_id}>{name}</option>)}
+                            {this.props.myItems.map(({name, _id}) => <option key={_id} name="item" value={_id}>{name}</option>)}           
                         </select>
                     </div>
                     <button style={this.buttonStyle} type="submit">List Your Item Here</button>
