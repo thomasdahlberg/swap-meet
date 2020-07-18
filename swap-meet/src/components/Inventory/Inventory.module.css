@@ -70,7 +70,7 @@ button {
     font-weight: 900;
     padding: 1rem;
     margin-right: 1rem;
-    /* box-shadow: 1px 1px 5px 1px gray; */
+    box-shadow: 2px 2px 7px 2px gray;
     border-radius: 50%;
     border: none;
     font-family: 'Open Sans', serif;
@@ -78,6 +78,11 @@ button {
 
 .delete {
     background-color: #ff8589;
+}
+
+.edit {
+    text-decoration: none;
+    color: black;
 }
 
 button:disabled {

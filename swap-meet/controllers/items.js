@@ -27,7 +27,7 @@ module.exports = {
 
 async function showOne(req, res) {
     try {
-        await Item.findByIdAndUpdate(req.body.itemId, function(err, item){
+        await Item.findById(req.params.id, function(err, item){
             res.status(200).json({ item });
         });
     } catch (error) {
@@ -88,6 +88,17 @@ async function addItem(req, res) {
     })
 }
 
+async function deleteItem(req, res) {
+    try {
+        await Item.deleteOne({"_id": req.params.id}, function(err, obj) {
+            if(err) throw err;
+            console.log("Item deleted:", obj);
+        })
+    } catch (error) {
+        res.status(400).json(error);
+    }
+}
+
 async function index(req, res) {
     try {
         await Item.find({}, function(err, items){
@@ -99,23 +110,13 @@ async function index(req, res) {
     }
 }
 
-async function getOne(req, res) {
-    try {
-        await Item.findById(req.body, function(err, item){
-            res.status(200).json({ item });
-        });
-    } catch (error) {
-       res.status(400).json(error); 
-    }
-}
+// async function getOne(req, res) {
+//     try {
+//         await Item.findById(req.body, function(err, item){
+//             res.status(200).json({ item });
+//         });
+//     } catch (error) {
+//        res.status(400).json(error); 
+//     }
+// }
 
-async function deleteItem(req, res) {
-    try {
-        await Item.deleteOne({"_id": req.params.id}, function(err, obj) {
-            if(err) throw err;
-            console.log("Item deleted:", obj);
-        })
-    } catch (error) {
-        res.status(400).json(error);
-    }
-}

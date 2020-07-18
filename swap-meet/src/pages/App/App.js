@@ -31,6 +31,7 @@ class App extends Component {
     return {
       user: userService.getUser(),
       myItems: [],
+      showItem: null,
       mySwapmeets:[],
       myOffers: [],
       swapmeets: [],
@@ -127,7 +128,8 @@ class App extends Component {
     console.log('Item Edit View');
     console.log(e.target.id);
     try {
-        await inventoryService.showOne(e.target.id);
+      const { item } = await inventoryService.showOne(e.target.id);
+      this.setState({showItem: item});
     } catch (error) {
         console.log(error);
     }
@@ -135,11 +137,8 @@ class App extends Component {
 
   handleItemDelete = async (e) => {
     e.preventDefault();
-    console.log('Delete Item');
-    console.log(e.target.id);
     try {
         inventoryService.deleteItem(e.target.id);
-        console.log('FIRE!');
         this.handleGetItems();
     } catch (error) {
         console.log(error);
@@ -211,6 +210,7 @@ class App extends Component {
           <Route exact path='/inventory/edit' render={() =>
             userService.getUser() ?
             <EditItemPage
+            showItem={this.state.showItem}
             myItems={this.state.myItems.reverse()}
             handleGetItems={this.handleGetItems} 
             items={this.state.items}
