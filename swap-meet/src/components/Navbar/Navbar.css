@@ -5,7 +5,7 @@
     background-color: #B2FFA8;
     justify-content: space-between;
     color: #ffffff;
-    box-shadow: 2px 2px 7px 2px #86E7B8;
+    box-shadow: 2px 2px 7px 2px lightgray;
   }
 
   .navbar ul {
