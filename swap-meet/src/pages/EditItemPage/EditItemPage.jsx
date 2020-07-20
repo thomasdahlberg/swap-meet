@@ -53,10 +53,18 @@ class EditItemPage extends Component {
                 name: this.props.showItem.name,
                 description: this.props.showItem.description,
                 itemType: this.props.showItem.itemType,
-                swapPref: this.props.showItem.swapPref
+                swapPref: this.props.showItem.swapPref,
+                redirect: false
             }
         } else {
             return {}
+        }
+    }
+
+    renderRedirect(){
+        if(this.state.redirect) {
+            setTimeout(console.log('waiting game'), 3000);
+            return <Redirect to='/inventory/' />
         }
     }
 
@@ -94,6 +102,7 @@ class EditItemPage extends Component {
         try {
             inventoryService.updateItem(data);
             console.log('got the items?');
+            this.delayedHandleGetItems();
             this.setState({
                 user: userService.getUser(),
                 id: '',
@@ -101,16 +110,17 @@ class EditItemPage extends Component {
                 name: '',
                 description: '',
                 itemType: '',
-                swapPref: ''
+                swapPref: '',
+                redirect: true
             });
-            this.delayedHandleGetItems();
         } catch (error) {
             console.log(error);
         }
     }
 
-    delayedHandleGetItems = () => {
+    delayedHandleGetItems = async () => {
         setTimeout(this.props.handleGetItems, 3000);
+        // setTimeout(this.setState({redirect: true}), 5000);
     }
 
     render() {
@@ -181,6 +191,7 @@ class EditItemPage extends Component {
                         </div>
                     </form> : <Redirect to="/inventory" />
                 }
+                {this.renderRedirect()}
             </div>
         )
     }
