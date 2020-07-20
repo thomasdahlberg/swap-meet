@@ -120,7 +120,6 @@ class EditItemPage extends Component {
 
     delayedHandleGetItems = async () => {
         setTimeout(this.props.handleGetItems, 3000);
-        // setTimeout(this.setState({redirect: true}), 5000);
     }
 
     render() {
