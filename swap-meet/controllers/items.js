@@ -4,7 +4,6 @@ const AWS = require('aws-sdk');
 const s3 = new AWS.S3({apiVersion: '2006-03-01'});
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
-const S3_BASE_URL = 's3-us-east-1.amazonaws.com/';
 const BUCKET = 'swap-meet';
 
 let storage = multer.diskStorage({
@@ -19,11 +18,77 @@ let storage = multer.diskStorage({
 let upload = multer({ storage: storage }).single('file')
 
 module.exports = {
+    updateOne,
     showOne,
     addItem,
     deleteItem,
     index
 };
+
+async function updateOne(req, res) {
+    let uploadParams = {Bucket: BUCKET, Key: '', Body: ''};
+    let url;
+    upload(req, res, function(err) {
+        if (err instanceof multer.MulterError) {
+            return res.status(500).json(err)
+        } else if (err) {
+            return res.status(500).json(err)
+        }
+        if (req.file){
+            let file = req.file;
+            let fileStream = fs.createReadStream(file.path);
+            
+            fileStream.on('error', function(err){
+                console.log('File Error', err);
+            });
+    
+            uploadParams.Body = fileStream;
+            const key = uuidv4() + file.filename;
+            uploadParams.Key = key;
+            url = `https://${BUCKET}.s3.amazonaws.com/${key}`;
+    
+            s3.upload(uploadParams, function(err, data) {
+                if(err){
+                    console.log("Error", err);
+                } if(data) {
+                    fs.unlinkSync(file.path);
+                    console.log('trigger 1');
+                    try {
+                        Item.findByIdAndUpdate(req.body.id, {
+                            name: req.body.name,
+                            description: req.body.description,
+                            image: url,
+                            itemType: req.body.itemType,
+                            swapPref: req.body.swapPref 
+                        }, function(error, item){
+                            console.log(error);
+                        });
+                    } catch (error) {
+                        res.status(400).json(error);
+                    }
+                }
+            })
+        } else {
+            console.log('trigger 2');
+            try {
+                Item.findByIdAndUpdate(req.body.id, {
+                    name: req.body.name,
+                    description: req.body.description,
+                    // image: url,
+                    itemType: req.body.itemType,
+                    swapPref: req.body.swapPref 
+                }, function(error, item){
+                    console.log(error);
+                });
+            } catch (error) {
+                res.status(400).json(error);
+            }
+
+        }
+        
+        return res.status(200).send(req.file)
+    })
+}
 
 async function showOne(req, res) {
     try {
@@ -35,6 +100,7 @@ async function showOne(req, res) {
     }
 }
 
+    
 async function addItem(req, res) {
     // console.log(req);
     let uploadParams = {Bucket: BUCKET, Key: '', Body: ''};
@@ -61,9 +127,7 @@ async function addItem(req, res) {
             if(err){
                 console.log("Error", err);
             } if(data) {
-                console.log("Upload Success", data.Location);
                 fs.unlinkSync(file.path);
-                console.log('still running');
                 const item = new Item({
                     name: req.body.name,
                     description: req.body.description,
@@ -76,7 +140,6 @@ async function addItem(req, res) {
                     currentOwner: req.user,
                     ownerHistory: [req.user]
                 });
-                console.log("Serverside Item:", item);
                 try {
                     item.save();
                 } catch (error) {
@@ -92,7 +155,6 @@ async function deleteItem(req, res) {
     try {
         await Item.deleteOne({"_id": req.params.id}, function(err, obj) {
             if(err) throw err;
-            console.log("Item deleted:", obj);
         })
     } catch (error) {
         res.status(400).json(error);
@@ -102,21 +164,9 @@ async function deleteItem(req, res) {
 async function index(req, res) {
     try {
         await Item.find({}, function(err, items){
-            console.log(items);
             res.status(200).json({ items });
         });
     } catch (error) {
        res.status(400).json(error); 
     }
 }
-
-// async function getOne(req, res) {
-//     try {
-//         await Item.findById(req.body, function(err, item){
-//             res.status(200).json({ item });
-//         });
-//     } catch (error) {
-//        res.status(400).json(error); 
-//     }
-// }
-

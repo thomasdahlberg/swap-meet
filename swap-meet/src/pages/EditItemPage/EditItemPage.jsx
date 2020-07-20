@@ -49,7 +49,7 @@ class EditItemPage extends Component {
         if(this.props.showItem) {
             return {
                 user: userService.getUser(),
-                image: this.props.showItem.image,
+                id: this.props.showItem._id,
                 name: this.props.showItem.name,
                 description: this.props.showItem.description,
                 itemType: this.props.showItem.itemType,
@@ -84,7 +84,8 @@ class EditItemPage extends Component {
     handleSubmit = async e => {
         e.preventDefault();
         if(!this.isFormValid()) return;
-        const data = new FormData(); 
+        const data = new FormData();
+        data.append('id', this.state.id); 
         data.append('file', this.state.image);
         data.append('name', this.state.name);
         data.append('description', this.state.description);
@@ -95,13 +96,14 @@ class EditItemPage extends Component {
             console.log('got the items?');
             this.setState({
                 user: userService.getUser(),
+                id: '',
                 image: null,
                 name: '',
                 description: '',
                 itemType: '',
                 swapPref: ''
             });
-            this.addItemFormToggle();
+            this.delayedHandleGetItems();
         } catch (error) {
             console.log(error);
         }
@@ -122,14 +124,12 @@ class EditItemPage extends Component {
                             <img src={this.props.showItem.image} alt={this.props.showItem.name}/>                    
                         </div>
                         <div className={styles.container}>
-
                             <label htmlFor="image">Select New Item Image:</label>
                             <input 
                                     id="image" 
                                     name="image" 
                                     type="file" 
                                     accept="image/*"
-                                    disabled
                                     onChange={this.handleImageChange}
                                 />
 

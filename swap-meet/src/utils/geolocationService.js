@@ -1,4 +1,3 @@
-import tokenService from './tokenService';
 const BASE_URL = '/api/key/';
 
 function getCurrentLatLng() {
@@ -15,9 +14,7 @@ function getGoogleMapAPI(key) {
     method: 'GET',
     headers: new Headers({
         'Content-type': 'Application/json',
-        // 'Authorization': 'Bearer ' + tokenService.getToken()
     }),
-    // body: JSON.stringify(key)
   })
   .then(response => {
       if(response.ok) {
