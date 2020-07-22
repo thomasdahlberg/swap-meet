@@ -33,6 +33,7 @@ class App extends Component {
       user: userService.getUser(),
       myItems: [],
       showItem: null,
+      showSite: null,
       mySwapmeets:[],
       myOffers: [],
       swapmeets: [],
@@ -153,6 +154,12 @@ class App extends Component {
     e.preventDefault();
     console.log('Site View');
     console.log(e.target.id);
+    try {
+      const { site } = await swapSiteService.showOne(e.target.id);
+      this.setState({showSite: site});
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async componentDidMount() {

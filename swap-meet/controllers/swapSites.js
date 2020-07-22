@@ -1,10 +1,24 @@
 const SwapSite = require('../models/swapSite');
 
 module.exports = {
+    showOne,
     linkItem,
     addSite,
     index
 };
+
+async function showOne(req, res) {
+    try {
+        await SwapSite.findById('5f1103c7eec84a2d3815ce7f', function(err, site){
+            console.log(site);
+            res.status(200).json({ site });
+            console.log(err);
+        });
+    } catch (error) {
+       res.status(400).json(error); 
+    }
+}
+
 
 async function linkItem(req, res) {
     // console.log(req.body);
