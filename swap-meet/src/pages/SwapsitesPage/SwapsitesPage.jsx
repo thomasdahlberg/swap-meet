@@ -48,6 +48,7 @@ class SwapsitesPage extends Component {
                     handleGetSites={this.props.handleGetSites}
                     myItems={this.props.myItems}
                     handleGetMyWantItem={this.props.handleGetMyWantItem}
+                    handleSwapSiteView={this.props.handleSwapSiteView}
                 />
             </div>
         )

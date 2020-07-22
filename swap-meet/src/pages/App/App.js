@@ -7,6 +7,7 @@ import InventoryPage from '../InventoryPage/InventoryPage';
 import SwapmeetsPage from '../SwapmeetsPage/SwapmeetsPage';
 import SwapsitesPage from '../SwapsitesPage/SwapsitesPage';
 import EditItemPage from '../EditItemPage/EditItemPage';
+import ViewSwapSitePage from '../ViewSwapSitePage/ViewSwapSitePage';
 import NewSwapmeetsPage from '../NewSwapmeetsPage/NewSwapmeetsPage';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
@@ -48,6 +49,8 @@ class App extends Component {
     };
   }
   
+  //Data Handling Functions
+
   handleGetItems = async () => {
     console.log('Get ITEMs!');
     const { items } = await inventoryService.index();
@@ -70,7 +73,6 @@ class App extends Component {
       this.handleGetSwapmeetsData();
     }
   }
-
 
   handleGetMyItems = () => {
     let myItems = [];
@@ -122,6 +124,18 @@ class App extends Component {
     })
     this.setState({ swapmeetsData: swapmeets });
   }
+  
+  handleItemDelete = async (e) => {
+    e.preventDefault();
+    try {
+        inventoryService.deleteItem(e.target.id);
+        this.handleGetItems();
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
+  //View handling functions
 
   handleItemEditView = async (e) => {
     e.preventDefault();
@@ -135,14 +149,10 @@ class App extends Component {
     }
   }
 
-  handleItemDelete = async (e) => {
+  handleSwapSiteView = async (e) => {
     e.preventDefault();
-    try {
-        inventoryService.deleteItem(e.target.id);
-        this.handleGetItems();
-    } catch (error) {
-        console.log(error);
-    }
+    console.log('Site View');
+    console.log(e.target.id);
   }
 
   async componentDidMount() {
@@ -256,6 +266,22 @@ class App extends Component {
               handleGetSites={this.handleGetSites}
               handleGetItems={this.handleGetItems} 
               items={this.state.items}
+              handleGetMyWantItem={this.handleGetMyWantItem}
+              handleSwapSiteView={this.handleSwapSiteView}
+            />
+              :
+            <Redirect to='/login' />    
+          }/>
+
+          <Route exact path='/swapsites/view' render={() =>
+            userService.getUser() ?
+            <ViewSwapSitePage
+              mapKey={this.state.mapKey} 
+              myItems={this.state.myItems}
+              sites={this.state.sites}
+              items={this.state.items}
+              handleGetSites={this.handleGetSites}
+              handleGetItems={this.handleGetItems} 
               handleGetMyWantItem={this.handleGetMyWantItem}
             />
               :
