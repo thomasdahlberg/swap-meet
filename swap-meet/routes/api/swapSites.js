@@ -3,7 +3,7 @@ const swapSitesCtrl = require('../../controllers/swapSites');
 
 router.use(require('../../config/auth'));
 router.get('/', swapSitesCtrl.index);
-router.get('/view', checkAuth, swapSitesCtrl.showOne);
+router.get('/:id', checkAuth, swapSitesCtrl.showOne);
 router.post('/new', checkAuth, swapSitesCtrl.addSite);
 router.put('/:id', checkAuth, swapSitesCtrl.linkItem);
 

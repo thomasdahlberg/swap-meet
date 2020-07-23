@@ -155,7 +155,7 @@ class App extends Component {
     console.log('Site View');
     console.log(e.target.id);
     try {
-      const { site } = await swapSiteService.showOne(e.target.id);
+      const { site }= await swapSiteService.showOne(e.target.id);
       this.setState({showSite: site});
     } catch (error) {
       console.log(error);
