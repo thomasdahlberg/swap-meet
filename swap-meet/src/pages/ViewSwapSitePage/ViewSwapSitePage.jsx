@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Redirect } from 'react-router-dom';
 
 class ViewSwapSitePage extends Component {
     constructor(props){
@@ -10,7 +10,12 @@ class ViewSwapSitePage extends Component {
     render() {
         return(
             <div>
-                SwapSite View Page
+                {this.props.showSite ? 
+                    <section>
+                        <h1>{this.props.showSite.siteName}</h1>
+                    </section> :
+                    <Redirect to="/swapsites" />
+                }
             </div>
         )
     }

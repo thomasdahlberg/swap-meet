@@ -287,6 +287,7 @@ class App extends Component {
               myItems={this.state.myItems}
               sites={this.state.sites}
               items={this.state.items}
+              showSite={this.state.showSite}
               handleGetSites={this.handleGetSites}
               handleGetItems={this.handleGetItems} 
               handleGetMyWantItem={this.handleGetMyWantItem}
