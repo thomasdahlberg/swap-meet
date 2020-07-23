@@ -10,20 +10,45 @@ class ViewSwapSitePage extends Component {
 
     render() {
         return(
-            <div className={styles.container}>
+            <div>
                 {this.props.showSite ? 
-                    <section>
+                    <main className={styles.outer}>
                         <div className={styles.header}>
                             <h1>{this.props.showSite.siteName}</h1>
                             <h2><em>{this.props.showSite.address}</em></h2>
                         </div>
-                        <div>
-                            {this.props.showSite.items.map(id => (
-                                <div>{id}</div>
-                             ))
+                        <div className={styles.container}>
+                            {this.props.items.map(({_id, name, description, itemType, swapPref, image}) => {
+                                return(
+                                    <div>
+                                    {this.props.showSite.items.map(item => {
+                                        if(item === _id){
+                                            return (
+                                                <div className={styles.item}>
+                                                    <div className={styles.inner}>
+                                                        <img src={image} alt={name}/>
+                                                        <div className={styles.info}>
+                                                            <h1>{name}</h1>
+                                                            <h3><em>{itemType}</em></h3>
+                                                            <p>{description}</p>
+                                                            <h3>Looking for: <em>{swapPref}</em></h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        } else {
+                                            return (
+                                                null
+                                            )
+                                        }
+                                    })}
+                                    </div>
+                                )
+
+                            })
                             }
                         </div>
-                    </section>
+                    </main>
                     :
                     <Redirect to="/swapsites" />
                 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Swapsites from '../../components/Swapsites/Swapsites';
 import AddSwapsitesForm from '../../components/AddSwapsitesForm/AddSwapsitesForm';
-import styles from './SwapsitesPage.module.css';
 
 
 
@@ -40,7 +39,7 @@ class SwapsitesPage extends Component {
                 <AddSwapsitesForm
                     mapKey={this.props.mapKey} 
                     handleGetSites={this.props.handleGetSites} 
-                    className={styles.section}/>
+                />
                 <Swapsites
                     handleGetItems={this.props.handleGetItems} 
                     sites={this.props.sites}
