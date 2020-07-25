@@ -116,7 +116,8 @@ class App extends Component {
       for(let i = 1; i < sites.length; i++) {
         if(sites[i]._id === element.site) {
           swapmeet.site = sites[i].siteName;
-          swapmeet.dateTime = element.dateTime;
+          let dateTime = new Date(element.dateTime);
+          swapmeet.dateTime = dateTime.toUTCString();
         }
       }
       for(let i = 1; i < items.length; i++) {
