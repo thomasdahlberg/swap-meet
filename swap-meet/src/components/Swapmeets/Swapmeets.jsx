@@ -7,11 +7,11 @@ const Swapmeets = (props) => {
 
     return (
         <main>
-            {props.swapmeets? 
-                props.swapmeets.map(({site, offerItem, wantItem, _id}) => (
+            {props.mySwapmeets ? 
+                props.mySwapmeets.map(({site, offerItem, wantItem, _id, dateTime}) => (
                 <section key={_id}>
                     <h1 key={_id}>{site}</h1>
-                    <h2 key={_id}>date</h2>
+                    <h2 key={_id}>{dateTime}</h2>
                     <p key={_id}>{offerItem}</p>
                     <p key={_id}>{wantItem}</p>
                 </section>

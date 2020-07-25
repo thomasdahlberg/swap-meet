@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Link, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import userService from '../../utils/userService';
 import swapmeetService from '../../utils/swapmeetService';
 import styles from './NewSwapMeetOfferForm.module.css';

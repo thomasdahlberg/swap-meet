@@ -9,7 +9,7 @@ const SwapmeetsPage = (props) => {
             <h1>My SwapMeets</h1>
             <Swapmeets
                 sites={props.sites}
-                swapmeets={props.swapmeets}
+                mySwapmeets={props.mySwapmeets}
                 items={props.items} 
                 myItems={props.myItems}
             />
