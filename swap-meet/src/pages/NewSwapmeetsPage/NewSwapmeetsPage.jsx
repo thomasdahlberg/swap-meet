@@ -5,23 +5,42 @@ import styles from './NewSwapmeetsPage.module.css'
 const NewSwapmeetsPage = (props) => {
 
     return(
-        <div className={styles.container}>
-            <h1>Swap Meet Offer</h1>
-            <div className={styles.item}>
-                <div className={styles.inner}>
-                    <img src={props.wantItem.image} alt={props.wantItem.name}/>
-                    <div className={styles.info}>
-                        <h1>{props.wantItem.name}</h1>
-                        <h3><em>{props.wantItem.itemType}</em></h3>
-                        <p>{props.wantItem.description}</p>
-                        <h3>Looking for: <em>{props.wantItem.swapPref}</em></h3>
+        <div className={styles.outer}>
+            <h1>Offer a Swap-Meet</h1>
+            <div className={styles.container}>
+                <div className={styles.item}>
+                    <div className={styles.inner}>
+                        <img src={props.wantItem.image} alt={props.wantItem.name}/>
+                        <div className={styles.info}>
+                            <h1>{props.wantItem.name}</h1>
+                            <h3><em>{props.wantItem.itemType}</em></h3>
+                            <p>{props.wantItem.description}</p>
+                            <h3>Looking for: <em>{props.wantItem.swapPref}</em></h3>
+                        </div>
                     </div>
+                </div>
+                <div>
+                    {props.offerItem ? 
+                    <div className={styles.inner}>
+                        <img src={props.offerItem.image} alt={props.offerItem.name}/>
+                        <div className={styles.info}>
+                            <h1>{props.offerItem.name}</h1>
+                            <h3><em>{props.offerItem.itemType}</em></h3>
+                            <p>{props.offerItem.description}</p>
+                            <h3>Looking for: <em>{props.offerItem.swapPref}</em></h3>
+                        </div>
+                    </div>
+                    :
+                    <h1>No Offer Item Selected</h1>
+                    }
                 </div>
             </div>
             <NewSwapMeetOfferForm 
                 handleGetItems={props.handleGetItems} 
                 items={props.items} myItems={props.myItems}
                 handleGetWantItemUser={props.handleGetWantItemUser}
+                offerItem={props.offerItem}
+                handleGetMyOfferItem={props.handleGetMyOfferItem}
                 wantItem={props.wantItem}
                 wantItemPlace={props.wantItemPlace}
                 wantItemUser={props.wantItemUser}  

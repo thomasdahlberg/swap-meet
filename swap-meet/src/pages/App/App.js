@@ -46,6 +46,7 @@ class App extends Component {
       wantItemPlace: null,
       wantItemUser: null,
       wantItems: null,
+      offerItem: null,
       mapActive: false,
     };
   }
@@ -94,11 +95,19 @@ class App extends Component {
   }
   
   handleGetMyWantItem = async (e) => {
-    const wantItemPlace = e.target.parentNode.parentNode.id;
     const wantItemId = e.target.id;
     this.state.items.forEach((item)=> {
       if(wantItemId === item._id){
         this.setState({wantItem: item})
+      }
+    })
+  }
+
+  handleGetMyOfferItem = async (e) => {
+    const offerItemId = e.target.id;
+    this.state.myItems.forEach((item)=> {
+      if(offerItemId === item._id){
+        this.setState({offerItem: item})
       }
     })
   }
@@ -262,7 +271,8 @@ class App extends Component {
               wantItem={this.state.wantItem}
               wantItemPlace={this.state.wantItemPlace}
               wantItemUser={this.state.wantItemUser}
-              handleGetWantItemUser={this.handleGetWantItemUser}
+              offerItem={this.state.offerItem}
+              handleGetMyOfferItem={this.handleGetMyOfferItem}
             />
               :
             <Redirect to='/login' />    
