@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link, withRouter } from 'react-router-dom';
 import styles from './ViewSwapSite.module.css'
 
 class ViewSwapSitePage extends Component {
     constructor(props){
         super(props)
         this.state = {}
+    }
+    
+    delayRedirect = e => {
+        e.preventDefault();
+        setTimeout(()=> {
+            this.props.history.push('/swapmeets/new')
+            }, 1000)
     }
 
     render() {
@@ -32,6 +39,7 @@ class ViewSwapSitePage extends Component {
                                                             <h3><em>{itemType}</em></h3>
                                                             <p>{description}</p>
                                                             <h3>Looking for: <em>{swapPref}</em></h3>
+                                                            <Link to='' onClick={this.delayRedirect} id={item}><button id={item} onClick={this.props.handleGetMyWantItem}>Make Swap Offer</button></Link>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -57,4 +65,4 @@ class ViewSwapSitePage extends Component {
     }
 }
 
-export default ViewSwapSitePage
+export default withRouter(ViewSwapSitePage)

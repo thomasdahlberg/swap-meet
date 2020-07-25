@@ -95,11 +95,12 @@ class App extends Component {
   
   handleGetMyWantItem = async (e) => {
     const wantItemPlace = e.target.parentNode.parentNode.id;
-    const wantItem = e.target.id
-    await this.setState({ 
-      wantItem: wantItem,
-      wantItemPlace: wantItemPlace
-     })
+    const wantItemId = e.target.id;
+    this.state.items.forEach((item)=> {
+      if(wantItemId === item._id){
+        this.setState({wantItem: item})
+      }
+    })
   }
 
   handleGetSwapmeetsData = async (e) => {
@@ -256,6 +257,8 @@ class App extends Component {
             <NewSwapmeetsPage 
               items={this.state.items} 
               myItems={this.state.myItems}
+              showItem={this.state.showItem}
+              showSite={this.state.showSite}
               wantItem={this.state.wantItem}
               wantItemPlace={this.state.wantItemPlace}
               wantItemUser={this.state.wantItemUser}
