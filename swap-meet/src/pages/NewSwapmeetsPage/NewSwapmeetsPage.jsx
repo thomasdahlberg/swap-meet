@@ -56,6 +56,7 @@ const NewSwapmeetsPage = (props) => {
                 showSite={props.showSite}
                 handleGetMyOfferItem={props.handleGetMyOfferItem}
                 wantItem={props.wantItem}
+                handleGetSwapmeets={props.handleGetSwapmeets}
                 wantItemPlace={props.wantItemPlace}
                 wantItemUser={props.wantItemUser}  
             />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect, Link, withRouter } from 'react-router-dom';
 import userService from '../../utils/userService';
 import swapmeetService from '../../utils/swapmeetService';
 import styles from './NewSwapMeetOfferForm.module.css';
@@ -9,6 +10,13 @@ class NewSwapMeetOfferForm extends Component {
         this.state = this.getInitialState();
     }
     
+    delayRedirect = e => {
+        e.preventDefault();
+        setTimeout(()=> {
+            this.props.history.push('/swapmeets')
+            }, 1000)
+    }
+
     getInitialState() {
         return {
             offerUser: userService.getUser()._id,
@@ -19,24 +27,10 @@ class NewSwapMeetOfferForm extends Component {
             items:[]
         };
     }
-    
-       
-
-    // getSwapItem() {
-    //     this.setState({
-    //         wantItemId: this.props.wantItem,
-    //         swapSiteId: this.props.wantItemPlace,
-    //         items: this.props.items
-    //     })
-    // }
-    
-    async componentDidMount(){
-        // await this.getSwapItem();
-    }
 
     isFormValid = () => {
         return (
-            this.state.user && 
+            this.state.offerUser && 
             this.state.wantItemId && 
             this.state.offerItemId &&
             this.state.swapSiteId &&
@@ -63,8 +57,7 @@ class NewSwapMeetOfferForm extends Component {
         try {
             const { wantItemId, offerItemId, swapSiteId, dateTime, offerUser } = this.state;
             await swapmeetService.addOffer({ wantItemId, offerItemId, swapSiteId, dateTime, offerUser });
-            // this.props.handleGetItems();
-            // this.props.history.push('/inventory');
+            this.props.handleGetSwapmeets();
         } catch (error) {
             console.log(error);
         }
@@ -90,7 +83,7 @@ class NewSwapMeetOfferForm extends Component {
                     </select>
                     <label htmlFor="dateTime">Swap-Meet Time?</label>
                     <input type="datetime-local" name="dateTime" onChange={this.handleChange}/>
-                    <button type="submit">Request Swap-Meet</button>
+                    <Link to="" onClick={this.delayRedirect} disabled={!this.isFormValid()}><button type="submit" onClick={this.handleSubmit} disabled={!this.isFormValid()}>Request Swap-Meet</button></Link>
                 </fieldset>
             </form>
         );
@@ -100,4 +93,4 @@ class NewSwapMeetOfferForm extends Component {
 
     
 
-export default NewSwapMeetOfferForm
+export default withRouter(NewSwapMeetOfferForm);

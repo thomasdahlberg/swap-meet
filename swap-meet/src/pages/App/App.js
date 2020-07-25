@@ -273,6 +273,7 @@ class App extends Component {
               wantItemPlace={this.state.wantItemPlace}
               wantItemUser={this.state.wantItemUser}
               offerItem={this.state.offerItem}
+              handleGetSwapmeets={this.handleGetSwapmeets}
               handleGetMyOfferItem={this.handleGetMyOfferItem}
             />
               :
