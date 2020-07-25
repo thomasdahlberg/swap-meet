@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: flex-start;
     padding: 10px;
 }
@@ -9,8 +9,8 @@
 .section {
     background-color: #D0FFB7;
     max-height: 40rem;
-    max-width: 30rem;
-    margin: 5px 5px 3px 3px;
+    width: 30rem;
+    margin: 1rem;
     padding: 2rem 3rem 1rem;
     border-radius: 10px;
     box-shadow: 2px 2px 7px 2px gray;
@@ -28,10 +28,19 @@
     justify-content: space-between;
 }
 
-.title button {
-    border-radius: 50%;
-    padding: 1.25rem;
+.title h1 {
+    text-decoration: none;
+    cursor: pointer;
 }
+
+.title a {
+    text-decoration: none;
+}
+
+.title h1:hover {
+    background-color: #86e7b8;
+}
+
 
 .info p {
     background-color: #F2F5DE;
@@ -44,6 +53,7 @@
 
 .info hr{
     border-bottom: black solid 1px;
+    margin-top: 1rem;
 }
 
 .info h3 {
@@ -72,3 +82,4 @@ button:disabled {
 button:hover {
     cursor: pointer;
 }
+

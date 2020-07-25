@@ -39,7 +39,7 @@ class ViewSwapSitePage extends Component {
                                                             <h3><em>{itemType}</em></h3>
                                                             <p>{description}</p>
                                                             <h3>Looking for: <em>{swapPref}</em></h3>
-                                                            <Link to='' onClick={this.delayRedirect} id={item}><button id={item} onClick={this.props.handleGetMyWantItem}>Make Swap Offer</button></Link>
+                                                            <Link to='' onClick={this.delayRedirect} id={item}><button className={styles.button} id={item} onClick={this.props.handleGetMyWantItem}>Make Swap Offer</button></Link>
                                                         </div>
                                                     </div>
                                                 </div>

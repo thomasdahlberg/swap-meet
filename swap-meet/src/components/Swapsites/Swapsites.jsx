@@ -24,8 +24,7 @@ class Swapsites extends Component {
                     <section className={styles.section} key={_id}>
                         <div className={styles.info}>
                             <div className={styles.title}>
-                                <h1>{siteName}</h1>
-                                <button onClick={this.props.handleSwapSiteView} key={_id} id={_id}><Link to="" onClick={this.delayRedirect} key={_id} id={_id}>View</Link></button>
+                                <Link to="" onClick={this.delayRedirect} key={_id} id={_id}><h1 onClick={this.props.handleSwapSiteView} id={_id}>{siteName}</h1></Link>
                             </div>
                             <hr/>
                             <h3><em>{address}</em></h3>

@@ -1,6 +1,7 @@
 import React from 'react';
 import NewSwapMeetOfferForm from '../../components/NewSwapMeetOfferForm/NewSwapMeetOfferForm';
 import styles from './NewSwapmeetsPage.module.css'
+import { Redirect } from 'react-router-dom';
 
 const NewSwapmeetsPage = (props) => {
     const h1Style = {
@@ -15,6 +16,8 @@ const NewSwapmeetsPage = (props) => {
 
     return(
         <div className={styles.outer}>
+            {props.wantItem ?
+            <div>
             <h1 style={h1Style}>Offer a Swap-Meet</h1>
             <div className={styles.container}>
                 <div className={styles.item}>
@@ -56,6 +59,10 @@ const NewSwapmeetsPage = (props) => {
                 wantItemPlace={props.wantItemPlace}
                 wantItemUser={props.wantItemUser}  
             />
+        </div>
+        :
+        <Redirect to="/swapsites"/>
+        }
         </div>
     )
 }
