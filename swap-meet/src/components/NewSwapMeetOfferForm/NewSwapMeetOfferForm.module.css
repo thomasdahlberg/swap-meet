@@ -4,4 +4,21 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2rem;
+}
+
+.container fieldset {
+    padding: 1rem;
+}
+
+.container label {
+    margin-right: 0.5rem;
+}
+
+.container input, select {
+    margin-right: 2rem;
+}
+
+.container button {
+    border-radius: 10px;
 }

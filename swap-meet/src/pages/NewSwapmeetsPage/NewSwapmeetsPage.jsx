@@ -3,10 +3,19 @@ import NewSwapMeetOfferForm from '../../components/NewSwapMeetOfferForm/NewSwapM
 import styles from './NewSwapmeetsPage.module.css'
 
 const NewSwapmeetsPage = (props) => {
+    const h1Style = {
+        fontFamily: 'Permanent Marker',
+        fontSize: '4rem'
+    };
+
+    const forStyle = {
+        padding: '2rem',
+        fontWeight: 500
+    }
 
     return(
         <div className={styles.outer}>
-            <h1>Offer a Swap-Meet</h1>
+            <h1 style={h1Style}>Offer a Swap-Meet</h1>
             <div className={styles.container}>
                 <div className={styles.item}>
                     <div className={styles.inner}>
@@ -19,7 +28,8 @@ const NewSwapmeetsPage = (props) => {
                         </div>
                     </div>
                 </div>
-                <div>
+                <h1 style={forStyle}>For</h1>
+                <div className={styles.item}>
                     {props.offerItem ? 
                     <div className={styles.inner}>
                         <img src={props.offerItem.image} alt={props.offerItem.name}/>
@@ -40,6 +50,7 @@ const NewSwapmeetsPage = (props) => {
                 items={props.items} myItems={props.myItems}
                 handleGetWantItemUser={props.handleGetWantItemUser}
                 offerItem={props.offerItem}
+                showSite={props.showSite}
                 handleGetMyOfferItem={props.handleGetMyOfferItem}
                 wantItem={props.wantItem}
                 wantItemPlace={props.wantItemPlace}

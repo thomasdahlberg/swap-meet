@@ -104,7 +104,8 @@ class App extends Component {
   }
 
   handleGetMyOfferItem = async (e) => {
-    const offerItemId = e.target.id;
+    console.log('get my offer item');
+    const offerItemId = e.target.value;
     this.state.myItems.forEach((item)=> {
       if(offerItemId === item._id){
         this.setState({offerItem: item})

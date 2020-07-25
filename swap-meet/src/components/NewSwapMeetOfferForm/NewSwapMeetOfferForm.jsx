@@ -12,9 +12,9 @@ class NewSwapMeetOfferForm extends Component {
     getInitialState() {
         return {
             offerUser: userService.getUser()._id,
-            wantItemId: null,
+            wantItemId: this.props.wantItem._id,
             offerItemId: null,
-            swapSiteId: null,
+            swapSiteId: this.props.showSite._id,
             dateTime: null,
             items:[]
         };
@@ -22,16 +22,16 @@ class NewSwapMeetOfferForm extends Component {
     
        
 
-    getSwapItem() {
-        this.setState({
-            wantItemId: this.props.wantItem,
-            swapSiteId: this.props.wantItemPlace,
-            items: this.props.items
-        })
-    }
+    // getSwapItem() {
+    //     this.setState({
+    //         wantItemId: this.props.wantItem,
+    //         swapSiteId: this.props.wantItemPlace,
+    //         items: this.props.items
+    //     })
+    // }
     
     async componentDidMount(){
-        await this.getSwapItem();
+        // await this.getSwapItem();
     }
 
     isFormValid = () => {
@@ -48,6 +48,13 @@ class NewSwapMeetOfferForm extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+
+    handleItemChange = e => {
+        this.setState({
+            offerItemId: e.target.value
+        })
+        this.props.handleGetMyOfferItem(e);
     }
 
     handleSubmit = async e => {
@@ -70,8 +77,10 @@ class NewSwapMeetOfferForm extends Component {
                     <label htmlFor="offerItemId">Select Item to Swap</label>
                     <select  
                         name="offerItemId"  
-                        onChange={this.handleChange}
+                        onChange={this.handleItemChange}
+                        defaultValue={'DEFAULT'}
                     >
+                        <option disabled value="DEFAULT" name="item">Choose Item to List</option>
                     {this.props.myItems ?
                         this.props.myItems.map(({ name, _id}) => (
                         <option key={_id} name="item" value={_id}>{name}</option>
@@ -81,7 +90,7 @@ class NewSwapMeetOfferForm extends Component {
                     </select>
                     <label htmlFor="dateTime">Swap-Meet Time?</label>
                     <input type="datetime-local" name="dateTime" onChange={this.handleChange}/>
-                    <button type="submit">Make Swap-Meet Offer</button>
+                    <button type="submit">Request Swap-Meet</button>
                 </fieldset>
             </form>
         );
