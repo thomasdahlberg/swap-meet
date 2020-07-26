@@ -9,6 +9,7 @@ import SwapsitesPage from '../SwapsitesPage/SwapsitesPage';
 import EditItemPage from '../EditItemPage/EditItemPage';
 import ViewSwapSitePage from '../ViewSwapSitePage/ViewSwapSitePage';
 import NewSwapmeetsPage from '../NewSwapmeetsPage/NewSwapmeetsPage';
+import EditSwapMeetPage from '../EditSwapMeetPage/EditSwapMeetPage';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 
@@ -34,6 +35,7 @@ class App extends Component {
       myItems: [],
       showItem: null,
       showSite: null,
+      showMeet: null,
       mySwapmeets: null,
       // myOffers: [],
       myOfferedMeets: null,
@@ -207,8 +209,18 @@ class App extends Component {
   handleSwapSiteView = async (e) => {
     e.preventDefault();
     try {
-      const { site }= await swapSiteService.showOne(e.target.id);
+      const { site } = await swapSiteService.showOne(e.target.id);
       this.setState({showSite: site});
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  handleSwapMeetEditView = async (e) => {
+    e.preventDefault();
+    try {
+      const { meet } = await swapmeetService.showOne(e.target.id);
+      this.setState({showMeet: meet});
     } catch (error) {
       console.log(error);
     }
@@ -295,6 +307,7 @@ class App extends Component {
             <SwapmeetsPage
               handleGetSites={this.handleGetSites}
               handleGetItems={this.handleGetMyItems}
+              handleSwapMeetEditView={this.handleSwapMeetEditView}
               sites={this.state.sites} 
               items={this.state.items} 
               myItems={this.state.myItems}
@@ -307,6 +320,23 @@ class App extends Component {
           <Route exact path='/swapmeets/new' render={() =>
             userService.getUser() ?
             <NewSwapmeetsPage 
+              items={this.state.items} 
+              myItems={this.state.myItems}
+              showItem={this.state.showItem}
+              showSite={this.state.showSite}
+              wantItem={this.state.wantItem}
+              wantItemPlace={this.state.wantItemPlace}
+              wantItemUser={this.state.wantItemUser}
+              offerItem={this.state.offerItem}
+              handleGetSwapmeets={this.handleGetSwapmeets}
+              handleGetMyOfferItem={this.handleGetMyOfferItem}
+            />
+              :
+            <Redirect to='/login' />    
+          }/>
+          <Route exact path='/swapmeets/edit' render={() =>
+            userService.getUser() ?
+            <EditSwapMeetPage 
               items={this.state.items} 
               myItems={this.state.myItems}
               showItem={this.state.showItem}

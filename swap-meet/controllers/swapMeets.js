@@ -2,16 +2,24 @@ const SwapMeet = require('../models/swapMeet');
 const Item = require('../models/item');
 
 module.exports = {
+    showOne,
     index,
     addOffer
 };
 
+async function showOne(req, res) {
+    try {
+        await SwapMeet.findById(req.params.id, function(err, meet){
+            console.log(meet);
+            res.status(200).json({ meet });
+            console.log(err);
+        });
+    } catch (error) {
+       res.status(400).json(error); 
+    }
+}
 
 async function addOffer(req, res) {
-    let owner;
-    Item.findById(req.body.wantItemId, function(err, item){
-        owner = item.currentOwner
-    });
     const meet = new SwapMeet({
         site: req.body.swapSiteId,
         dateTime: new Date(req.body.dateTime),

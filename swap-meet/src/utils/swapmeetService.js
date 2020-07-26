@@ -1,6 +1,23 @@
 import tokenService from './tokenService';
 const BASE_URL = '/api/swapmeets/';
 
+function showOne(swapMeet) {
+    return fetch(BASE_URL + swapMeet,  {
+        method: 'GET',
+        headers: new Headers({
+            'Content-type': 'Application/json',
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        }),
+    })
+    .then(response => {
+        if(response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Invalid Request, Try Again');
+        }
+    })
+}
+
 function addOffer(swapMeet) {
     return fetch(BASE_URL + 'new', {
         method: 'POST',
@@ -40,6 +57,7 @@ function index(swapMeets) {
 
 
 export default {
+    showOne,
     addOffer,
     index
 }

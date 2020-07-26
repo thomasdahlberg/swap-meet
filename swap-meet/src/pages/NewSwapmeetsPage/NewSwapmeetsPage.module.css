@@ -91,9 +91,10 @@ button {
     background-color: #86e7b8;
     font-weight: 900;
     padding: 1rem;
+    margin-top: 1rem;
     margin-right: 1rem;
     box-shadow: 2px 2px 7px 2px gray;
-    border-radius: 50%;
+    border-radius: 10px;
     border: none;
     font-family: 'Open Sans', serif;
 }

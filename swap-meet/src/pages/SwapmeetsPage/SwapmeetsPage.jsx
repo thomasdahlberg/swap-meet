@@ -24,11 +24,12 @@ class SwapmeetsPage extends Component {
     render() {
         return(
             <div style={this.containerStyle}>
-                {/* {this.props.mySwapmeets || this.props.myOfferedMeets ? 
+                {this.props.mySwapmeets || this.props.myOfferedMeets ? 
                 <h1 style={this.h1Style}>My Swap-Meets</h1>
                 :
-                <h1 style={this.h1Style}>No Current Swap-Meets</h1>} */}
+                <h1 style={this.h1Style}>No Current Swap-Meets</h1>}
                 <Swapmeets
+                    handleSwapMeetEditView={this.props.handleSwapMeetEditView}
                     sites={this.props.sites}
                     mySwapmeets={this.props.mySwapmeets}
                     myOfferedMeets={this.props.myOfferedMeets}

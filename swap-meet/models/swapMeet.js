@@ -16,7 +16,8 @@ const swapMeetSchema = new Schema({
     dateTime: Date,
     transaction: transactionSchema,
     active: Boolean,
-    meetAccepted: Boolean
+    meetAccepted: Boolean,
+    counterOffer: Boolean
 },{
     timestamps: true
 });
