@@ -18,7 +18,7 @@ async function addOffer(req, res) {
         transaction: {
             offerUser: req.body.offerUser,
             offerItem: req.body.offerItemId,
-            wantItemUser: owner,
+            wantItemUser: req.body.wantItemUser,
             wantItem: req.body.wantItemId
         },
         swapped: false,

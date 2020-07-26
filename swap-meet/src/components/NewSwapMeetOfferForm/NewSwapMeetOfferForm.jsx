@@ -20,6 +20,7 @@ class NewSwapMeetOfferForm extends Component {
     getInitialState() {
         return {
             offerUser: userService.getUser()._id,
+            wantItemUser: this.props.wantItemUser,
             wantItemId: this.props.wantItem._id,
             offerItemId: null,
             swapSiteId: this.props.showSite._id,
@@ -34,7 +35,8 @@ class NewSwapMeetOfferForm extends Component {
             this.state.wantItemId && 
             this.state.offerItemId &&
             this.state.swapSiteId &&
-            this.state.dateTime
+            this.state.dateTime &&
+            this.state.wantItemUser
         );
     }
 
@@ -55,8 +57,8 @@ class NewSwapMeetOfferForm extends Component {
         e.preventDefault();
         console.log('submitting swapmeet offer');
         try {
-            const { wantItemId, offerItemId, swapSiteId, dateTime, offerUser } = this.state;
-            await swapmeetService.addOffer({ wantItemId, offerItemId, swapSiteId, dateTime, offerUser });
+            const { wantItemId, offerItemId, swapSiteId, dateTime, offerUser, wantItemUser } = this.state;
+            await swapmeetService.addOffer({ wantItemId, offerItemId, swapSiteId, dateTime, offerUser, wantItemUser});
             this.props.handleGetSwapmeets();
         } catch (error) {
             console.log(error);

@@ -56,6 +56,8 @@ class GoogleMap extends Component {
   initMap = async () => {
     await this.props.handleGetItems();
     await this.props.handleGetSites();
+    await this.props.handleGetSwapmeets();
+    
     let coords = {}
     this.props.lat? coords.lat = this.props.lat : coords.lat = 51.5074;
     this.props.lng? coords.lng = this.props.lng : coords.lng = 0.1278; 

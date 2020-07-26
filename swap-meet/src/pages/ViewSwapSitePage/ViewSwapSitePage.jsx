@@ -27,11 +27,11 @@ class ViewSwapSitePage extends Component {
                         <div className={styles.container}>
                             {this.props.items.map(({_id, name, description, itemType, swapPref, image}) => {
                                 return(
-                                    <div>
+                                    <div key={_id}>
                                     {this.props.showSite.items.map(item => {
                                         if(item === _id){
                                             return (
-                                                <div className={styles.item}>
+                                                <div key={_id} className={styles.item}>
                                                     <div className={styles.inner}>
                                                         <img src={image} alt={name}/>
                                                         <div className={styles.info}>

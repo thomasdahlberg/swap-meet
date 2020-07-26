@@ -34,8 +34,9 @@ class App extends Component {
       myItems: [],
       showItem: null,
       showSite: null,
-      mySwapmeets:null,
-      myOffers: [],
+      mySwapmeets: null,
+      // myOffers: [],
+      myOfferedMeets: null,
       swapmeets: null,
       mySwapmeetsData: null,
       items: [],
@@ -54,7 +55,6 @@ class App extends Component {
   //Data Handling Functions
 
   handleGetItems = async () => {
-    console.log('Get ITEMs!');
     const { items } = await inventoryService.index();
     this.setState({ items: items })
     if(userService.getUser()) {
@@ -72,13 +72,11 @@ class App extends Component {
       const { meets } = await swapmeetService.index();
       this.setState({ swapmeets: meets })
       this.handleGetMySwapmeets()
-      this.handleGetMySwapmeetsData();
     }
   }
 
   handleGetMyItems = () => {
     let myItems = [];
-    console.log('getmyitems')
     for(let i = 1; i < this.state.items.length; i++){
       if(this.state.items[i].currentOwner === this.state.user._id){
         myItems.push(this.state.items[i]);
@@ -92,13 +90,15 @@ class App extends Component {
     const wantItemId = e.target.id;
     this.state.items.forEach((item)=> {
       if(wantItemId === item._id){
-        this.setState({wantItem: item})
+        this.setState({
+          wantItem: item,
+          wantItemUser: item.currentOwner
+        })
       }
     })
   }
 
   handleGetMyOfferItem = async (e) => {
-    console.log('get my offer item');
     const offerItemId = e.target.value;
     this.state.myItems.forEach((item)=> {
       if(offerItemId === item._id){
@@ -109,40 +109,76 @@ class App extends Component {
 
   handleGetMySwapmeetsData = async (e) => {
     let myMeetsData = [];
-    this.state.mySwapmeets.forEach((element) => {
-      let sites = this.state.sites;
-      let items = this.state.items;
-      let swapmeet = {};
-      for(let i = 1; i < sites.length; i++) {
-        if(sites[i]._id === element.site) {
-          swapmeet.site = sites[i].siteName;
-          let dateTime = new Date(element.dateTime);
-          swapmeet.dateTime = dateTime.toUTCString();
+    if(this.state.mySwapmeets){
+      this.state.mySwapmeets.forEach((element) => {
+        let sites = this.state.sites;
+        let items = this.state.items;
+        let swapmeet = {};
+        for(let i = 0; i < sites.length; i++) {
+          if(sites[i]._id === element.site) {
+            swapmeet.site = sites[i].siteName;
+            let dateTime = new Date(element.dateTime);
+            swapmeet.dateTime = dateTime.toUTCString();
+          }
+       }
+        for(let i = 0; i < items.length; i++) {
+          if(items[i]._id === element.transaction.offerItem){
+            swapmeet.offerItem = items[i].name;
+          }
+          if(items[i]._id === element.transaction.wantItem){
+            swapmeet.wantItem = items[i].name;
+          }
         }
-      }
-      for(let i = 1; i < items.length; i++) {
-        if(items[i]._id === element.transaction.offerItem){
-          swapmeet.offerItem = items[i].name;
+        if(swapmeet.site) myMeetsData.push(swapmeet);
+      })
+      this.setState({ mySwapmeetsData: myMeetsData });
+    }
+    
+    let myOfferedMeetsData = [];
+    if(this.state.myOfferedMeets){
+      this.state.myOfferedMeets.forEach((element) => {
+        let sites = this.state.sites;
+        let items = this.state.items;
+        let swapmeet = {};
+        for(let i = 0; i < sites.length; i++) {
+          if(sites[i]._id === element.site) {
+            swapmeet.site = sites[i].siteName;
+            let dateTime = new Date(element.dateTime);
+            swapmeet.dateTime = dateTime.toUTCString();
+          }
         }
-        if(items[i]._id === element.transaction.wantItem){
-          swapmeet.wantItem = items[i].name;
+        for(let i = 0; i < items.length; i++) {
+          if(items[i]._id === element.transaction.offerItem){
+            swapmeet.offerItem = items[i].name;
+          }
+          if(items[i]._id === element.transaction.wantItem){
+            swapmeet.wantItem = items[i].name;
+          }
         }
-      }
-      if(swapmeet.site) myMeetsData.push(swapmeet);
-    })
-    this.setState({ mySwapmeetsData: myMeetsData });
+        if(swapmeet.site) myOfferedMeetsData.push(swapmeet);
+      })
+      this.setState({ myOfferedMeetsData: myOfferedMeetsData });
+    }
   }
 
   handleGetMySwapmeets = async (e) => {
     let myMeets = [];
-    console.log('get my swapmeets')
-    for(let i = 1; i < this.state.swapmeets.length; i++){
+    let myOfferedMeets = [];
+    for(let i = 0; i < this.state.swapmeets.length; i++){
       if(this.state.swapmeets[i].transaction.offerUser === this.state.user._id){
         myMeets.push(this.state.swapmeets[i]);
       }
+      if(this.state.swapmeets[i].transaction.wantItemUser === this.state.user._id){
+        myOfferedMeets.push(this.state.swapmeets[i]);
+      }
+      console.log('My Meets', myMeets);
+      console.log('My Offered Meets', myOfferedMeets);
     }
-    this.setState({ mySwapmeets: myMeets});
-
+    await this.setState({
+      mySwapmeets: myMeets,
+      myOfferedMeets: myOfferedMeets
+    });
+    this.handleGetMySwapmeetsData();
   }
   
   handleItemDelete = async (e) => {
@@ -159,7 +195,6 @@ class App extends Component {
 
   handleItemEditView = async (e) => {
     e.preventDefault();
-    console.log('Item Edit View');
     console.log(e.target.id);
     try {
       const { item } = await inventoryService.showOne(e.target.id);
@@ -171,8 +206,6 @@ class App extends Component {
 
   handleSwapSiteView = async (e) => {
     e.preventDefault();
-    console.log('Site View');
-    console.log(e.target.id);
     try {
       const { site }= await swapSiteService.showOne(e.target.id);
       this.setState({showSite: site});
@@ -223,6 +256,7 @@ class App extends Component {
             handleToggleMap={this.handleToggleMap}
             handleGetItems={this.handleGetItems}
             handleGetSites={this.handleGetSites}
+            handleGetSwapmeets={this.handleGetSwapmeets}
             mapKey={this.state.mapKey}
             mapActive={this.state.mapActive}
             items={this.state.items}
@@ -265,7 +299,7 @@ class App extends Component {
               items={this.state.items} 
               myItems={this.state.myItems}
               mySwapmeets={this.state.mySwapmeetsData}
-
+              myOfferedMeets={this.state.myOfferedMeetsData}
             />
               :
             <Redirect to='/login' />    
