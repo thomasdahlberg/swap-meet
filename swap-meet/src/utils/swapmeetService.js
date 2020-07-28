@@ -1,8 +1,8 @@
 import tokenService from './tokenService';
 const BASE_URL = '/api/swapmeets/';
 
-function showOne(swapMeet) {
-    return fetch(BASE_URL + swapMeet,  {
+function showOne(meet) {
+    return fetch(BASE_URL + meet, {
         method: 'GET',
         headers: new Headers({
             'Content-type': 'Application/json',

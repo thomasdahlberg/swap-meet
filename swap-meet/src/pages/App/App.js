@@ -37,7 +37,6 @@ class App extends Component {
       showSite: null,
       showMeet: null,
       mySwapmeets: null,
-      // myOffers: [],
       myOfferedMeets: null,
       swapmeets: null,
       mySwapmeetsData: null,
@@ -118,6 +117,7 @@ class App extends Component {
         let swapmeet = {};
         for(let i = 0; i < sites.length; i++) {
           if(sites[i]._id === element.site) {
+            swapmeet._id = element._id;
             swapmeet.site = sites[i].siteName;
             let dateTime = new Date(element.dateTime);
             swapmeet.dateTime = dateTime.toUTCString();
@@ -173,8 +173,6 @@ class App extends Component {
       if(this.state.swapmeets[i].transaction.wantItemUser === this.state.user._id){
         myOfferedMeets.push(this.state.swapmeets[i]);
       }
-      console.log('My Meets', myMeets);
-      console.log('My Offered Meets', myOfferedMeets);
     }
     await this.setState({
       mySwapmeets: myMeets,
@@ -218,6 +216,7 @@ class App extends Component {
 
   handleSwapMeetEditView = async (e) => {
     e.preventDefault();
+    console.log(e.target);
     try {
       const { meet } = await swapmeetService.showOne(e.target.id);
       this.setState({showMeet: meet});

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Swapmeets.module.css';
 import { Link, withRouter } from 'react-router-dom';
-// import inventoryService from '../../utils/inventoryService';
 
 
 
@@ -25,23 +24,23 @@ class Swapmeets extends Component {
                     this.props.mySwapmeets.map(({site, offerItem, wantItem, _id, dateTime, meetAccepted, counterOffer}) => (
                     <section key={_id} className={styles.meet}>
                         <h1 key={_id}>{dateTime} at {site}</h1>
-                        <div className={styles.info}>
-                            <p key={_id}><strong>Your Item:</strong> {offerItem}</p>
-                            <p key={_id}><strong>Their Item:</strong> {wantItem}</p>
+                        <div key={_id} className={styles.info}>
+                            <p key={_id}><strong key={_id}>Your Item:</strong> {offerItem}</p>
+                            <p key={_id}><strong key={_id}>Their Item:</strong> {wantItem}</p>
                         </div>
                         {meetAccepted ? 
-                            <h3><strong>Meet Accepted!</strong></h3>
+                            <h3 key={_id}><strong key={_id}>Meet Accepted!</strong></h3>
                             :
-                            <h3><em>Awaiting response</em></h3>
+                            <h3 key={_id}><em key={_id}>Awaiting response</em></h3>
                         }
-                        <Link to="" onClick={this.delayRedirect}><button onClick={this.props.handleSwapmeetEditView} id={_id}>Change Date/Time</button></Link>
+                        <Link to="" onClick={this.delayRedirect}><button key={_id} onClick={this.props.handleSwapMeetEditView} id={_id}>Change Date/Time</button></Link>
                         {counterOffer ? 
-                            <div>
-                                <button>Agree to Swap-Meet</button>
-                                <button>Decline Offer</button>
+                            <div key={_id}>
+                                <button key={_id}>Agree to Swap-Meet</button>
+                                <button key={_id}>Decline Offer</button>
                             </div>
                             :
-                            null
+                            <div key={_id} value={null}></div>
                         }
                     </section>
                     ))
@@ -52,14 +51,14 @@ class Swapmeets extends Component {
                     this.props.myOfferedMeets.map(({site, offerItem, wantItem, _id, dateTime, meetAccepted, counterOffer}) => (
                         <section key={_id} className={styles.meet}>
                             <h1 key={_id}>{dateTime} at {site}</h1>
-                            <div className={styles.info}>
-                                <p key={_id}><strong>Your Item:</strong> {wantItem}</p>
-                                <p key={_id}><strong>Their Item:</strong> {offerItem}</p>
+                            <div key={_id} className={styles.info}>
+                                <p key={_id}><strong key={_id}>Your Item:</strong> {wantItem}</p>
+                                <p key={_id}><strong key={_id}>Their Item:</strong> {offerItem}</p>
                             </div>
-                            <div>
-                                <button>Change Date/Time</button>
-                                <button>Agree to Swap-Meet</button>
-                                <button>Decline Offer</button>
+                            <div key={_id}>
+                                <button key={_id}>Change Date/Time</button>
+                                <button key={_id}>Agree to Swap-Meet</button>
+                                <button key={_id}>Decline Offer</button>
                             </div>
                         </section>
                     ))
