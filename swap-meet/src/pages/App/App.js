@@ -125,10 +125,10 @@ class App extends Component {
        }
         for(let i = 0; i < items.length; i++) {
           if(items[i]._id === element.transaction.offerItem){
-            swapmeet.offerItem = items[i].name;
+            swapmeet.offerItem = items[i];
           }
           if(items[i]._id === element.transaction.wantItem){
-            swapmeet.wantItem = items[i].name;
+            swapmeet.wantItem = items[i];
           }
         }
         if(swapmeet.site) myMeetsData.push(swapmeet);
@@ -151,10 +151,10 @@ class App extends Component {
         }
         for(let i = 0; i < items.length; i++) {
           if(items[i]._id === element.transaction.offerItem){
-            swapmeet.offerItem = items[i].name;
+            swapmeet.offerItem = items[i];
           }
           if(items[i]._id === element.transaction.wantItem){
-            swapmeet.wantItem = items[i].name;
+            swapmeet.wantItem = items[i];
           }
         }
         if(swapmeet.site) myOfferedMeetsData.push(swapmeet);
@@ -216,10 +216,13 @@ class App extends Component {
 
   handleSwapMeetEditView = async (e) => {
     e.preventDefault();
-    console.log(e.target);
+    console.log(e.target.id);
     try {
-      const { meet } = await swapmeetService.showOne(e.target.id);
-      this.setState({showMeet: meet});
+      // let meet  = await swapmeetService.showOne(e.target.id);
+      let mySwapmeets = this.state.mySwapmeetsData;
+      let myMeet = mySwapmeets.filter(swapmeet => swapmeet._id === e.target.id)
+      console.log(myMeet);
+      this.setState({showMeet: myMeet[0]});
     } catch (error) {
       console.log(error);
     }
@@ -335,15 +338,8 @@ class App extends Component {
           }/>
           <Route exact path='/swapmeets/edit' render={() =>
             userService.getUser() ?
-            <EditSwapMeetPage 
-              items={this.state.items} 
-              myItems={this.state.myItems}
-              showItem={this.state.showItem}
-              showSite={this.state.showSite}
-              wantItem={this.state.wantItem}
-              wantItemPlace={this.state.wantItemPlace}
-              wantItemUser={this.state.wantItemUser}
-              offerItem={this.state.offerItem}
+            <EditSwapMeetPage
+              showMeet={this.state.showMeet}
               handleGetSwapmeets={this.handleGetSwapmeets}
               handleGetMyOfferItem={this.handleGetMyOfferItem}
             />
