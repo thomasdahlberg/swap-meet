@@ -121,6 +121,8 @@ class App extends Component {
             swapmeet.site = sites[i].siteName;
             let dateTime = new Date(element.dateTime);
             swapmeet.dateTime = dateTime.toUTCString();
+            let dtData = element.dateTime;
+            swapmeet.dateTimeData = dtData.substring(0, dtData.length-1);
           }
        }
         for(let i = 0; i < items.length; i++) {
@@ -147,6 +149,7 @@ class App extends Component {
             swapmeet.site = sites[i].siteName;
             let dateTime = new Date(element.dateTime);
             swapmeet.dateTime = dateTime.toUTCString();
+            swapmeet.dateTimeData = element.dateTime;
           }
         }
         for(let i = 0; i < items.length; i++) {

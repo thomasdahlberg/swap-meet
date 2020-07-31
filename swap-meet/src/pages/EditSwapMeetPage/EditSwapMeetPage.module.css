@@ -1,14 +1,6 @@
-.h1Style {
+.h1 {
     font-family: 'Permanent Marker';
-    font-size: '4rem';
-};
-
-.containerStyle {
-    display: 'flex';
-    flex-wrap: 'wrap';
-    flex-direction: 'column';
-    justify-content: 'space-between';
-    align-items: 'center';
+    font-size: 4rem;
 };
 
 .outer {
@@ -29,6 +21,12 @@
     padding: 10px;
     margin-bottom: 2rem;
 }
+
+.spacer {
+    padding: 2rem;
+    font-weight: 500;
+}
+
 
 .noOffer {
     padding: 2rem;

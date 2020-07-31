@@ -1,19 +1,39 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link, withRouter } from 'react-router-dom';
 import styles from './EditSwapMeetPage.module.css';
 
 class EditSwapMeetPage extends Component {
     constructor(props){
         super(props)
-        this.state = {};
+        this.state = {
+            dateTime: null
+        };
+    }
+
+    delayRedirect = e => {
+        e.preventDefault();
+        setTimeout(()=> {
+            this.props.history.push('/swapmeets')
+            }, 1000)
     }
     
+    handleChange = e => {
+        this.setState({
+            dateTime: e.target.value
+        })
+    }
+
     render() {
         return(
             <div className={styles.outer}>
             {this.props.showMeet ?
-                <div>
-                    <h1 className={styles.h1Style}>Update Swap-Meet Time</h1>
+                <div className={styles.outer}>
+                    <h1 className={styles.h1}>Update Swap-Meet Time</h1>
+                    <div className={styles.container}>
+                        <h1>Meet at {this.props.showMeet.site} at:</h1>
+                        <input type="datetime-local" name="dateTime" id="dateTime" defaultValue={this.props.showMeet.dateTimeData} onChange={this.handleChange}/>
+                        <Link to="" onClick={this.delayRedirect}><button onClick={null}>Suggest New Date/Time</button></Link>
+                    </div>
                     <div className={styles.container}>
                         <div className={styles.item}>
                             <div className={styles.inner}>
@@ -26,7 +46,7 @@ class EditSwapMeetPage extends Component {
                                 </div>
                             </div>
                         </div>
-                        <h1>For</h1>
+                        <h1 className={styles.spacer}>For</h1>
                         <div className={styles.item}>
                             <div className={styles.inner}>
                                 <img src={this.props.showMeet.offerItem.image} alt={this.props.showMeet.offerItem.name}/>
@@ -48,4 +68,4 @@ class EditSwapMeetPage extends Component {
     }
 }
 
-export default EditSwapMeetPage;
+export default withRouter(EditSwapMeetPage);
