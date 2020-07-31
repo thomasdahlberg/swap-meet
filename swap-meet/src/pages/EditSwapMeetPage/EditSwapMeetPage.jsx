@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { Redirect, Link, withRouter } from 'react-router-dom';
 import styles from './EditSwapMeetPage.module.css';
+import swapmeetService from '../../utils/swapmeetService';
 
 class EditSwapMeetPage extends Component {
     constructor(props){
         super(props)
         this.state = {
-            dateTime: null
+            dateTime: null,
+            id: null
         };
+    }
+
+    isFormValid = () => {
+        return this.state.dateTime;
     }
 
     delayRedirect = e => {
@@ -19,8 +25,20 @@ class EditSwapMeetPage extends Component {
     
     handleChange = e => {
         this.setState({
-            dateTime: e.target.value
+            dateTime: e.target.value,
+            id: e.target.previousSibling.value
         })
+    }
+
+    handleSubmit = async e => {
+        e.preventDefault();
+        try {
+            const { id, dateTime } = this.state;
+            await swapmeetService.updateOne({ id, dateTime });
+            this.props.handleGetSwapmeets();
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
@@ -31,8 +49,9 @@ class EditSwapMeetPage extends Component {
                     <h1 className={styles.h1}>Update Swap-Meet Time</h1>
                     <div className={styles.container}>
                         <h1>Meet at {this.props.showMeet.site} at:</h1>
+                        <input type="hidden" name="id" id="id" value={this.props.showMeet._id}/>
                         <input type="datetime-local" name="dateTime" id="dateTime" defaultValue={this.props.showMeet.dateTimeData} onChange={this.handleChange}/>
-                        <Link to="" onClick={this.delayRedirect}><button onClick={null}>Suggest New Date/Time</button></Link>
+                        <Link to="" disabled={!this.isFormValid()} onClick={this.delayRedirect}><button onClick={this.handleSubmit} disabled={!this.isFormValid()}>Suggest New Time</button></Link>
                     </div>
                     <div className={styles.container}>
                         <div className={styles.item}>

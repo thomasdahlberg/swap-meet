@@ -1,11 +1,25 @@
 const SwapMeet = require('../models/swapMeet');
-const Item = require('../models/item');
 
 module.exports = {
+    updateOne,
     showOne,
     index,
     addOffer
 };
+
+async function updateOne(req, res) {
+    try {
+        SwapMeet.findByIdAndUpdate(req.body.id, {
+            dateTime: req.body.dateTime
+        }, function(error, meet){
+            console.log(meet);
+            res.status(200).json({ meet });
+            console.log(error);
+        });
+    } catch (error) {
+        res.status(400).json(error);
+    }
+}
 
 async function showOne(req, res) {
     try {

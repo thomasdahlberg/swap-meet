@@ -4,6 +4,7 @@ const swapMeetCtrl = require('../../controllers/swapMeets');
 router.use(require('../../config/auth'));
 router.get('/', checkAuth, swapMeetCtrl.index);
 router.get('/:id', checkAuth, swapMeetCtrl.showOne);
+router.put('/:id',checkAuth,swapMeetCtrl.updateOne);
 router.post('/new', checkAuth, swapMeetCtrl.addOffer);
 
 
