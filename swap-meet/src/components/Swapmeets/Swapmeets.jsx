@@ -23,21 +23,21 @@ class Swapmeets extends Component {
                 {this.props.mySwapmeets ? 
                     this.props.mySwapmeets.map(({site, offerItem, wantItem, _id, dateTime, meetAccepted, counterOffer},i) => (
                     <section key={i} className={styles.meet}>
-                        <h1 key={_id}>{dateTime} at {site}</h1>
-                        <div key={_id} className={styles.info}>
-                            <p key={_id}><strong key={_id}>Your Item:</strong> {offerItem.name}</p>
-                            <p key={i}><strong key={i}>Their Item:</strong> {wantItem.name}</p>
+                        <h1>{dateTime} at {site}</h1>
+                        <div className={styles.info}>
+                            <p><strong>Your Item:</strong> {offerItem.name}</p>
+                            <p><strong>Their Item:</strong> {wantItem.name}</p>
                         </div>
                         {meetAccepted ? 
-                            <h3 key={_id}><strong key={_id}>Meet Accepted!</strong></h3>
+                            <h3><strong>Meet Accepted!</strong></h3>
                             :
-                            <h3 key={i}><em key={i}>Awaiting response</em></h3>
+                            <h3><em >Awaiting response</em></h3>
                         }
-                        <Link to="" onClick={this.delayRedirect}><button key={_id} data="1" onClick={this.props.handleSwapMeetEditView} id={_id}>Change Date/Time</button></Link>
+                        <Link to="" onClick={this.delayRedirect}><button name="first" onClick={this.props.handleSwapMeetEditView} id={_id}>Change Date/Time</button></Link>
                         {counterOffer ? 
-                            <div key={i}>
-                                <button key={_id}>Agree to Swap-Meet</button>
-                                <button key={i}>Decline Offer</button>
+                            <div>
+                                <button>Agree to Swap-Meet</button>
+                                <button>Decline Offer</button>
                             </div>
                             :
                             null
@@ -50,15 +50,15 @@ class Swapmeets extends Component {
                 {this.props.myOfferedMeets ?
                     this.props.myOfferedMeets.map(({site, offerItem, wantItem, _id, dateTime, meetAccepted, counterOffer},i) => (
                         <section key={i} className={styles.meet}>
-                            <h1 key={_id}>{dateTime} at {site}</h1>
-                            <div key={_id} className={styles.info}>
-                                <p key={_id}><strong key={_id}>Your Item:</strong> {wantItem.name}</p>
-                                <p key={i}><strong key={i}>Their Item:</strong> {offerItem.name}</p>
+                            <h1>{dateTime} at {site}</h1>
+                            <div className={styles.info}>
+                                <p><strong>Your Item:</strong> {wantItem.name}</p>
+                                <p><strong>Their Item:</strong> {offerItem.name}</p>
                             </div>
-                            <div key={i}>
-                                <button key={_id}>Change Date/Time</button>
-                                <button key={i}>Agree to Swap-Meet</button>
-                                <button key={i+_id}>Decline Offer</button>
+                            <div>
+                            <Link to="" onClick={this.delayRedirect}><button id={_id} onClick={this.props.handleSwapMeetEditView}>Change Date/Time</button></Link>
+                                <button>Agree to Swap-Meet</button>
+                                <button>Decline Offer</button>
                             </div>
                         </section>
                     ))

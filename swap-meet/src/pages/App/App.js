@@ -146,6 +146,7 @@ class App extends Component {
         let swapmeet = {};
         for(let i = 0; i < sites.length; i++) {
           if(sites[i]._id === element.site) {
+            swapmeet._id = element._id;
             swapmeet.site = sites[i].siteName;
             let dateTime = new Date(element.dateTime);
             swapmeet.dateTime = dateTime.toUTCString();
@@ -219,13 +220,18 @@ class App extends Component {
 
   handleSwapMeetEditView = async (e) => {
     e.preventDefault();
-    console.log(e.target.id);
     try {
-      // let meet  = await swapmeetService.showOne(e.target.id);
+      let myMeet;
       let mySwapmeets = this.state.mySwapmeetsData;
-      let myMeet = mySwapmeets.filter(swapmeet => swapmeet._id === e.target.id)
-      console.log(myMeet);
-      this.setState({showMeet: myMeet[0]});
+      let myOfferedMeets = this.state.myOfferedMeetsData;
+      if(e.target.name){
+        myMeet = mySwapmeets.filter(swapmeet => swapmeet._id === e.target.id);
+        console.log(myMeet);
+        this.setState({showMeet: myMeet[0]});
+      } else {
+        myMeet = myOfferedMeets.filter(swapmeet => swapmeet._id === e.target.id);
+        this.setState({showMeet: myMeet[0]});
+      }
     } catch (error) {
       console.log(error);
     }
