@@ -2,13 +2,14 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/swapmeets/';
 
 function updateOne(swapMeet) {
+    let swapmeetData = {name: swapMeet.name};
     return fetch(BASE_URL + swapMeet.id, {
         method: 'PUT',
         headers: new Headers({
             'Content-type': 'Application/json',
             'Authorization': 'Bearer ' + tokenService.getToken()
         }),
-        body: JSON.stringify(swapMeet)
+        body: JSON.stringify(swapmeetData)
     })
     .then(response => {
         if(response.ok) {

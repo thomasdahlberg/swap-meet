@@ -9,13 +9,23 @@ module.exports = {
 
 async function updateOne(req, res) {
     try {
-        SwapMeet.findByIdAndUpdate(req.body.id, {
-            dateTime: req.body.dateTime
-        }, function(error, meet){
-            console.log(meet);
-            res.status(200).json({ meet });
-            console.log(error);
-        });
+        if(req.body.name === "agree"){
+            SwapMeet.findByIdAndUpdate(req.params.id, {
+                meetAccepted: true
+            }, function(error, meet){
+                console.log(meet);
+                res.status(200).json({ meet });
+                console.log(error);
+            });
+        } else {
+            SwapMeet.findByIdAndUpdate(req.params.id, {
+                active: false
+            }, function(error, meet){
+                console.log(meet);
+                res.status(200).json({ meet });
+                console.log(error);
+            });
+        }
     } catch (error) {
         res.status(400).json(error);
     }

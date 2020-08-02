@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Swapmeets.module.css';
 import { Link, withRouter } from 'react-router-dom';
+import swapmeetService from '../../utils/swapmeetService';
 
 
 
@@ -16,6 +17,14 @@ class Swapmeets extends Component {
             this.props.history.push('/swapmeets/edit')
             }, 1000)
     }
+
+    handleSwapmeetDecision = async (e) => {
+        try {
+          swapmeetService.updateOne(e.target);
+        } catch (error) {
+          console.log(error);
+        }
+    }    
 
     render() {
         return (
@@ -57,8 +66,8 @@ class Swapmeets extends Component {
                             </div>
                             <div>
                             <Link to="" onClick={this.delayRedirect}><button id={_id} onClick={this.props.handleSwapMeetEditView}>Change Date/Time</button></Link>
-                                <button>Agree to Swap-Meet</button>
-                                <button>Decline Offer</button>
+                                <button id={_id} name="agree" onClick={this.handleSwapmeetDecision} >Agree to Swap-Meet</button>
+                                <button id={_id} name="decline" onClick={this.handleSwapmeetDecision} >Decline Offer</button>
                             </div>
                         </section>
                     ))
