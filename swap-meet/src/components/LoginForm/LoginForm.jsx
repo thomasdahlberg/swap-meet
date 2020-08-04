@@ -45,8 +45,7 @@ class LoginForm extends Component {
     render() {
         return(
             <form className={styles.form}>
-                <fieldset>
-                    <legend>Login Form</legend>
+                    <h1>Log in</h1>
                     <label htmlFor="email">Email</label>
                     <input 
                         id="email" 
@@ -66,7 +65,6 @@ class LoginForm extends Component {
                     />
 
                     <button onClick={this.handleSubmit} disabled={!this.isFormValid()} type="submit">Log In</button>
-                </fieldset>
             </form>
         );
     }

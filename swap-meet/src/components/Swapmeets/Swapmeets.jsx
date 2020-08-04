@@ -55,7 +55,7 @@ class Swapmeets extends Component {
                     </section>
                     ))
                     :
-                    <div>no swapmeets</div>
+                    null
                 }
                 {this.props.myOfferedMeets ?
                     this.props.myOfferedMeets.map(({site, offerItem, wantItem, _id, dateTime, meetAccepted, counterOffer},i) => (
@@ -87,7 +87,7 @@ class Swapmeets extends Component {
                         </section>
                     ))
                     :
-                    <div>no offered swapmeets</div>
+                    null
                 }
             </main>
         )
