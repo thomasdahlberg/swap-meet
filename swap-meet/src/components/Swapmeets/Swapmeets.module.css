@@ -18,3 +18,7 @@
     max-height: 10rem;
     width: 28rem;
 }
+
+.cancel {
+    background-color: #ff8589;
+}

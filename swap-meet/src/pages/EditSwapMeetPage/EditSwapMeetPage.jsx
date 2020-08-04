@@ -7,6 +7,7 @@ class EditSwapMeetPage extends Component {
     constructor(props){
         super(props)
         this.state = {
+            showMeetOffer: null,
             dateTime: null,
             id: null
         };
@@ -26,15 +27,16 @@ class EditSwapMeetPage extends Component {
     handleChange = e => {
         this.setState({
             dateTime: e.target.value,
-            id: e.target.previousSibling.value
+            id: e.target.previousSibling.value,
+            showMeetOffer: e.target.previousSibling.previousSibling.value
         })
     }
 
     handleSubmit = async e => {
         e.preventDefault();
         try {
-            const { id, dateTime } = this.state;
-            await swapmeetService.updateOne({ id, dateTime });
+            const { id, dateTime, showMeetOffer } = this.state;
+            await swapmeetService.updateOne({ id, dateTime, showMeetOffer });
             this.props.handleGetSwapmeets();
         } catch (error) {
             console.log(error);
@@ -49,6 +51,7 @@ class EditSwapMeetPage extends Component {
                     <h1 className={styles.h1}>Update Swap-Meet Time</h1>
                     <div className={styles.container}>
                         <h1>Meet at {this.props.showMeet.site} at:</h1>
+                        <input type="hidden" name="showMeetOffer" value={this.props.showMeetOffer}/>
                         <input type="hidden" name="id" id="id" value={this.props.showMeet._id}/>
                         <input type="datetime-local" name="dateTime" id="dateTime" defaultValue={this.props.showMeet.dateTimeData} onChange={this.handleChange}/>
                         <Link to="" disabled={!this.isFormValid()} onClick={this.delayRedirect}><button onClick={this.handleSubmit} disabled={!this.isFormValid()}>Suggest New Time</button></Link>

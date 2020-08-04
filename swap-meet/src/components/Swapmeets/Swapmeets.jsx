@@ -37,19 +37,22 @@ class Swapmeets extends Component {
                             <p><strong>Your Item:</strong> {offerItem.name}</p>
                             <p><strong>Their Item:</strong> {wantItem.name}</p>
                         </div>
-                        {meetAccepted ? 
-                            <h3><strong>Meet Accepted!</strong></h3>
-                            :
-                            <h3><em >Awaiting response</em></h3>
-                        }
-                        <Link to="" onClick={this.delayRedirect}><button name="first" onClick={this.props.handleSwapMeetEditView} id={_id}>Change Date/Time</button></Link>
-                        {counterOffer ? 
+                        {meetAccepted && counterOffer ? 
                             <div>
-                                <button>Agree to Swap-Meet</button>
-                                <button>Decline Offer</button>
+                                <h3><strong>Updated Time for Swapmeet</strong></h3>
+                                <button id={_id} name="agree" onClick={this.handleSwapmeetDecision} >Agree to Swap-Meet</button>
+                                <button id={_id} name="decline" onClick={this.handleSwapmeetDecision} >Decline Offer</button>
                             </div>
                             :
                             null
+                            }
+                        {meetAccepted && !counterOffer ? 
+                            <div>
+                                <h3><strong>Meet Accepted</strong></h3>
+                                <button className={styles.cancel} id={_id} name="cancel" onClick={this.handleSwapmeetDecision}>Cancel Swapmeet</button>
+                            </div>
+                            :
+                            <h3><strong>Awaiting Response</strong></h3>
                         }
                     </section>
                     ))
@@ -65,9 +68,18 @@ class Swapmeets extends Component {
                                 <p><strong>Their Item:</strong> {offerItem.name}</p>
                             </div>
                             <div>
-                            <Link to="" onClick={this.delayRedirect}><button id={_id} onClick={this.props.handleSwapMeetEditView}>Change Date/Time</button></Link>
-                                <button id={_id} name="agree" onClick={this.handleSwapmeetDecision} >Agree to Swap-Meet</button>
-                                <button id={_id} name="decline" onClick={this.handleSwapmeetDecision} >Decline Offer</button>
+                            {meetAccepted ? 
+                                <div>
+                                    <h3><strong>Meet Accepted!</strong></h3>
+                                    <button className={styles.cancel} id={_id} name="cancel" onClick={this.handleSwapmeetDecision}>Cancel Swapmeet</button>
+                                </div>
+                                :
+                                <div>
+                                    <Link to="" onClick={this.delayRedirect}><button id={_id} name="counter-offer" onClick={this.props.handleSwapMeetEditView}>Change Date/Time</button></Link>
+                                    <button id={_id} name="agree" onClick={this.handleSwapmeetDecision} >Agree to Swap-Meet</button>
+                                    <button id={_id} name="decline" onClick={this.handleSwapmeetDecision} >Decline Offer</button>
+                                </div>
+                            }
                             </div>
                         </section>
                     ))

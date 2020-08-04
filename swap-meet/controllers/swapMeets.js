@@ -17,6 +17,17 @@ async function updateOne(req, res) {
                 res.status(200).json({ meet });
                 console.log(error);
             });
+        } 
+        else if(req.body.dateTime){
+            SwapMeet.findByIdAndUpdate(req.params.id, {
+                dateTime: req.body.dateTime,
+                counterOffer: true,
+                meetAccepted: true
+            }, function(error, meet){
+                console.log(meet);
+                res.status(200).json({ meet });
+                console.log(error);
+            });
         } else {
             SwapMeet.findByIdAndUpdate(req.params.id, {
                 active: false
@@ -69,7 +80,7 @@ async function addOffer(req, res) {
 
 async function index(req, res) {
     try {
-        await SwapMeet.find({},function(err, meets){
+        await SwapMeet.find({active: true},function(err, meets){
             res.status(200).json({ meets });
         });
     } catch (error) {

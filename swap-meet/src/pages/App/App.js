@@ -36,6 +36,7 @@ class App extends Component {
       showItem: null,
       showSite: null,
       showMeet: null,
+      showMeetOffer: false,
       mySwapmeets: null,
       myOfferedMeets: null,
       swapmeets: null,
@@ -123,6 +124,7 @@ class App extends Component {
             swapmeet.dateTime = dateTime.toUTCString();
             let dtData = element.dateTime;
             swapmeet.dateTimeData = dtData.substring(0, dtData.length-1);
+            swapmeet.meetAccepted = element.meetAccepted;
           }
        }
         for(let i = 0; i < items.length; i++) {
@@ -150,7 +152,8 @@ class App extends Component {
             swapmeet.site = sites[i].siteName;
             let dateTime = new Date(element.dateTime);
             swapmeet.dateTime = dateTime.toUTCString();
-            swapmeet.dateTimeData = element.dateTime;
+            let dtData = element.dateTime;
+            swapmeet.dateTimeData = dtData.substring(0, dtData.length-1);            swapmeet.meetAccepted = element.meetAccepted;
           }
         }
         for(let i = 0; i < items.length; i++) {
@@ -224,13 +227,20 @@ class App extends Component {
       let myMeet;
       let mySwapmeets = this.state.mySwapmeetsData;
       let myOfferedMeets = this.state.myOfferedMeetsData;
-      if(e.target.name){
+      console.log(e.target.id);
+      if(e.target.name === ""){
         myMeet = mySwapmeets.filter(swapmeet => swapmeet._id === e.target.id);
         console.log(myMeet);
-        this.setState({showMeet: myMeet[0]});
+        this.setState({
+          showMeet: myMeet[0],
+          showMeetOffer: false,
+        });
       } else {
         myMeet = myOfferedMeets.filter(swapmeet => swapmeet._id === e.target.id);
-        this.setState({showMeet: myMeet[0]});
+        this.setState({
+          showMeet: myMeet[0],
+          showMeetOffer: true,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -349,6 +359,7 @@ class App extends Component {
             userService.getUser() ?
             <EditSwapMeetPage
               showMeet={this.state.showMeet}
+              showMeetOffer={this.state.showMeetOffer}
               handleGetSwapmeets={this.handleGetSwapmeets}
               handleGetMyOfferItem={this.handleGetMyOfferItem}
             />
