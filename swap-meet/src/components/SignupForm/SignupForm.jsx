@@ -47,9 +47,8 @@ class SignupForm extends Component {
     render() {
         return(
         <form className={styles.form} onSubmit={this.handleSubmit}>
-            <fieldset>
-                <legend>Sign Up Form</legend>
-                <label htmlFor="name">Name</label>
+                <h1>Sign Up for Swap-Meet!</h1>
+                <label htmlFor="name">Full Name</label>
                 <input 
                     id="name" 
                     name="name" 
@@ -86,7 +85,6 @@ class SignupForm extends Component {
                 />
                 
                 <button disabled={!this.isFormValid()} type="submit">Submit</button>
-            </fieldset>
         </form>
         );
     }
