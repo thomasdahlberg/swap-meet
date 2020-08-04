@@ -125,6 +125,7 @@ class App extends Component {
             let dtData = element.dateTime;
             swapmeet.dateTimeData = dtData.substring(0, dtData.length-1);
             swapmeet.meetAccepted = element.meetAccepted;
+            swapmeet.counterOffer = element.counterOffer;
           }
        }
         for(let i = 0; i < items.length; i++) {
@@ -153,7 +154,9 @@ class App extends Component {
             let dateTime = new Date(element.dateTime);
             swapmeet.dateTime = dateTime.toUTCString();
             let dtData = element.dateTime;
-            swapmeet.dateTimeData = dtData.substring(0, dtData.length-1);            swapmeet.meetAccepted = element.meetAccepted;
+            swapmeet.dateTimeData = dtData.substring(0, dtData.length-1);
+            swapmeet.meetAccepted = element.meetAccepted;
+            swapmeet.counterOffer = element.counterOffer;
           }
         }
         for(let i = 0; i < items.length; i++) {

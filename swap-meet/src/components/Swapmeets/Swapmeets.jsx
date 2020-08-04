@@ -37,18 +37,16 @@ class Swapmeets extends Component {
                             <p><strong>Your Item:</strong> {offerItem.name}</p>
                             <p><strong>Their Item:</strong> {wantItem.name}</p>
                         </div>
-                        {meetAccepted && counterOffer ? 
+                        {counterOffer && !meetAccepted ? 
                             <div>
                                 <h3><strong>Updated Time for Swapmeet</strong></h3>
                                 <button id={_id} name="agree" onClick={this.handleSwapmeetDecision} >Agree to Swap-Meet</button>
                                 <button id={_id} name="decline" onClick={this.handleSwapmeetDecision} >Decline Offer</button>
                             </div>
                             :
-                            null
-                            }
-                        {meetAccepted && !counterOffer ? 
+                            meetAccepted ? 
                             <div>
-                                <h3><strong>Meet Accepted</strong></h3>
+                                <h3><strong>Meet Accepted!</strong></h3>
                                 <button className={styles.cancel} id={_id} name="cancel" onClick={this.handleSwapmeetDecision}>Cancel Swapmeet</button>
                             </div>
                             :
@@ -72,6 +70,11 @@ class Swapmeets extends Component {
                                 <div>
                                     <h3><strong>Meet Accepted!</strong></h3>
                                     <button className={styles.cancel} id={_id} name="cancel" onClick={this.handleSwapmeetDecision}>Cancel Swapmeet</button>
+                                </div>
+                                :
+                                counterOffer ?
+                                <div>
+                                    <h3><strong>Awaiting Response</strong></h3>
                                 </div>
                                 :
                                 <div>

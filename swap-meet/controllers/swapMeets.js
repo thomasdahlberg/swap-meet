@@ -22,7 +22,6 @@ async function updateOne(req, res) {
             SwapMeet.findByIdAndUpdate(req.params.id, {
                 dateTime: req.body.dateTime,
                 counterOffer: true,
-                meetAccepted: true
             }, function(error, meet){
                 console.log(meet);
                 res.status(200).json({ meet });
