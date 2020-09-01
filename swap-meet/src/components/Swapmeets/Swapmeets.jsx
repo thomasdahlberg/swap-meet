@@ -3,8 +3,6 @@ import styles from './Swapmeets.module.css';
 import { Link, withRouter } from 'react-router-dom';
 import swapmeetService from '../../utils/swapmeetService';
 
-
-
 class Swapmeets extends Component {
     constructor(props) {
         super(props) 
