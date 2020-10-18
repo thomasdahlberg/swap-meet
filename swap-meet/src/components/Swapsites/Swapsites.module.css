@@ -31,10 +31,14 @@
 .title h1 {
     text-decoration: none;
     cursor: pointer;
+    padding: .5rem;
+    border-radius: 10px;
 }
 
 .title a {
     text-decoration: none;
+    color: black;
+    padding: .5rem;
 }
 
 .title h1:hover {
@@ -65,7 +69,6 @@
     font-weight: 900;
     padding: 1rem;
     margin-right: 1rem;
-    /* box-shadow: 1px 1px 5px 1px gray; */
     border-radius: 10px;
     border: none;
     font-family: 'Open Sans', serif;
