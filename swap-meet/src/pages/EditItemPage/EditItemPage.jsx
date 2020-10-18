@@ -101,7 +101,6 @@ class EditItemPage extends Component {
         data.append('swapPref', this.state.swapPref);
         try {
             inventoryService.updateItem(data);
-            console.log('got the items?');
             this.delayedHandleGetItems();
             this.setState({
                 user: userService.getUser(),
