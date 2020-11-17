@@ -5,6 +5,7 @@ const s3 = new AWS.S3({apiVersion: '2006-03-01'});
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const BUCKET = 'swap-meet';
+  
 
 let storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -102,7 +103,6 @@ async function showOne(req, res) {
 
     
 async function addItem(req, res) {
-    // console.log(req);
     let uploadParams = {Bucket: BUCKET, Key: '', Body: ''};
     let url;
     upload(req, res, function(err) {
