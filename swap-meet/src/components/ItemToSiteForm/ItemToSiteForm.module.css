@@ -1,0 +1,29 @@
+.container {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f2f5de;
+  border: black solid 1px;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.button {
+  background-color: #86e7b8;
+  font-weight: 900;
+  padding: 1rem;
+  box-shadow: 1px 1px 5px 1px gray;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  margin-left: 2rem;
+}
+
+.select {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}

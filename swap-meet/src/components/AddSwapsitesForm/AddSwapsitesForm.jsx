@@ -20,8 +20,6 @@ class AddSwapsitesForm extends Component {
     };
   }
 
-  formRef = React.createRef();
-  buttonRef = React.createRef();
   googleRef = React.createRef();
   siteNameRef = React.createRef();
   siteAddressRef = React.createRef();
@@ -122,23 +120,6 @@ class AddSwapsitesForm extends Component {
     siteLngNode.value = e.coordinates.lng;
   }
   
-  addSiteFormToggle = async e => {
-    const formNode = this.formRef.current;
-    const buttonNode = this.buttonRef.current;
-
-    if(buttonNode.innerText === 'Cancel'){
-        formNode.style.opacity = 0;
-        formNode.style.height = '0px';
-        buttonNode.style.backgroundColor = '#86e7b8';
-        buttonNode.innerText = 'Create New Swap-Site';
-    } else {
-        formNode.style.opacity = 1;
-        formNode.style.height = '50rem';
-        buttonNode.style.backgroundColor = '#ff8589';
-        buttonNode.innerText = 'Cancel';    
-    }
-  }
-
   delayedHandleGetSites = () => {
     setTimeout(this.props.handleGetSites, 3000);
   }
@@ -146,70 +127,64 @@ class AddSwapsitesForm extends Component {
 
     render() {
       return (
-        <div className={styles.addsite}>
-          <button ref={this.buttonRef} className={styles.button} onClick={this.addSiteFormToggle}>Create New Swap-Site</button>
-          <div className={styles.container}>
-          <form
-            ref={this.formRef}
-            className={styles.form}
-            onSubmit={this.handleSubmit}
-          >
-            <GoogleComponent
-              ref={this.googleRef}
-              apiKey={this.state.mapKey}
-              language={'en'}
-              country={'country:us'}
-              coordinates={true}
-              placeholder={'Start typing location'}
-              locationBoxStyle={'custom-style'}
-              locationListStyle={'custom-style-list'}
-              onChange={(e) => {this.handlePlacesData(e)}} 
+        <form
+          ref={this.formRef}
+          className={styles.form}
+          onSubmit={this.handleSubmit}
+        >
+          <GoogleComponent
+            ref={this.googleRef}
+            apiKey={this.state.mapKey}
+            language={'en'}
+            country={'country:us'}
+            coordinates={true}
+            placeholder={'Start typing location'}
+            locationBoxStyle={'custom-style'}
+            locationListStyle={'custom-style-list'}
+            onChange={(e) => {this.handlePlacesData(e)}} 
+          />
+            <label htmlFor="siteName">Swap-Site Name:</label>
+            <input
+              ref={this.siteNameRef} 
+              type="text" 
+              name="siteName"
+              onChange={this.handleChange}
             />
-              <label htmlFor="siteName">Swap-Site Name:</label>
-              <input
-                ref={this.siteNameRef} 
-                type="text" 
-                name="siteName"
-                onChange={this.handleChange}
-              />
-              <label htmlFor="address">Address:</label>
-              <input
-                ref={this.siteAddressRef}
-                name="address" 
-                id="address" 
-                onChange={this.handleChange}  
-              />
-              <label htmlFor="city">City:</label>
-              <input
-                ref={this.siteCityRef}
-                name="city" 
-                id="city" 
-                onChange={this.handleChange}  
-              />
-              <label htmlFor="usState">State:</label>
-              <input
-                ref={this.siteStateRef}
-                name="usState" 
-                id="usState" 
-                onChange={this.handleChange}  
-              />
-              <input
-                ref={this.siteLatRef}
-                name="latitude"
-                type="text"
-                onChange={this.handleChange}
-              />
-              <input 
-                ref={this.siteLngRef}
-                name="longitude"
-                type="text"
-                onChange={this.handleChange}  
-              />
-              <button type="submit" onClick={this.delayedHandleGetSites}>Add New Swap-Site</button>
-          </form>
-        </div>
-      </div>
-  
+            <label htmlFor="address">Address:</label>
+            <input
+              ref={this.siteAddressRef}
+              name="address" 
+              id="address" 
+              onChange={this.handleChange}  
+            />
+            <label htmlFor="city">City:</label>
+            <input
+              ref={this.siteCityRef}
+              name="city" 
+              id="city" 
+              onChange={this.handleChange}  
+            />
+            <label htmlFor="usState">State:</label>
+            <input
+              ref={this.siteStateRef}
+              name="usState" 
+              id="usState" 
+              onChange={this.handleChange}  
+            />
+            <input
+              ref={this.siteLatRef}
+              name="latitude"
+              type="text"
+              onChange={this.handleChange}
+            />
+            <input 
+              ref={this.siteLngRef}
+              name="longitude"
+              type="text"
+              onChange={this.handleChange}  
+            />
+            <button type="submit" onClick={this.delayedHandleGetSites}>Add New Swap-Site</button>
+        </form>
       )
     } 
   }

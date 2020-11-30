@@ -1,24 +1,16 @@
 import React, { Component } from 'react';
 import Inventory from '../../components/Inventory/Inventory'
 import NewInventoryItem from '../../components/NewInventoryItem/NewInventoryItem';
+import styles from './InventoryPage.module.css';
 
 class InventoryPage extends Component {
-    constructor(props){
-        super(props)
-        this.state = {};
+    
+    delayRedirect = e => {
+        e.preventDefault();
+        setTimeout(()=> {
+            this.props.history.push('/inventory/edit')
+        }, 1000)
     }
-    h1Style = {
-        fontFamily: 'Permanent Marker',
-        fontSize: '4rem'
-    };
-
-    containerStyle = {
-        display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    };
 
     componentDidMount(){
         this.props.handleGetItems();
@@ -26,16 +18,32 @@ class InventoryPage extends Component {
     
     render(){
         return(
-            <div style={this.containerStyle}>
-                {this.props.myItems.length === 0? <h1 style={this.h1Style}>No Swap-Items in Inventory</h1> : <h1 style={this.h1Style}>My Swap-Items</h1>}
-                <NewInventoryItem handleGetItems={this.props.handleGetItems}/>
+            <div className={styles.container}>
+                { this.props.myItems.length === 0 ? 
+                    <h1 className={styles.header}>No Swap-Items in Inventory</h1>
+                    : <h1 className={styles.header}>My Swap-Items</h1>
+                }
+                { this.props.addItemForm ? 
+                    <NewInventoryItem 
+                        handleGetItems={this.props.handleGetItems}
+                        handleAddItemFormToggle={this.props.handleAddItemFormToggle}
+                    />
+                    :
+                    <button 
+                        className={styles.button} 
+                        onClick={this.props.handleAddItemFormToggle}
+                    >
+                        Add an Item
+                    </button>
+                }
                 <Inventory 
                     items={this.props.items}
                     myItems={this.props.myItems}
                     handleGetItems={this.props.handleGetItems}
                     handleItemEditView={this.props.handleItemEditView}
                     handleItemDelete={this.props.handleItemDelete}
-                    />
+                    delayRedirect={this.delayRedirect}
+                />
             </div>
         )
     }

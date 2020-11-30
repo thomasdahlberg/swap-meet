@@ -14,8 +14,7 @@ import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 
 // Components
-import Navbar from '../../components/Navbar/Navbar';
-import Footer from '../../components/Footer/Footer';
+import Layout from '../../components/Layout/Layout';
 import GoogleMap from '../../components/Map/Map';
 
 // Services
@@ -51,6 +50,8 @@ class App extends Component {
       wantItems: null,
       offerItem: null,
       mapActive: false,
+      addItemForm: false,
+      addSiteForm: false,
     };
   }
   
@@ -266,6 +267,18 @@ class App extends Component {
     }
   }
 
+  handleAddItemFormToggle = () => {
+    this.state.addItemForm ?
+      this.setState({ addItemForm: false })
+      : this.setState({ addItemForm: true });
+  }
+
+  handleAddSiteFormToggle = () => {
+    this.state.addSiteForm ?
+      this.setState({ addSiteForm: false })
+      : this.setState({ addSiteForm: true });
+  }
+
 
 //Log In and Log Out Functions
 
@@ -283,134 +296,136 @@ class App extends Component {
 
   render(){
     return(
-      <div className="App-outer-container">
-        <Navbar user={this.state.user} handleLogout={this.handleLogout} handleGetItems={this.handleGetItems}/>
-        <div className="App-inner-container">
+      <Layout
+        user={this.state.user}
+        handleLogout={this.handleLogout}
+        handleGetItems={this.handleGetItems}
+      >
         <Switch>
           <Route exact path='/' render={() =>
-          <GoogleMap
-            handleToggleMap={this.handleToggleMap}
-            handleGetItems={this.handleGetItems}
-            handleGetSites={this.handleGetSites}
-            handleGetSwapmeets={this.handleGetSwapmeets}
-            mapKey={this.state.mapKey}
-            mapActive={this.state.mapActive}
-            items={this.state.items}
-            sites={this.state.sites}
-            lat={this.state.lat}
-            lng={this.state.lng}
-          />
+            <GoogleMap
+              handleToggleMap={this.handleToggleMap}
+              handleGetItems={this.handleGetItems}
+              handleGetSites={this.handleGetSites}
+              handleGetSwapmeets={this.handleGetSwapmeets}
+              mapKey={this.state.mapKey}
+              mapActive={this.state.mapActive}
+              items={this.state.items}
+              sites={this.state.sites}
+              lat={this.state.lat}
+              lng={this.state.lng}
+            />
           }/>
           <Route exact path='/inventory' render={() =>
             userService.getUser() ?
-            <InventoryPage
-            myItems={this.state.myItems.reverse()}
-            handleGetItems={this.handleGetItems} 
-            items={this.state.items}
-            handleItemEditView={this.handleItemEditView}
-            handleItemDelete={this.handleItemDelete}
-            />
-              :
-            <Redirect to='/login' />
+              <InventoryPage
+                myItems={this.state.myItems.reverse()}
+                handleGetItems={this.handleGetItems} 
+                items={this.state.items}
+                handleItemEditView={this.handleItemEditView}
+                handleItemDelete={this.handleItemDelete}
+                handleAddItemFormToggle={this.handleAddItemFormToggle}
+                addItemForm={this.state.addItemForm}
+              />
+              : <Redirect to='/login' />
           }/>
           <Route exact path='/inventory/edit' render={() =>
             userService.getUser() ?
-            <EditItemPage
-            showItem={this.state.showItem}
-            myItems={this.state.myItems.reverse()}
-            handleGetItems={this.handleGetItems} 
-            items={this.state.items}
-            handleItemEditView={this.handleItemEditView}
-            handleItemDelete={this.handleItemDelete}
-            />
-              :
-            <Redirect to='/login' />
+              <EditItemPage
+              showItem={this.state.showItem}
+              myItems={this.state.myItems.reverse()}
+              handleGetItems={this.handleGetItems} 
+              items={this.state.items}
+              handleItemEditView={this.handleItemEditView}
+              handleItemDelete={this.handleItemDelete}
+              />
+              : <Redirect to='/login' />
           }/>
           <Route exact path='/swapmeets' render={() =>
             userService.getUser() ?
-            <SwapmeetsPage
-              handleGetSites={this.handleGetSites}
-              handleGetItems={this.handleGetMyItems}
-              handleSwapMeetEditView={this.handleSwapMeetEditView}
-              sites={this.state.sites} 
-              items={this.state.items} 
-              myItems={this.state.myItems}
-              mySwapmeets={this.state.mySwapmeetsData}
-              myOfferedMeets={this.state.myOfferedMeetsData}
-            />
-              :
-            <Redirect to='/login' />    
+              <SwapmeetsPage
+                handleAddSiteFormToggle={this.handleAddSiteFormToggle}
+                handleGetSites={this.handleGetSites}
+                handleGetItems={this.handleGetMyItems}
+                handleSwapMeetEditView={this.handleSwapMeetEditView}
+                addSiteForm={this.state.addSiteForm}
+                sites={this.state.sites} 
+                items={this.state.items} 
+                myItems={this.state.myItems}
+                mySwapmeets={this.state.mySwapmeetsData}
+                myOfferedMeets={this.state.myOfferedMeetsData}
+              />
+              : <Redirect to='/login' />    
           }/>
           <Route exact path='/swapmeets/new' render={() =>
             userService.getUser() ?
-            <NewSwapmeetsPage 
-              items={this.state.items} 
-              myItems={this.state.myItems}
-              showItem={this.state.showItem}
-              showSite={this.state.showSite}
-              wantItem={this.state.wantItem}
-              wantItemPlace={this.state.wantItemPlace}
-              wantItemUser={this.state.wantItemUser}
-              offerItem={this.state.offerItem}
-              handleGetSwapmeets={this.handleGetSwapmeets}
-              handleGetMyOfferItem={this.handleGetMyOfferItem}
-            />
-              :
-            <Redirect to='/login' />    
+              <NewSwapmeetsPage 
+                items={this.state.items} 
+                myItems={this.state.myItems}
+                showItem={this.state.showItem}
+                showSite={this.state.showSite}
+                wantItem={this.state.wantItem}
+                wantItemPlace={this.state.wantItemPlace}
+                wantItemUser={this.state.wantItemUser}
+                offerItem={this.state.offerItem}
+                handleGetSwapmeets={this.handleGetSwapmeets}
+                handleGetMyOfferItem={this.handleGetMyOfferItem}
+              />
+              : <Redirect to='/login' />    
           }/>
           <Route exact path='/swapmeets/edit' render={() =>
             userService.getUser() ?
-            <EditSwapMeetPage
-              showMeet={this.state.showMeet}
-              showMeetOffer={this.state.showMeetOffer}
-              handleGetSwapmeets={this.handleGetSwapmeets}
-              handleGetMyOfferItem={this.handleGetMyOfferItem}
-            />
-              :
-            <Redirect to='/login' />    
+              <EditSwapMeetPage
+                showMeet={this.state.showMeet}
+                showMeetOffer={this.state.showMeetOffer}
+                handleGetSwapmeets={this.handleGetSwapmeets}
+                handleGetMyOfferItem={this.handleGetMyOfferItem}
+              />
+              : <Redirect to='/login' />    
           }/>
           <Route exact path='/swapsites' render={() =>
             userService.getUser() ?
-            <SwapsitesPage
-              mapKey={this.state.mapKey} 
-              myItems={this.state.myItems}
-              sites={this.state.sites} 
-              handleGetSites={this.handleGetSites}
-              handleGetItems={this.handleGetItems} 
-              items={this.state.items}
-              handleGetMyWantItem={this.handleGetMyWantItem}
-              handleSwapSiteView={this.handleSwapSiteView}
-            />
-              :
-            <Redirect to='/login' />    
+              <SwapsitesPage
+                mapKey={this.state.mapKey} 
+                myItems={this.state.myItems}
+                sites={this.state.sites} 
+                handleGetSites={this.handleGetSites}
+                handleGetItems={this.handleGetItems} 
+                items={this.state.items}
+                handleGetMyWantItem={this.handleGetMyWantItem}
+                handleSwapSiteView={this.handleSwapSiteView}
+              />
+              : <Redirect to='/login' />    
           }/>
-
           <Route exact path='/swapsites/view' render={() =>
             userService.getUser() ?
-            <ViewSwapSitePage
-              mapKey={this.state.mapKey} 
-              myItems={this.state.myItems}
-              sites={this.state.sites}
-              items={this.state.items}
-              showSite={this.state.showSite}
-              handleGetSites={this.handleGetSites}
-              handleGetItems={this.handleGetItems} 
-              handleGetMyWantItem={this.handleGetMyWantItem}
-            />
-              :
-            <Redirect to='/login' />    
+              <ViewSwapSitePage
+                mapKey={this.state.mapKey} 
+                myItems={this.state.myItems}
+                sites={this.state.sites}
+                items={this.state.items}
+                showSite={this.state.showSite}
+                handleGetSites={this.handleGetSites}
+                handleGetItems={this.handleGetItems} 
+                handleGetMyWantItem={this.handleGetMyWantItem}
+              />
+              : <Redirect to='/login' />    
           }/>
           <Route exact path="/login" render={({ history }) =>
-            <Login handleSignupOrLogin={this.handleSignupOrLogin} history={history}/>
+            <Login 
+              handleSignupOrLogin={this.handleSignupOrLogin}
+              history={history}
+            />
           }/>
           <Route exact path="/signup" render={({ history }) =>
-            <Signup handleSignupOrLogin={this.handleSignupOrLogin} history={history}/>
+            <Signup 
+              handleSignupOrLogin={this.handleSignupOrLogin} 
+              history={history}
+            />
           }/>
         </Switch>
-        </div>
-        <Footer />
-      </div>
-    );
+      </Layout>
+    )
   }
 }
 
