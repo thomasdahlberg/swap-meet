@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Site.module.css';
 import ItemToSiteForm from '../ItemToSiteForm/ItemToSiteForm';
+import SiteItem from '../SiteItem/SiteItem';
 
 const Site = (props) => {
     return (
@@ -27,29 +28,18 @@ const Site = (props) => {
             </div>
             <div>
                 <ul>
-                    { props.siteItems.map((siteItem, idx) => 
-                        { props.items.map(({_id, name}) => 
+                    { props.siteItems.map((siteItem, idx) => {
+                         props.items.map(({_id, name}) => 
                             siteItem === _id ?
-                                <Link 
-                                    key={siteItem} 
-                                    to="/swapmeets/new"
-                                >
-                                    <li 
-                                        onClick={props.handleGetMyWantItem}
-                                        key={siteItem}
-                                        id={siteItem}
-                                    >
-                                    {name}
-                                    </li>
-                                    <input
-                                        type="hidden"
-                                        name="swapSite"
-                                        value={siteItem}
-                                    />
-                                </Link>
+                                <SiteItem 
+                                    id={_id}
+                                    name={name}
+                                    key={idx}
+                                />
                                 : null
-                        )}
-                    )}
+                            )
+                        return null;
+                    })}
                 </ul>
             </div>
             <ItemToSiteForm 
