@@ -1,12 +1,20 @@
 .header {
-  font-family: "Permanent Marker";
-  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 1rem;
+  align-items: center;
 }
 
 .container {
+  margin: 1.45rem;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-between;
-  align-items: "center";
+  align-items: center;
+}
+
+.button {
+  font-weight: 900;
 }

@@ -19,23 +19,25 @@ class InventoryPage extends Component {
     render(){
         return(
             <div className={styles.container}>
-                { this.props.myItems.length === 0 ? 
-                    <h1 className={styles.header}>No Swap-Items in Inventory</h1>
-                    : <h1 className={styles.header}>My Swap-Items</h1>
-                }
-                { this.props.addItemForm ? 
-                    <NewInventoryItem 
-                        handleGetItems={this.props.handleGetItems}
-                        handleAddItemFormToggle={this.props.handleAddItemFormToggle}
-                    />
-                    :
-                    <button 
-                        className={styles.button} 
-                        onClick={this.props.handleAddItemFormToggle}
-                    >
-                        Add an Item
-                    </button>
-                }
+                <div className={styles.header}>
+                    { this.props.myItems.length === 0 ? 
+                        <h1 className={styles.header}>No Swap-Items in Inventory</h1>
+                        : <h1 className={styles.header}>My Swap-Items</h1>
+                    }
+                    { this.props.addItemForm ? 
+                        <NewInventoryItem 
+                            handleGetItems={this.props.handleGetItems}
+                            handleAddItemFormToggle={this.props.handleAddItemFormToggle}
+                        />
+                        :
+                        <button 
+                            className={styles.button} 
+                            onClick={this.props.handleAddItemFormToggle}
+                        >
+                            Add an Item
+                        </button>
+                    }
+                </div>
                 <Inventory 
                     items={this.props.items}
                     myItems={this.props.myItems}
