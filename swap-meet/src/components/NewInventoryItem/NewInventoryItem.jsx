@@ -92,7 +92,8 @@ class NewInventoryItem extends Component {
                 itemType: '',
                 swapPref: ''
             });
-            this.addItemFormToggle();
+            const eventObj = { target: { value: "addItemForm" }} 
+            this.handleFormToggle(eventObj);
         } catch (error) {
             console.log(error);
         }
@@ -194,7 +195,12 @@ class NewInventoryItem extends Component {
                     >
                         Add Item
                     </button>
-                    <button onClick={this.props.handleAddItemFormToggle}>Cancel</button>
+                    <button 
+                        value="addItemForm"
+                        onClick={this.props.handleFormToggle}
+                    >
+                        Cancel
+                    </button>
                 </div>
             </form>
         );

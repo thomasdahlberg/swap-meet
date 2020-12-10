@@ -27,12 +27,13 @@ class InventoryPage extends Component {
                     { this.props.addItemForm ? 
                         <NewInventoryItem 
                             handleGetItems={this.props.handleGetItems}
-                            handleAddItemFormToggle={this.props.handleAddItemFormToggle}
+                            handleFormToggle={this.props.handleFormToggle}
                         />
                         :
                         <button 
                             className={styles.button} 
-                            onClick={this.props.handleAddItemFormToggle}
+                            onClick={this.props.handleFormToggle}
+                            value="addItemForm"
                         >
                             Add an Item
                         </button>

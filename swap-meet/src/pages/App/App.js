@@ -279,6 +279,14 @@ class App extends Component {
       : this.setState({ addSiteForm: true });
   }
 
+  handleFormToggle = e => {
+    e.preventDefault();
+    console.log(e.target.value)
+    e.target.value === "addItemForm" ? 
+      this.handleAddItemFormToggle()
+      : this.handleAddSiteFormToggle();
+  }
+
 
 //Log In and Log Out Functions
 
@@ -324,7 +332,7 @@ class App extends Component {
                 items={this.state.items}
                 handleItemEditView={this.handleItemEditView}
                 handleItemDelete={this.handleItemDelete}
-                handleAddItemFormToggle={this.handleAddItemFormToggle}
+                handleFormToggle={this.handleFormToggle}
                 addItemForm={this.state.addItemForm}
               />
               : <Redirect to='/login' />
@@ -394,6 +402,7 @@ class App extends Component {
                 items={this.state.items}
                 handleGetMyWantItem={this.handleGetMyWantItem}
                 handleSwapSiteView={this.handleSwapSiteView}
+                handleFormToggle={this.handleFormToggle}
               />
               : <Redirect to='/login' />    
           }/>

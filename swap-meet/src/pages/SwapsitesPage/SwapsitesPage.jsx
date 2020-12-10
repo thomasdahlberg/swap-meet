@@ -24,9 +24,10 @@ class SwapsitesPage extends Component {
                         handleGetSites={this.props.handleGetSites} 
                     />
                     : 
-                    <button 
+                    <button
                         className={styles.button} 
-                        onClick={this.props.handleAddSiteFormToggle}
+                        onClick={this.props.handleFormToggle}
+                        value="addSiteForm"
                     >
                         Create New Swap-Site
                     </button>
