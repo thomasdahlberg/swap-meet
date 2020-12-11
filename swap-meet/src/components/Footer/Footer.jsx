@@ -1,13 +1,12 @@
 import React from 'react';
 import styles from './Footer.module.css';
 
-const Footer = (props) => {
+const Footer = () => {
     return (
         <footer className={styles.footer}>
-<p>Copyright &copy; Swap-Meet {new Date().getFullYear()}</p>
+            <p>Copyright &copy; Swap-Meet {new Date().getFullYear()}</p>
         </footer>
     )
-
 }
 
 

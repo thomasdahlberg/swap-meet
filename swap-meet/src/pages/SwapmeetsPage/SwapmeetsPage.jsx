@@ -1,51 +1,33 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import Swapmeets from '../../components/Swapmeets/Swapmeets';
 import { Redirect } from 'react-router-dom';
+import styles from './SwapmeetsPage.module.css';
 
 
-class SwapmeetsPage extends Component {
-    constructor(props){
-        super(props)
-        this.state = {};
-    }
-    
-    h1Style = {
-        fontFamily: 'Permanent Marker',
-        fontSize: '4rem'
-    };
-
-    containerStyle = {
-        display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    };
-
-    render() {
-        return(
-            <div style={this.containerStyle}>
-                {this.props.mySwapmeets || this.props.myOfferedMeets ?
-                    this.props.mySwapmeets.length > 0 || this.props.myOfferedMeets.length > 0 ? 
-                    <Fragment>
-                        <h1 style={this.h1Style}>My Swap-Meets</h1>
-                        <Swapmeets
-                            handleSwapMeetEditView={this.props.handleSwapMeetEditView}
-                            sites={this.props.sites}
-                            mySwapmeets={this.props.mySwapmeets}
-                            myOfferedMeets={this.props.myOfferedMeets}
-                            items={this.props.items} 
-                            myItems={this.props.myItems}
-                        />
-                    </Fragment>
-                    :
-                    <h1 style={this.h1Style}>No Current Swap-Meets</h1>
+const SwapmeetsPage = (props) => {
+    return(
+        <div className={styles.container}>
+            {props.mySwapmeets || props.myOfferedMeets ?
+                props.mySwapmeets.length > 0 || props.myOfferedMeets.length > 0 ? 
+                <Fragment>
+                    <h1 className={styles.header}>My Swap-Meets</h1>
+                    <Swapmeets
+                        handleSwapMeetEditView={props.handleSwapMeetEditView}
+                        sites={props.sites}
+                        mySwapmeets={props.mySwapmeets}
+                        myOfferedMeets={props.myOfferedMeets}
+                        items={props.items} 
+                        myItems={props.myItems}
+                    />
+                </Fragment>
                 :
-                <Redirect to="/" />
-                }
-            </div>
-        )
-    }
+                <h1 className={styles.header}>No Current Swap-Meets</h1>
+            :
+            <Redirect to="/" />
+            }
+        </div>
+    )
 }
+
 
 export default SwapmeetsPage;
