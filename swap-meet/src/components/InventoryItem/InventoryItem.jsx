@@ -18,8 +18,7 @@ const InventoryItem = (props) => {
                             id={props.id}
                         >
                             <Link 
-                                to="" 
-                                onClick={props.delayRedirect}
+                                to="/inventory/edit" 
                                 className={styles.edit} 
                                 key={props.id} 
                                 id={props.id}

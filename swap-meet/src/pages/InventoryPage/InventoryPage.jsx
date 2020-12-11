@@ -5,13 +5,6 @@ import styles from './InventoryPage.module.css';
 
 class InventoryPage extends Component {
     
-    delayRedirect = e => {
-        e.preventDefault();
-        setTimeout(()=> {
-            this.props.history.push('/inventory/edit')
-        }, 1000)
-    }
-
     componentDidMount(){
         this.props.handleGetItems();
     }
@@ -39,13 +32,13 @@ class InventoryPage extends Component {
                         </button>
                     }
                 </div>
-                <Inventory 
+                <Inventory
+                    showItem={this.props.showItem} 
                     items={this.props.items}
                     myItems={this.props.myItems}
                     handleGetItems={this.props.handleGetItems}
                     handleItemEditView={this.props.handleItemEditView}
                     handleItemDelete={this.props.handleItemDelete}
-                    delayRedirect={this.delayRedirect}
                 />
             </div>
         )

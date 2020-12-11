@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import inventoryService from '../../utils/inventoryService';
 import userService from '../../utils/userService';
-import styles from './EditItemPage.module.css';
+import styles from './EditItem.module.css';
 
 const ITEM_TYPES = [
     'Antiques',
@@ -39,7 +39,7 @@ const ITEM_TYPES = [
     'Video Games & Consoles',
 ]
 
-class EditItemPage extends Component {
+class EditItem extends Component {
     constructor(props){
         super(props)
         this.state = this.getInitialState();
@@ -228,4 +228,4 @@ class EditItemPage extends Component {
     }
 }
 
-export default EditItemPage;
+export default EditItem;
