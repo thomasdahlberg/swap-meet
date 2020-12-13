@@ -1,29 +1,24 @@
 import React from 'react';
-import EditItem from '../EditItem/EditItem';
 import InventoryItem from '../InventoryItem/InventoryItem';
 
 const Inventory = (props) => {
     return (
-        <main>
+        <div>
             { props.myItems.map(({name, _id, description, image, itemType, swapPref}) => 
-                props.showItem._id === _id ?
-                    <EditItem 
-                        showItem={props.showItem}
-                    />
-                    : <InventoryItem
-                        name={name}
-                        id={_id}
-                        description={description}
-                        image={image}
-                        itemType={itemType}
-                        swapPref={swapPref}
-                        handleItemDelete={props.handleItemDelete}
-                        handleItemEditView={props.handleItemEditView}
-                        delayRedirect={props.delayRedirect}
-                    />
-                )
-            }
-        </main>
+                <InventoryItem
+                    name={name}
+                    id={_id}
+                    description={description}
+                    image={image}
+                    itemType={itemType}
+                    swapPref={swapPref}
+                    showItem={props.showItem}
+                    handleItemDelete={props.handleItemDelete}
+                    handleFormToggle={props.handleFormToggle}
+                    handleToggleEditItem={props.handleToggleEditItem}
+                />
+            )}
+        </div>
     )
 }
 

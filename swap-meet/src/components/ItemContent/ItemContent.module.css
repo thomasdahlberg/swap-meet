@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.section {
+  background-color: #d0ffb7;
+  max-height: 42rem;
+  max-width: 30rem;
+  margin: 5px 5px 3px 3px;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 7px 2px gray;
+  font-family: "Open Sans", serif;
+  font-weight: 500;
+}

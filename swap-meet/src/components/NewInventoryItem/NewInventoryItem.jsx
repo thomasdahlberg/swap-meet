@@ -92,7 +92,7 @@ class NewInventoryItem extends Component {
                 itemType: '',
                 swapPref: ''
             });
-            const eventObj = { target: { value: "addItemForm" }} 
+            const eventObj = { target: { id: "addItemForm" }} 
             this.handleFormToggle(eventObj);
         } catch (error) {
             console.log(error);

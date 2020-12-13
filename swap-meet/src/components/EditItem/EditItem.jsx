@@ -223,6 +223,13 @@ class EditItem extends Component {
                     </form> : <Redirect to="/inventory" />
                 }
                 {this.renderRedirect()}
+                <button
+                    className={styles.button}
+                    onClick={this.props.handleFormToggle}
+                    id="toggleEditItem"
+                >
+                    Cancel
+                </button>
             </div>
         )
     }

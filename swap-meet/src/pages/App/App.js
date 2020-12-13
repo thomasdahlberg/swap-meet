@@ -201,18 +201,14 @@ class App extends Component {
     }
   }
 
-  //View handling functions
-
-  handleItemEditView = async (e) => {
-    e.preventDefault();
-    console.log(e.target.id);
+  handleGetOneItem = async (id) => {
     try {
-      const { item } = await inventoryService.showOne(e.target.id);
-      this.setState({showItem: item});
+      return await inventoryService.showOne(id);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
+  //View handling functions
 
   handleSwapSiteView = async (e) => {
     e.preventDefault();
@@ -259,11 +255,9 @@ class App extends Component {
   }
 
   handleToggleMap = () => {
-    if(this.state.mapActive === false){
-      this.setState({mapActive: true});
-    } else {
-      this.setState({mapActive: false});
-    }
+    this.state.mapActive ? 
+      this.setState({ mapActive: false })    
+      : this.setState({ mapActive: true })
   }
 
   handleAddItemFormToggle = () => {
@@ -278,14 +272,39 @@ class App extends Component {
       : this.setState({ addSiteForm: true });
   }
 
-  handleFormToggle = e => {
-    e.preventDefault();
-    console.log(e.target.value)
-    e.target.value === "addItemForm" ? 
-      this.handleAddItemFormToggle()
-      : this.handleAddSiteFormToggle();
+  handleToggleEditItem = async (e) => {
+    this.state.showItem ?
+      this.setState({ showItem: null })
+      : this.setState({ 
+        showItem: await this.handleGetOneItem(e.target.id) 
+      });
   }
 
+
+  handleFormToggle = e => {
+    e.preventDefault();
+    const target = e.target.id
+    this.runFormSwitch(target);
+  }
+
+  runFormSwitch = target => {
+    switch(target){
+      case "toggleEditItem":
+        this.handleToggleEditItem();
+        break;
+      case "toggleAddSiteForm":
+        this.handleAddSiteFormToggle();
+        break;
+      case "toggleAddItemForm":
+        this.handleAddItemFormToggle();
+        break;
+      case "toggleMap":
+        this.handleToggleMap();
+        break;
+      default:
+        break;
+    }
+  }
 
 //Log In and Log Out Functions
 
@@ -311,7 +330,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={() =>
             <GoogleMap
-              handleToggleMap={this.handleToggleMap}
+              handleFormToggle={this.handleFormToggle}
               handleGetItems={this.handleGetItems}
               handleGetSites={this.handleGetSites}
               handleGetSwapmeets={this.handleGetSwapmeets}
@@ -326,30 +345,30 @@ class App extends Component {
           <Route exact path='/inventory' render={() =>
             userService.getUser() ?
               <InventoryPage
-                myItems={this.state.myItems.reverse()}
-                handleGetItems={this.handleGetItems} 
                 items={this.state.items}
-                handleItemEditView={this.handleItemEditView}
+                myItems={this.state.myItems.reverse()}
+                showItem={this.state.showItem}
+                addItemForm={this.state.addItemForm}
+                handleGetItems={this.handleGetItems} 
                 handleItemDelete={this.handleItemDelete}
                 handleFormToggle={this.handleFormToggle}
-                addItemForm={this.state.addItemForm}
-                showItem={this.state.showItem}
+                handleToggleEditItem={this.handleToggleEditItem}
               />
               : <Redirect to='/login' />
           }/>
           <Route exact path='/swapmeets' render={() =>
             userService.getUser() ?
               <SwapmeetsPage
-                handleAddSiteFormToggle={this.handleAddSiteFormToggle}
-                handleGetSites={this.handleGetSites}
-                handleGetItems={this.handleGetMyItems}
-                handleSwapMeetEditView={this.handleSwapMeetEditView}
                 addSiteForm={this.state.addSiteForm}
                 sites={this.state.sites} 
                 items={this.state.items} 
                 myItems={this.state.myItems}
                 mySwapmeets={this.state.mySwapmeetsData}
                 myOfferedMeets={this.state.myOfferedMeetsData}
+                handleFormToggle={this.handleFormToggle}
+                handleGetSites={this.handleGetSites}
+                handleGetItems={this.handleGetMyItems}
+                handleSwapMeetEditView={this.handleSwapMeetEditView}
               />
               : <Redirect to='/login' />    
           }/>

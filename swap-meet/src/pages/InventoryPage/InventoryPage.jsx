@@ -8,6 +8,10 @@ class InventoryPage extends Component {
     componentDidMount(){
         this.props.handleGetItems();
     }
+
+    componentWillUnmount(){
+
+    }
     
     render(){
         return(
@@ -26,7 +30,7 @@ class InventoryPage extends Component {
                         <button 
                             className={styles.button} 
                             onClick={this.props.handleFormToggle}
-                            value="addItemForm"
+                            id="addItemForm"
                         >
                             Add an Item
                         </button>
@@ -37,7 +41,8 @@ class InventoryPage extends Component {
                     items={this.props.items}
                     myItems={this.props.myItems}
                     handleGetItems={this.props.handleGetItems}
-                    handleItemEditView={this.props.handleItemEditView}
+                    handleFormToggle={this.props.handleFormToggle}
+                    handleToggleEditItem={this.props.handleToggleEditItem}
                     handleItemDelete={this.props.handleItemDelete}
                 />
             </div>
