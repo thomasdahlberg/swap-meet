@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import inventoryService from '../../utils/inventoryService';
 import userService from '../../utils/userService';
+import FormButtons from '../FormButtons/FormButtons';
 import styles from './NewInventoryItem.module.css';
 
 const ITEM_TYPES = [
@@ -106,10 +107,10 @@ class NewInventoryItem extends Component {
 
     render() {
         return(
-            <form
+            <div
                 className={styles.form} 
-                onSubmit={this.handleSubmit} 
-                encType="multipart/form-data"
+                // onSubmit={this.handleSubmit} 
+                // encType="multipart/form-data"
             >
                 <div className={styles.container}>
                     <h1>Add A New Item</h1>
@@ -188,23 +189,17 @@ class NewInventoryItem extends Component {
                             </option>
                         )}
                     </select>
-                    <button 
-                        disabled={!this.isFormValid()}
-                        type="submit"
-                        onClick={this.delayedHandleGetItems}
-                    >
-                        Add Item
-                    </button>
-                    <button 
-                        value="addItemForm"
-                        onClick={this.props.handleFormToggle}
-                    >
-                        Cancel
-                    </button>
+                    <FormButtons
+                        submitTitle="Update Item"
+                        cancelTitle="Cancel"
+                        submitFunction={this.handleSubmit}
+                        cancelFunction={this.props.handleFormToggle}
+                        cancelId="toggleAddItemForm" 
+                    />
                 </div>
-            </form>
+            </div>
         );
     }
 }
 
-export default NewInventoryItem
+export default NewInventoryItem;

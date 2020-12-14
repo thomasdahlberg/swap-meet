@@ -289,7 +289,7 @@ class App extends Component {
 
   runFormSwitch = target => {
     switch(target){
-      case "toggleEditItem":
+      case "toggleEditItemForm":
         this.handleToggleEditItem();
         break;
       case "toggleAddSiteForm":
@@ -302,6 +302,7 @@ class App extends Component {
         this.handleToggleMap();
         break;
       default:
+        console.log("runSwitch didn't match case.")
         break;
     }
   }
@@ -403,10 +404,11 @@ class App extends Component {
               <SwapsitesPage
                 mapKey={this.state.mapKey} 
                 myItems={this.state.myItems}
-                sites={this.state.sites} 
-                handleGetSites={this.handleGetSites}
-                handleGetItems={this.handleGetItems} 
                 items={this.state.items}
+                sites={this.state.sites}
+                addSiteForm={this.state.addSiteForm} 
+                handleGetItems={this.handleGetItems} 
+                handleGetSites={this.handleGetSites}
                 handleGetMyWantItem={this.handleGetMyWantItem}
                 handleSwapSiteView={this.handleSwapSiteView}
                 handleFormToggle={this.handleFormToggle}

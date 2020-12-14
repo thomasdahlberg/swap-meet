@@ -30,7 +30,7 @@ class InventoryPage extends Component {
                         <button 
                             className={styles.button} 
                             onClick={this.props.handleFormToggle}
-                            id="addItemForm"
+                            id="toggleAddItemForm"
                         >
                             Add an Item
                         </button>

@@ -1,62 +1,61 @@
 .addsite {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .addsite button {
-    margin-bottom: 2rem;
-    border-radius: 10px;
-    box-shadow: 1px 1px 5px 1px gray;
-    font-size: 1.5rem;
-    font-family: 'Open Sans', serif;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px 1px gray;
+  font-size: 1.5rem;
+  font-family: "Open Sans", serif;
 }
 
 .form {
-    background-color: #D0FFB7;
-    max-height: 30rem;
-    max-width: 30rem;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 2px 2px 7px 2px gray;
-    font-family: 'Open Sans', serif;
-    font-weight: 500;
-    height: 0px;
-    opacity: 0;
-    padding-bottom: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: left;
+  background-color: #d0ffb7;
+  max-height: 30rem;
+  max-width: 30rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 7px 2px gray;
+  font-family: "Open Sans", serif;
+  font-weight: 500;
+  height: 0px;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: left;
 }
 
 .form ul {
-    list-style-type: none;
-    align-self: left;
-
+  list-style-type: none;
+  align-self: left;
 }
 
-.form input, textarea {
-    margin-bottom: 1rem;
+.form input,
+textarea {
+  margin-bottom: 1rem;
 }
 
 .button {
-    background-color: #86e7b8;
-    font-weight: 900;
-    padding: 1rem;
-    box-shadow: 1px 1px 5px 1px gray;
-    border-radius: 10px;
-    border: none;
-    font-size: 1.5rem;
-    font-family: 'Open Sans', serif;
+  background-color: #86e7b8;
+  font-weight: 900;
+  padding: 1rem;
+  box-shadow: 1px 1px 5px 1px gray;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.5rem;
+  font-family: "Open Sans", serif;
 }
 
 button:disabled {
-    background-color: #ddd;
-    border-radius: 10px;
+  background-color: #ddd;
+  border-radius: 10px;
 }
 
 button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import FormButtons from '../FormButtons/FormButtons';
 import styles from './ItemContent.module.css';
 
 const ItemContent = (props) => {
@@ -10,22 +11,14 @@ const ItemContent = (props) => {
                     <h1>{props.name}</h1>
                     <h3><em>{props.itemType}</em></h3>
                     <p>{props.description}</p>
-                    <div>
-                        <button 
-                            onClick={props.handleToggleEditItem}
-                            key={props.id} 
-                            id={props.id}
-                        >
-                            Edit
-                        </button>
-                        <button 
-                            id={props.id} 
-                            onClick={props.handleItemDelete}
-                            className={styles.delete}
-                        >
-                            Delete
-                        </button>
-                    </div>
+                    <FormButtons 
+                        submitId={props.id}                         
+                        submitTitle="Delete"
+                        cancelId={props.id}                         
+                        cancelTitle="Edit"
+                        submitFunction={props.handleItemDelete}
+                        cancelFunction={props.handleToggleEditItem}
+                    />
                 </div>
             </div>
         </section>

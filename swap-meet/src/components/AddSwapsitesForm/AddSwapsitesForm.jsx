@@ -3,6 +3,7 @@ import { GoogleComponent } from 'react-google-location';
 import swapSiteService from '../../utils/swapSiteService';
 import styles from './AddSwapsitesForm.module.css';
 import geolocationService from '../../utils/geolocationService';
+import FormButtons from '../FormButtons/FormButtons';
 
 
 
@@ -127,10 +128,10 @@ class AddSwapsitesForm extends Component {
 
     render() {
       return (
-        <form
+        <div
           ref={this.formRef}
           className={styles.form}
-          onSubmit={this.handleSubmit}
+          // onSubmit={this.handleSubmit}
         >
           <GoogleComponent
             ref={this.googleRef}
@@ -183,8 +184,14 @@ class AddSwapsitesForm extends Component {
               type="text"
               onChange={this.handleChange}  
             />
-            <button type="submit" onClick={this.delayedHandleGetSites}>Add New Swap-Site</button>
-        </form>
+            <FormButtons
+              submitTitle="Add Site"
+              cancelTitle="Cancel"
+              submitFunction={this.handleSubmit}
+              cancelFunction={this.props.handleFormToggle}
+              cancelId="toggleAddSiteForm"
+            />
+        </div>
       )
     } 
   }

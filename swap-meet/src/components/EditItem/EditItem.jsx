@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import inventoryService from '../../utils/inventoryService';
 import userService from '../../utils/userService';
+import FormButtons from '../FormButtons/FormButtons';
 import styles from './EditItem.module.css';
 
 const ITEM_TYPES = [
@@ -126,10 +127,10 @@ class EditItem extends Component {
         return(
             <div className={styles.edit}>
                 { this.props.showItem ? 
-                    <form 
+                    <div 
                         className={styles.form} 
-                        onSubmit={this.handleSubmit} 
-                        encType="multipart/form-data"
+                        // onSubmit={this.handleSubmit} 
+                        // encType="multipart/form-data"
                     >
                         <div className={styles.header}>
                             <h1>{this.props.showItem.name}</h1>
@@ -211,25 +212,17 @@ class EditItem extends Component {
                                         {type}
                                     </option>)}
                             </select>
-                            <button 
-                                className={styles.button} 
-                                disabled={!this.isFormValid()} 
-                                type="submit" 
-                                onClick={this.delayedHandleGetItems}
-                            >
-                                Update Item
-                            </button>
+                            <FormButtons
+                                submitTitle="Update Item"
+                                cancelTitle="Cancel"
+                                submitFunction={this.handleSubmit}
+                                cancelFunction={this.props.handleFormToggle}
+                                cancelId="toggleEditItemForm" 
+                            />
                         </div>
-                    </form> : <Redirect to="/inventory" />
+                    </div> : <Redirect to="/inventory" />
                 }
                 {this.renderRedirect()}
-                <button
-                    className={styles.button}
-                    onClick={this.props.handleFormToggle}
-                    id="toggleEditItem"
-                >
-                    Cancel
-                </button>
             </div>
         )
     }
