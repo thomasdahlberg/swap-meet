@@ -18,7 +18,6 @@ class ItemToSiteForm extends Component {
     }
 
     editListItems = () => {
-        console.log('editing list items');
         let listItems = this.props.listItems;
         console.log(listItems);
         listItems.forEach(({_id}, idx) => {
@@ -40,7 +39,6 @@ class ItemToSiteForm extends Component {
     }
 
     handleChange = e => {
-        console.log(e.target);
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -48,13 +46,11 @@ class ItemToSiteForm extends Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-        console.log('linking new item to site');
         try {
             const { user, item, site } = this.state;
             await swapSiteService.linkItem({ user, item, site });
             setTimeout(this.props.handleGetSites(),1000);
             setTimeout(this.props.handleGetItems(), 1000);
-            console.log('sites gotten');
         } catch (error) {
             console.log(error);
         }
