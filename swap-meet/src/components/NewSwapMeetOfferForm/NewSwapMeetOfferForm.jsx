@@ -55,7 +55,6 @@ class NewSwapMeetOfferForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('submitting swapmeet offer');
     try {
       const {
         wantItemId,

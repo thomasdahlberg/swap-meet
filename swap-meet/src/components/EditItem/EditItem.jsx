@@ -124,11 +124,7 @@ class EditItem extends Component {
     return (
       <div className={styles.edit}>
         {this.props.showItem ? (
-          <div
-            className={styles.form}
-            // onSubmit={this.handleSubmit}
-            // encType="multipart/form-data"
-          >
+          <div className={styles.form}>
             <div className={styles.header}>
               <h1>{this.props.showItem.name}</h1>
               <h2>
