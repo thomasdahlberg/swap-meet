@@ -9,9 +9,7 @@ const ItemContent = (props) => {
         <img src={props.image} alt={props.name} />
         <div className={styles.info}>
           <h1>{props.name}</h1>
-          <h3>
-            <em>{props.itemType}</em>
-          </h3>
+          <h3>{props.itemType}</h3>
           <p>{props.description}</p>
           <FormButtons
             submitId={props.id}

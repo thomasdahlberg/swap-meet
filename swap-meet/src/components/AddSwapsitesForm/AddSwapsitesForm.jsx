@@ -139,11 +139,7 @@ class AddSwapsitesForm extends Component {
 
   render() {
     return (
-      <div
-        ref={this.formRef}
-        className={styles.form}
-        // onSubmit={this.handleSubmit}
-      >
+      <div ref={this.formRef} className={styles.form}>
         <GoogleComponent
           ref={this.googleRef}
           apiKey={this.state.mapKey}
