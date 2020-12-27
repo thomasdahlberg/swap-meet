@@ -9,16 +9,13 @@ const Site = (props) => {
     <section className={styles.section}>
       <div className={styles.info}>
         <div className={styles.title}>
-          <Link
-            to=""
-            onClick={props.delayRedirect}
+          <button
+            onClick={props.handleSwapSiteView}
             key={props.id}
             id={props.id}
           >
-            <h1 onClick={props.handleSwapSiteView} id={props.id}>
-              {props.siteName}
-            </h1>
-          </Link>
+            {props.siteName}
+          </button>
         </div>
         <hr />
         <h3>

@@ -215,6 +215,7 @@ class App extends Component {
     try {
       const { site } = await swapSiteService.showOne(e.target.id);
       this.setState({showSite: site});
+      return <Redirect to="swapsites/view/" />
     } catch (error) {
       console.log(error);
     }
