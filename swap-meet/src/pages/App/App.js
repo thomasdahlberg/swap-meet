@@ -77,13 +77,13 @@ class App extends Component {
     }
   }
 
-  handleGetMyItems = () => {
-    let myItems = [];
-    for(let i = 1; i < this.state.items.length; i++){
-      if(this.state.items[i].currentOwner === this.state.user._id){
-        myItems.push(this.state.items[i]);
-      }
-    }
+  handleGetMyItems = async () => {
+    let { myItems } = await inventoryService.getMyItems(); 
+    // for(let i = 1; i < this.state.items.length; i++){
+    //   if(this.state.items[i].currentOwner === this.state.user._id){
+    //     myItems.push(this.state.items[i]);
+    //   }
+    // }
     this.setState({ myItems: myItems});
   }
 
@@ -94,7 +94,6 @@ class App extends Component {
       if(wantItemId === item._id){
         this.setState({
           wantItem: item,
-          wantItemUser: item.currentOwner
         })
       }
     })
@@ -382,8 +381,6 @@ class App extends Component {
                 showItem={this.state.showItem}
                 showSite={this.state.showSite}
                 wantItem={this.state.wantItem}
-                wantItemPlace={this.state.wantItemPlace}
-                wantItemUser={this.state.wantItemUser}
                 offerItem={this.state.offerItem}
                 handleGetSwapmeets={this.handleGetSwapmeets}
                 handleGetMyOfferItem={this.handleGetMyOfferItem}
