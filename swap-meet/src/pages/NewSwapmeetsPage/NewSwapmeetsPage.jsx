@@ -1,24 +1,14 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import NewSwapMeetOfferForm from '../../components/NewSwapMeetOfferForm/NewSwapMeetOfferForm';
 import styles from './NewSwapmeetsPage.module.css';
-import { Redirect } from 'react-router-dom';
 
 const NewSwapmeetsPage = (props) => {
-  const h1Style = {
-    fontFamily: 'Permanent Marker',
-    fontSize: '4rem',
-  };
-
-  const forStyle = {
-    padding: '2rem',
-    fontWeight: 500,
-  };
-
   return (
     <div className={styles.outer}>
       {props.wantItem ? (
         <div>
-          <h1 style={h1Style}>Offer a Swap-Meet</h1>
+          <h1 className={styles.h1Style}>Offer a Swap-Meet</h1>
           <div className={styles.container}>
             <div className={styles.item}>
               <div className={styles.inner}>
@@ -38,7 +28,7 @@ const NewSwapmeetsPage = (props) => {
                 </div>
               </div>
             </div>
-            <h1 style={forStyle}>For</h1>
+            <h1 className={styles.forStyle}>For</h1>
             <div className={styles.item}>
               {props.offerItem ? (
                 <div className={styles.inner}>

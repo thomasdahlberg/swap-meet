@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import './App.css';
 
 // Pages
 import InventoryPage from '../InventoryPage/InventoryPage';

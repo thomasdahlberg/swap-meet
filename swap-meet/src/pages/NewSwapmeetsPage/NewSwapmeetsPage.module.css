@@ -1,117 +1,127 @@
 .outer {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 2rem;
 }
 
 .noOffer {
-    padding: 2rem;
-    background-color: #D0FFB7;
-    border-radius: 10px;
-    box-shadow: 2px 2px 7px 2px gray;
-    font-weight: 500;
+  padding: 2rem;
+  background-color: #d0ffb7;
+  border-radius: 10px;
+  box-shadow: 2px 2px 7px 2px gray;
+  font-weight: 500;
 }
 
 .inner {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
 }
 
-.header h1{
-    font-size: 4rem;
-    font-family: 'Permanent Marker';
-    padding-bottom: 0;
-    margin-bottom: 0;
+.header h1 {
+  font-size: 4rem;
+  font-family: 'Permanent Marker';
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .header h2 {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .item {
-    background-color: #D0FFB7;
-    max-height: 42rem;
-    max-width: 30rem;
-    margin: 5px 5px 3px 3px;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 2px 2px 7px 2px gray;
-    font-family: 'Open Sans', serif;
-    font-weight: 500;
+  background-color: #d0ffb7;
+  max-height: 42rem;
+  max-width: 30rem;
+  margin: 5px 5px 3px 3px;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 7px 2px gray;
+  font-family: 'Open Sans', serif;
+  font-weight: 500;
 }
 
 .item img {
-    align-self: center;
-    max-width: 25rem;
-    max-height: 20rem;
-    border-radius: 10px;
-    background-color: #F2F5DE;
+  align-self: center;
+  max-width: 25rem;
+  max-height: 20rem;
+  border-radius: 10px;
+  background-color: #f2f5de;
 }
 
 .info {
-    padding: 0 2rem;
+  padding: 0 2rem;
 }
 
 .info p {
-    background-color: #F2F5DE;
-    padding: 1rem;
-    border-radius: 10px;
-    border: solid black 1px;
-    max-height: 10rem;
-    width: 23rem;
+  background-color: #f2f5de;
+  padding: 1rem;
+  border-radius: 10px;
+  border: solid black 1px;
+  max-height: 10rem;
+  width: 23rem;
 }
 
 .info h1 {
-    margin-bottom: .5rem;
-    padding-bottom: .5rem;
-    border-bottom: black solid 1px;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: black solid 1px;
 }
 
 .info h3 {
-    margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 button {
-    background-color: #86e7b8;
-    font-weight: 900;
-    padding: 1rem;
-    margin-top: 1rem;
-    margin-right: 1rem;
-    box-shadow: 2px 2px 7px 2px gray;
-    border-radius: 10px;
-    border: none;
-    font-family: 'Open Sans', serif;
+  background-color: #86e7b8;
+  font-weight: 900;
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  box-shadow: 2px 2px 7px 2px gray;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Open Sans', serif;
 }
 
 .delete {
-    background-color: #ff8589;
+  background-color: #ff8589;
 }
 
 .edit {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 button:disabled {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 button:hover {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.h1Style {
+  font-family: 'Permanent Marker';
+  font-size: 4rem;
+}
+
+.forStyle {
+  padding: '2rem';
+  font-weight: 500;
 }
