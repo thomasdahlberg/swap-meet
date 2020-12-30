@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import NewSwapMeetOfferForm from '../../components/NewSwapMeetOfferForm/NewSwapMeetOfferForm';
+import SwapMeetOfferForm from '../../components/SwapMeetOfferForm/SwapMeetOfferForm';
 import styles from './NewSwapmeetsPage.module.css';
 
 const NewSwapmeetsPage = (props) => {
@@ -52,7 +52,7 @@ const NewSwapmeetsPage = (props) => {
               )}
             </div>
           </div>
-          <NewSwapMeetOfferForm
+          <SwapMeetOfferForm
             handleGetItems={props.handleGetItems}
             items={props.items}
             myItems={props.myItems}

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import userService from '../../utils/userService';
 import swapmeetService from '../../utils/swapmeetService';
-import styles from './NewSwapMeetOfferForm.module.css';
+import styles from './SwapMeetOfferForm.module.css';
 
-class NewSwapMeetOfferForm extends Component {
+class SwapMeetOfferForm extends Component {
   constructor(props) {
     super(props);
     this.state = this.getInitialState();
@@ -126,4 +126,4 @@ class NewSwapMeetOfferForm extends Component {
   }
 }
 
-export default withRouter(NewSwapMeetOfferForm);
+export default withRouter(SwapMeetOfferForm);
