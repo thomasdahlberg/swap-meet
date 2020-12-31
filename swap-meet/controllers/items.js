@@ -172,8 +172,8 @@ async function index(req, res) {
 
 async function getMyItems(req, res) {
 	try {
-		await Item.find({currentOwner: req.params.id}, function(err, obj){
-			if(err) throw err;
+		await Item.find({currentOwner: req.params.id}, function(error, items){
+			res.status(200).json({ items })
 		})
 	} catch (error) {
 		res.status(400).json(error) 

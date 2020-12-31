@@ -84,6 +84,7 @@ class App extends Component {
     //     myItems.push(this.state.items[i]);
     //   }
     // }
+    console.log('Clientside get my items');
     this.setState({ myItems: myItems});
   }
 
@@ -347,7 +348,7 @@ class App extends Component {
             userService.getUser() ?
               <InventoryPage
                 items={this.state.items}
-                myItems={this.state.myItems.reverse()}
+                myItems={this.state.myItems}
                 showItem={this.state.showItem}
                 addItemForm={this.state.addItemForm}
                 handleGetItems={this.handleGetItems} 

@@ -76,7 +76,7 @@ function deleteItem(item) {
 }
 
 function index(items) {
-    return fetch(BASE_URL, {
+    return fetch(BASE_URL + 'myitems', {
         method: 'GET',
         headers: new Headers({
             'Content-type': 'Application/json',
