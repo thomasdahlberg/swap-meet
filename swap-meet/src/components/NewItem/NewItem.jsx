@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import inventoryService from '../../utils/inventoryService';
 import userService from '../../utils/userService';
 import FormButtons from '../FormButtons/FormButtons';
-import styles from './NewInventoryItem.module.css';
+import styles from './NewItem.module.css';
 
 const ITEM_TYPES = [
   'Antiques',
@@ -39,7 +39,7 @@ const ITEM_TYPES = [
   'Video Games & Consoles',
 ];
 
-class NewInventoryItem extends Component {
+class NewItem extends Component {
   state = this.getInitialState();
 
   getInitialState() {
@@ -71,45 +71,34 @@ class NewInventoryItem extends Component {
     });
   };
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!this.isFormValid()) return;
-    const data = new FormData();
+  buildFormData = () => {
+    let data = new FormData();
     data.append('file', this.state.image);
     data.append('name', this.state.name);
     data.append('description', this.state.description);
     data.append('itemType', this.state.itemType);
     data.append('swapPref', this.state.swapPref);
-    try {
-      inventoryService.addItem(data);
-      console.log('got the items?');
-      this.setState({
-        user: userService.getUser(),
-        image: null,
-        name: '',
-        description: '',
-        itemType: '',
-        swapPref: '',
-      });
-      const eventObj = { target: { id: 'addItemForm' } };
-      this.handleFormToggle(eventObj);
-    } catch (error) {
-      console.log(error);
-    }
+    return data;
   };
 
-  delayedHandleGetItems = () => {
-    // Make this better with a setInterval for larger files
-    setTimeout(this.props.handleGetItems, 3000);
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!this.isFormValid()) return;
+    const formData = this.buildFormData();
+    try {
+      inventoryService.addItem(formData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.props.handleGetItems();
+      this.getInitialState();
+      this.props.handleFormToggle(e);
+    }
   };
 
   render() {
     return (
-      <div
-        className={styles.form}
-        // onSubmit={this.handleSubmit}
-        // encType="multipart/form-data"
-      >
+      <div className={styles.form}>
         <div className={styles.container}>
           <h1>Add A New Item</h1>
           <label htmlFor="image">Select Item Image:</label>
@@ -177,6 +166,7 @@ class NewInventoryItem extends Component {
             submitFunction={this.handleSubmit}
             cancelFunction={this.props.handleFormToggle}
             cancelId="toggleAddItemForm"
+            submitId="toggleAddItemForm"
           />
         </div>
       </div>
@@ -184,4 +174,4 @@ class NewInventoryItem extends Component {
   }
 }
 
-export default NewInventoryItem;
+export default NewItem;

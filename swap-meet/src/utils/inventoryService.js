@@ -76,12 +76,11 @@ function deleteItem(item) {
 }
 
 function index(items) {
-    return fetch(BASE_URL + 'myitems', {
+    return fetch(BASE_URL, {
         method: 'GET',
         headers: new Headers({
             'Content-type': 'Application/json',
         }),
-        body: JSON.stringify(items)
     })
     .then(response => {
         if(response.ok) {
@@ -91,28 +90,6 @@ function index(items) {
         }
     })
 }
-
-function getMyItems(user) {
-    return fetch(BASE_URL, {
-        method: 'GET',
-        headers: new Headers({
-            'Content-type': 'Applications/json',
-        }),
-        body: JSON.stringify(user)
-    })
-    .then(response => {
-        if(response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Invalid Request, Try Again');
-        }
-    })
-}
-
-
-
-
-
 
 export default {
     updateItem,
@@ -120,6 +97,5 @@ export default {
     addItem,
     deleteItem,
     index,
-    getMyItems,
 }
 

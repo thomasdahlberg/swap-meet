@@ -60,7 +60,7 @@ class App extends Component {
     const { items } = await inventoryService.index();
     this.setState({ items: items })
     if(userService.getUser()) {
-      this.handleGetMyItems();
+      this.handleGetMyItems(this.state.user._id);
     }
   }
   
@@ -77,15 +77,10 @@ class App extends Component {
     }
   }
 
-  handleGetMyItems = async () => {
-    let { myItems } = await inventoryService.getMyItems(); 
-    // for(let i = 1; i < this.state.items.length; i++){
-    //   if(this.state.items[i].currentOwner === this.state.user._id){
-    //     myItems.push(this.state.items[i]);
-    //   }
-    // }
+  handleGetMyItems = async (userId) => {
+    let { myItems } = await userService.getMyItems(userId); 
     console.log('Clientside get my items');
-    this.setState({ myItems: myItems});
+    myItems ? this.setState({ myItems: myItems}) : this.setState({myItems: []});
   }
 
   

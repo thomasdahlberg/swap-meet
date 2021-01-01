@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Inventory from '../../components/Inventory/Inventory';
-import NewInventoryItem from '../../components/NewInventoryItem/NewInventoryItem';
+import NewItem from '../../components/NewItem/NewItem';
 import styles from './InventoryPage.module.css';
 
 class InventoryPage extends Component {
@@ -22,7 +22,7 @@ class InventoryPage extends Component {
             <h1 className={styles.header}>My Swap-Items</h1>
           )}
           {this.props.addItemForm ? (
-            <NewInventoryItem
+            <NewItem
               handleGetItems={this.props.handleGetItems}
               handleFormToggle={this.props.handleFormToggle}
             />

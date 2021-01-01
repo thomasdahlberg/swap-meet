@@ -1,10 +1,12 @@
 const User = require('../models/user');
+const Item = require('../models/item');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
 module.exports = {
     signup,
-    login
+    login,
+    getMyItems,
 };
 
 function createJWT(user) {
@@ -50,3 +52,16 @@ async function login(req, res) {
       return res.status(401).json(err);
     }
   }
+
+  async function getMyItems(req, res) {
+    try {
+      console.log(req.params.id);
+      await Item.find({currentOwner: req.params.id}, function(error, myItems){
+        res.status(200).json({ myItems })
+        console.log(myItems);
+      })
+    } catch (error) {
+      res.status(400).json(error) 
+    }
+  }
+  

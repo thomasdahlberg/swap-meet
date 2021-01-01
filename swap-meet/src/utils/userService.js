@@ -40,9 +40,26 @@ function login(creds) {
   .then(({token}) => tokenService.setToken(token));
 }
 
+function getMyItems(user) {
+  return fetch(BASE_URL + user + '/items/', {
+      method: 'GET',
+      headers: new Headers({
+          'Content-type': 'Applications/json',
+      }),
+  })
+  .then(response => {
+      if(response.ok) {
+          return response.json();
+      } else {
+          throw new Error('Invalid Request, Try Again');
+      }
+  })
+}
+
 export default {
   signup,
   getUser,
   logout,
-  login
+  login,
+  getMyItems,
 }
