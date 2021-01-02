@@ -55,10 +55,8 @@ async function login(req, res) {
 
   async function getMyItems(req, res) {
     try {
-      console.log(req.params.id);
       await Item.find({currentOwner: req.params.id}, function(error, myItems){
         res.status(200).json({ myItems })
-        console.log(myItems);
       })
     } catch (error) {
       res.status(400).json(error) 

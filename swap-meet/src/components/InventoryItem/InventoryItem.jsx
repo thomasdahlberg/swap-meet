@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import EditItem from '../EditItem/EditItem';
+import ItemForm from '../ItemForm/ItemForm';
 import ItemContent from '../ItemContent/ItemContent';
 
 const InventoryItem = (props) => {
@@ -8,7 +8,7 @@ const InventoryItem = (props) => {
     <Fragment>
       {props.showItem ? (
         props.showItem.item._id === props.id ? (
-          <EditItem
+          <ItemForm
             showItem={props.showItem.item}
             handleFormToggle={props.handleFormToggle}
           />

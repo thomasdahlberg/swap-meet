@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import Inventory from '../../components/Inventory/Inventory';
-import NewItem from '../../components/NewItem/NewItem';
+import ItemForm from '../../components/ItemForm/ItemForm';
 import styles from './InventoryPage.module.css';
 
 class InventoryPage extends Component {
   componentDidMount() {
     this.props.handleGetItems();
   }
-
-  componentWillUnmount() {}
 
   render() {
     return (
@@ -22,7 +20,7 @@ class InventoryPage extends Component {
             <h1 className={styles.header}>My Swap-Items</h1>
           )}
           {this.props.addItemForm ? (
-            <NewItem
+            <ItemForm
               handleGetItems={this.props.handleGetItems}
               handleFormToggle={this.props.handleFormToggle}
             />
