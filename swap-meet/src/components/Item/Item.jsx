@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import ItemForm from '../ItemForm/ItemForm';
 import ItemContent from '../ItemContent/ItemContent';
 
-const InventoryItem = (props) => {
+const Item = (props) => {
   return (
     <Fragment>
       {props.showItem ? (
@@ -42,4 +42,4 @@ const InventoryItem = (props) => {
   );
 };
 
-export default withRouter(InventoryItem);
+export default withRouter(Item);

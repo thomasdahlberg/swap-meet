@@ -1,12 +1,12 @@
 import React from 'react';
-import InventoryItem from '../InventoryItem/InventoryItem';
+import Item from '../Item/Item';
 
 const Inventory = (props) => {
   return (
     <div>
       {props.myItems.map(
         ({ name, _id, description, image, itemType, swapPref }) => (
-          <InventoryItem
+          <Item
             name={name}
             id={_id}
             description={description}

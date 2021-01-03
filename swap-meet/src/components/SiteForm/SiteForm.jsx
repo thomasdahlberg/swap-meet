@@ -5,7 +5,7 @@ import styles from './AddSwapsitesForm.module.css';
 import geolocationService from '../../utils/geolocationService';
 import FormButtons from '../FormButtons/FormButtons';
 
-class AddSwapsitesForm extends Component {
+class SiteForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -205,4 +205,4 @@ class AddSwapsitesForm extends Component {
   }
 }
 
-export default AddSwapsitesForm;
+export default SiteForm;
