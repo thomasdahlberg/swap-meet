@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { GoogleComponent } from 'react-google-location';
 import swapSiteService from '../../utils/swapSiteService';
-import styles from './AddSwapsitesForm.module.css';
+import styles from './SiteForm.module.css';
 import geolocationService from '../../utils/geolocationService';
 import FormButtons from '../FormButtons/FormButtons';
 

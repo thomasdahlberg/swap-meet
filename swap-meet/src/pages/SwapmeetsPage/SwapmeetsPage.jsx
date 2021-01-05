@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Swapmeets from '../../components/Swapmeets/Swapmeets';
+import MeetsContainer from '../../components/MeetsContainer/MeetsContainer';
 import { Redirect } from 'react-router-dom';
 import styles from './SwapmeetsPage.module.css';
 
@@ -11,7 +11,7 @@ const SwapmeetsPage = (props) => {
         props.myOfferedMeets.length > 0 ? (
           <Fragment>
             <h1 className={styles.header}>My Swap-Meets</h1>
-            <Swapmeets
+            <MeetsContainer
               handleSwapMeetEditView={props.handleSwapMeetEditView}
               sites={props.sites}
               mySwapmeets={props.mySwapmeets}

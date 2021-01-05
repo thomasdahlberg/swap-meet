@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Swapsites from '../../components/Swapsites/Swapsites';
-import AddSwapsitesForm from '../../components/AddSwapsitesForm/AddSwapsitesForm';
+import SiteForm from '../../components/SiteForm/SiteForm';
 import styles from './SwapsitesPage.module.css';
 
 class SwapsitesPage extends Component {
@@ -18,7 +18,7 @@ class SwapsitesPage extends Component {
           <h1 className={styles.header}>Swap-Sites</h1>
         )}
         {this.props.addSiteForm ? (
-          <AddSwapsitesForm
+          <SiteForm
             mapKey={this.props.mapKey}
             handleGetSites={this.props.handleGetSites}
             handleFormToggle={this.props.handleFormToggle}

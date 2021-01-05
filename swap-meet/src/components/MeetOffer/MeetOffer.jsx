@@ -50,7 +50,7 @@ const MeetOffer = ({
       <div>
         <Link to="" onClick={this.delayRedirect}>
           <button
-            id={_id}
+            id={id}
             name="counter-offer"
             onClick={handleMeetEditView}
           >
