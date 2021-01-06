@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
 import ItemForm from '../ItemForm/ItemForm';
 import ItemContent from '../ItemContent/ItemContent';
 
@@ -42,4 +41,4 @@ const Item = (props) => {
   );
 };
 
-export default withRouter(Item);
+export default Item;

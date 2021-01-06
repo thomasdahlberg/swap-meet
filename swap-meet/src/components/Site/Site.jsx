@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from './Site.module.css';
 import ItemToSiteForm from '../ItemToSiteForm/ItemToSiteForm';
 import SiteItem from '../SiteItem/SiteItem';
