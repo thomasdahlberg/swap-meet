@@ -278,7 +278,9 @@ class App extends Component {
 
 
   handleFormToggle = e => {
-    e.preventDefault();
+    if(e.preventDefault) {
+      e.preventDefault();
+    }
     const target = e.target.id
     this.runFormSwitch(target);
   }

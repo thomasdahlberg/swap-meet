@@ -20,7 +20,7 @@ class GoogleMap extends Component {
   handleShowMap = async () => {
     await this.props.handleGetSites();
     await this.props.handleGetItems();
-    await this.props.handleToggleForm({
+    await this.props.handleFormToggle({
       target: { id: 'toggleMap' },
     });
     this.handleMapStyle();
