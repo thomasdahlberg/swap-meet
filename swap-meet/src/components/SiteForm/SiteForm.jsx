@@ -89,7 +89,6 @@ class SiteForm extends Component {
     siteStateNode.value = '';
     siteLatNode.value = '';
     siteLngNode.value = '';
-    this.addSiteFormToggle();
   };
 
   resetState = () => {
@@ -133,13 +132,10 @@ class SiteForm extends Component {
     siteLngNode.value = e.coordinates.lng;
   };
 
-  delayedHandleGetSites = () => {
-    setTimeout(this.props.handleGetSites, 3000);
-  };
-
   render() {
     return (
-      <div ref={this.formRef} className={styles.form}>
+      <div className={styles.form}>
+        <label>Search For a Swap-Site</label>
         <GoogleComponent
           ref={this.googleRef}
           apiKey={this.state.mapKey}
@@ -184,13 +180,13 @@ class SiteForm extends Component {
         <input
           ref={this.siteLatRef}
           name="latitude"
-          type="text"
+          type="hidden"
           onChange={this.handleChange}
         />
         <input
           ref={this.siteLngRef}
           name="longitude"
-          type="text"
+          type="hidden"
           onChange={this.handleChange}
         />
         <FormButtons
