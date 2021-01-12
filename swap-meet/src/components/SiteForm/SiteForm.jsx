@@ -69,8 +69,10 @@ class SiteForm extends Component {
         city,
         usState,
       });
+      const event = { target: { id: 'toggleAddSiteForm' } };
       this.resetAddSiteForm();
       this.resetState();
+      this.props.handleFormToggle(event);
     } catch (error) {
       console.log(error);
     }

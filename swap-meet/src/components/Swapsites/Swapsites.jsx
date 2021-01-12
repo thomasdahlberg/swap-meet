@@ -20,7 +20,7 @@ const Swapsites = (props) => {
             handleGetMyWantItem={props.handleGetMyWantItem}
             handleGetItems={props.handleGetItems}
             handleGetSites={props.handleGetSites}
-            handleSwapView={props.handleSwapView}
+            handleSwapSiteView={props.handleSwapSiteView}
           />
         ),
       )}

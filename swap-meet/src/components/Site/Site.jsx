@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import styles from './Site.module.css';
 import ItemToSiteForm from '../ItemToSiteForm/ItemToSiteForm';
 import SiteItem from '../SiteItem/SiteItem';
@@ -9,7 +10,10 @@ const Site = (props) => {
       <div className={styles.info}>
         <div className={styles.title}>
           <button
-            onClick={props.handleSwapSiteView}
+            onClick={(e) => {
+              props.handleSwapSiteView(e);
+              return <Redirect to="/swapsites/view/" />;
+            }}
             key={props.id}
             id={props.id}
           >

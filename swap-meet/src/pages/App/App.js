@@ -208,9 +208,10 @@ class App extends Component {
   handleSwapSiteView = async (e) => {
     e.preventDefault();
     try {
+      console.log('handle swap site view');
       const { site } = await swapSiteService.showOne(e.target.id);
       this.setState({showSite: site});
-      return <Redirect to="swapsites/view/" />
+      return <Redirect to="/swapsites/view/" />
     } catch (error) {
       console.log(error);
     }
