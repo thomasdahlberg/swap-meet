@@ -102,9 +102,16 @@ class ItemForm extends Component {
     } catch (error) {
       console.log(error);
     } finally {
+      const toggleEvent = {
+        target: {
+          id: this.props.showItem
+            ? 'toggleEditItemForm'
+            : 'toggleAddItemForm',
+        },
+      };
       this.props.handleGetItems();
       this.getInitialState();
-      this.props.handleFormToggle(e);
+      this.props.handleFormToggle(toggleEvent);
     }
   };
 
