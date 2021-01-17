@@ -69,17 +69,14 @@ class App extends Component {
     this.setState({ sites: sites })
   }
 
-  handleGetSwapmeets = async () => {
+  handleGetSwapmeets = () => {
     if(userService.getUser()) {
-      const { meets } = await swapmeetService.index();
-      this.setState({ swapmeets: meets })
-      this.handleGetMySwapmeets()
+      this.handleGetMySwapmeets(this.state.user._id);
     }
   }
 
   handleGetMyItems = async (userId) => {
     let { myItems } = await userService.getMyItems(userId); 
-    console.log('Clientside get my items');
     myItems ? this.setState({ myItems: myItems}) : this.setState({myItems: []});
   }
 
@@ -168,29 +165,20 @@ class App extends Component {
     }
   }
 
-  handleGetMySwapmeets = async (e) => {
-    let myMeets = [];
-    let myOfferedMeets = [];
-    for(let i = 0; i < this.state.swapmeets.length; i++){
-      if(this.state.swapmeets[i].transaction.offerUser === this.state.user._id){
-        myMeets.push(this.state.swapmeets[i]);
-      }
-      if(this.state.swapmeets[i].transaction.wantItemUser === this.state.user._id){
-        myOfferedMeets.push(this.state.swapmeets[i]);
-      }
+  handleGetMySwapmeets = async (userId) => {
+    try {
+      const { meets } = await userService.getMyMeets(userId);
+      this.setState({ mySwapmeets: meets });
+    } catch (error) {
+      console.log(error);
     }
-    await this.setState({
-      mySwapmeets: myMeets,
-      myOfferedMeets: myOfferedMeets
-    });
-    this.handleGetMySwapmeetsData();
   }
   
   handleItemDelete = async (e) => {
     e.preventDefault();
     try {
-        inventoryService.deleteItem(e.target.id);
-        this.handleGetItems();
+      inventoryService.deleteItem(e.target.id);
+      this.handleGetItems();
     } catch (error) {
         console.log(error);
     }

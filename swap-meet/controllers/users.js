@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Item = require('../models/item');
+const SwapMeet = require('../models/swapMeet');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
@@ -7,6 +8,7 @@ module.exports = {
     signup,
     login,
     getMyItems,
+    getMyMeets,
 };
 
 function createJWT(user) {
@@ -58,6 +60,24 @@ async function login(req, res) {
       await Item.find({currentOwner: req.params.id}, function(error, myItems){
         res.status(200).json({ myItems })
       })
+    } catch (error) {
+      res.status(400).json(error) 
+    }
+  }
+
+  async function getMyMeets(req, res) {
+    try {
+      let meets = {
+        myOffers: null,
+        myWanted: null
+      }
+      await SwapMeet.find({transaction: {offerUser: req.params.id}}, function(error, myMeets){
+        meets.myOffers = myMeets;
+      })
+      await SwapMeet.find({transaction: {wantItemUser: req.params.id}}, function(error, myMeets){
+        meets.myWanted = myMeets;
+      })
+      res.status(200).json({ meets });
     } catch (error) {
       res.status(400).json(error) 
     }

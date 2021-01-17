@@ -56,10 +56,27 @@ function getMyItems(user) {
   })
 }
 
+function getMyMeets(user) {
+  return fetch(BASE_URL + user + '/swapmeets/', {
+      method: 'GET',
+      headers: new Headers({
+          'Content-type': 'Applications/json',
+      }),
+  })
+  .then(response => {
+      if(response.ok) {
+          return response.json();
+      } else {
+          throw new Error('Invalid Request, Try Again');
+      }
+  })
+}
+
 export default {
   signup,
   getUser,
   logout,
   login,
   getMyItems,
+  getMyMeets
 }
