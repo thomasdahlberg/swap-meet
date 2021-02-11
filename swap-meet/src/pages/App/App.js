@@ -21,7 +21,6 @@ import userService from '../../utils/userService';
 import inventoryService from '../../utils/inventoryService';
 import geolocationService from '../../utils/geolocationService';
 import swapSiteService from '../../utils/swapSiteService';
-import swapmeetService from '../../utils/swapmeetService';
 
 
 class App extends Component {
