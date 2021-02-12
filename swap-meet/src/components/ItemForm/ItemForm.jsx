@@ -98,7 +98,9 @@ class ItemForm extends Component {
     if (!this.isFormValid()) return;
     const formData = this.buildFormData();
     try {
-      inventoryService.addItem(formData);
+      this.props.addItemForm
+        ? inventoryService.addItem(formData)
+        : inventoryService.updateItem(formData);
     } catch (error) {
       console.log(error);
     } finally {

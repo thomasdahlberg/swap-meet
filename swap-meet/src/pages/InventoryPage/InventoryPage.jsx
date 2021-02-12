@@ -23,6 +23,7 @@ class InventoryPage extends Component {
             <ItemForm
               handleGetItems={this.props.handleGetItems}
               handleFormToggle={this.props.handleFormToggle}
+              addItemForm={this.props.addItemForm}
             />
           ) : (
             <button

@@ -27,6 +27,7 @@ module.exports = {
 };
 
 async function updateOne(req, res) {
+	console.log("UPDATE ITEM")
 	let uploadParams = {Bucket: BUCKET, Key: '', Body: ''};
 	let url;
 	upload(req, res, function(err) {
@@ -101,7 +102,7 @@ async function showOne(req, res) {
 
 	
 async function addItem(req, res) {
-	console.log("addItem!")
+	console.log("ADD ITEM");
 	let url;
 	if(req.file) {
 		url = await addItemPhoto(req, res);
