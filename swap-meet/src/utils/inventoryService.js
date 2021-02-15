@@ -42,7 +42,7 @@ function showOne(item) {
 
 function addItem(item) {
     
-    return fetch(BASE_URL + 'new', {
+    return fetch(BASE_URL, {
         method: 'POST',
         headers: {
             'Authorization': 'Bearer ' + tokenService.getToken()

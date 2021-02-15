@@ -103,15 +103,10 @@ async function showOne(req, res) {
 	
 async function addItem(req, res) {
 	console.log("ADD ITEM");
-	let url;
-	if(req.file) {
-		url = await addItemPhoto(req, res);
-		console.log("url")
-	}
 	const item = new Item({
 		name: req.body.name,
 		description: req.body.description,
-		image: url ? url : "",
+		image: "",
 		itemType: req.body.itemType,
 		swapPref: req.body.swapPref,
 		active: true,

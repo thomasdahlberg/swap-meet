@@ -3,7 +3,7 @@ const itemsCtrl = require('../../controllers/items');
 
 router.use(require('../../config/auth'));
 router.get('/', itemsCtrl.index);
-router.post('/new', checkAuth, itemsCtrl.addItem);
+router.post('/', checkAuth, itemsCtrl.addItem);
 router.get('/:id', checkAuth, itemsCtrl.showOne);
 router.put('/:id',checkAuth, itemsCtrl.updateOne);
 router.delete('/:id',checkAuth, itemsCtrl.deleteItem);
