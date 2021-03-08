@@ -14,6 +14,7 @@ const Inventory = (props) => {
             itemType={itemType}
             swapPref={swapPref}
             showItem={props.showItem}
+            handleGetItems={props.handleGetItems}
             handleItemDelete={props.handleItemDelete}
             handleFormToggle={props.handleFormToggle}
             handleToggleEditItem={props.handleToggleEditItem}

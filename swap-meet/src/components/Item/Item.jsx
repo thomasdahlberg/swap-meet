@@ -10,6 +10,7 @@ const Item = (props) => {
           <ItemForm
             showItem={props.showItem.item}
             handleFormToggle={props.handleFormToggle}
+            handleGetItems={props.handleGetItems}
           />
         ) : (
           <ItemContent
