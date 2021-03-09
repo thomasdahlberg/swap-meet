@@ -27,7 +27,6 @@ module.exports = {
 };
 
 async function updateOne(req, res) {
-	console.log("UPDATE ITEM")
 	let uploadParams = {Bucket: BUCKET, Key: '', Body: ''};
 	let url;
 	upload(req, res, function(err) {
@@ -102,7 +101,6 @@ async function showOne(req, res) {
 
 	
 async function addItem(req, res) {
-	console.log("ADD ITEM");
 	const item = new Item({
 		name: req.body.name,
 		description: req.body.description,

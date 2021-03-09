@@ -2,7 +2,6 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/inventory/';
 
 function updateItem(item) {
-    console.log(item.get('id'));
     return fetch(BASE_URL + item.get('id'), {
         method: 'PUT',
         headers: {
@@ -37,17 +36,17 @@ function showOne(item) {
 }
 
 function addItem(item) {
-    
     return fetch(BASE_URL, {
         method: 'POST',
         headers: {
+            'Content-type': 'Application/json',
             'Authorization': 'Bearer ' + tokenService.getToken()
         },
-        body: item
+        body: JSON.stringify(item),
     })
     .then(response => {
         if(response.ok) {
-            return response.json();
+            return response;
         } else {
             throw new Error('Invalid Item, Try Again');
         }

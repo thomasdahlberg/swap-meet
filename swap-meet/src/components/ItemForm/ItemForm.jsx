@@ -94,16 +94,28 @@ class ItemForm extends Component {
     return data;
   };
 
+  addItem = async () => {
+    let data = {
+      name: this.state.name,
+      description: this.state.description,
+      itemType: this.state.itemType,
+      swapPref: this.state.swapPref,
+    };
+    await inventoryService.addItem(data);
+  };
+
+  updateItem = async () => {
+    let data = await this.buildFormData();
+    inventoryService.updateItem(data);
+  };
+
   handleSubmit = async (e) => {
     e.preventDefault();
     if (!this.isFormValid()) return;
-    let data = await this.buildFormData();
-    // let {id, name, description, itemType, swapPref} = ;
-    console.log(data.get('description'));
     try {
       this.props.addItemForm
-        ? await inventoryService.addItem({ data })
-        : await inventoryService.updateItem(data);
+        ? await this.addItem()
+        : await this.updateItem();
     } catch (error) {
       console.log(error);
     } finally {
