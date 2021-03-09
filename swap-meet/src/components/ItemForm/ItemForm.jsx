@@ -85,6 +85,7 @@ class ItemForm extends Component {
 
   buildFormData = async () => {
     let data = new FormData();
+    data.append('id', this.state.id);
     data.append('file', this.state.image);
     data.append('name', this.state.name);
     data.append('description', this.state.description);
@@ -96,11 +97,13 @@ class ItemForm extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     if (!this.isFormValid()) return;
-    const formData = await this.buildFormData();
+    let data = await this.buildFormData();
+    // let {id, name, description, itemType, swapPref} = ;
+    console.log(data.get('description'));
     try {
       this.props.addItemForm
-        ? inventoryService.addItem({ formData })
-        : inventoryService.updateItem({ formData });
+        ? await inventoryService.addItem({ data })
+        : await inventoryService.updateItem(data);
     } catch (error) {
       console.log(error);
     } finally {
