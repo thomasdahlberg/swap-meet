@@ -70,7 +70,7 @@ function deleteItem(item) {
     })
 }
 
-function index(items) {
+function index() {
     return fetch(BASE_URL, {
         method: 'GET',
         headers: new Headers({
